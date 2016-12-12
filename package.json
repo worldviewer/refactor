@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/worldviewer/worldviewer-refactor#readme",
   "scripts": {
-    "build": "babel src -d lib"
+    "build": "babel src/js -d dist/js"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
