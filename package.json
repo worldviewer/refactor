@@ -1,0 +1,23 @@
+{
+  "name": "refactor",
+  "version": "1.0.0",
+  "description": "To view the current state of the site, go <a href=\"http://worldviewer.github.io/\">here</a>.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/worldviewer/worldviewer-refactor.git"
+  },
+  "author": "Chris Reeve",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/worldviewer/worldviewer-refactor/issues"
+  },
+  "homepage": "https://github.com/worldviewer/worldviewer-refactor#readme",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0"
+  }
+}
