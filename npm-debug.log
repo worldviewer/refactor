@@ -1,0 +1,40 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'run', 'build' ]
+2 info using npm@3.3.6
+3 info using node@v0.12.0
+4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+5 info lifecycle refactor@1.0.0~prebuild: refactor@1.0.0
+6 silly lifecycle refactor@1.0.0~prebuild: no script for prebuild, continuing
+7 info lifecycle refactor@1.0.0~build: refactor@1.0.0
+8 verbose lifecycle refactor@1.0.0~build: unsafe-perm in lifecycle true
+9 verbose lifecycle refactor@1.0.0~build: PATH: /usr/local/lib/node_modules/npm/bin/node-gyp-bin:/Volumes/PRODUCTION/Database/code/worldviewer/refactor/node_modules/.bin:/Applications/AMPPS/php/bin:/Users/mrroboto/.rvm/gems/ruby-2.2.1/bin:/Users/mrroboto/.rvm/gems/ruby-2.2.1@global/bin:/Users/mrroboto/.rvm/rubies/ruby-2.2.1/bin:/usr/local/bin:/Users/mrroboto/:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/opt/local/bin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/Users/mrroboto/.rvm/bin
+10 verbose lifecycle refactor@1.0.0~build: CWD: /Volumes/PRODUCTION/Database/code/worldviewer/refactor
+11 silly lifecycle refactor@1.0.0~build: Args: [ '-c', 'babel src -d lib' ]
+12 silly lifecycle refactor@1.0.0~build: Returned: code: 2  signal: null
+13 info lifecycle refactor@1.0.0~build: Failed to exec build script
+14 verbose stack Error: refactor@1.0.0 build: `babel src -d lib`
+14 verbose stack Exit status 2
+14 verbose stack     at EventEmitter.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/lifecycle.js:233:16)
+14 verbose stack     at EventEmitter.emit (events.js:110:17)
+14 verbose stack     at ChildProcess.<anonymous> (/usr/local/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at ChildProcess.emit (events.js:110:17)
+14 verbose stack     at maybeClose (child_process.js:1008:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
+15 verbose pkgid refactor@1.0.0
+16 verbose cwd /Volumes/PRODUCTION/Database/code/worldviewer/refactor
+17 error Darwin 15.6.0
+18 error argv "node" "/usr/local/bin/npm" "run" "build"
+19 error node v0.12.0
+20 error npm  v3.3.6
+21 error code ELIFECYCLE
+22 error refactor@1.0.0 build: `babel src -d lib`
+22 error Exit status 2
+23 error Failed at the refactor@1.0.0 build script 'babel src -d lib'.
+23 error This is most likely a problem with the refactor package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     babel src -d lib
+23 error You can get their info via:
+23 error     npm owner ls refactor
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]

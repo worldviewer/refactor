@@ -535,7 +535,7 @@ $(window).load(function() {
 				method: 'feed',
 				name: 'Is It Possible to Increase the Rate of Innovation?',
 				link: 'https://www.worldviewer.github.io',
-				picture: 'https://worldviewer.github.io/public/img-mobile/get-big-things-done-7.jpg',
+				picture: 'https://worldviewer.github.io/src/img-mobile/get-big-things-done-7.jpg',
 				caption: 'worldviewer.github.io',
 
 				// 297 max
@@ -948,9 +948,9 @@ if (!device.mobile() && !device.tablet() && (Cookies.get('display') !== 'mobile'
 	// Dynamically add in the img tag, so that this huge file never downloads for mobile
 
 	var firstDiv = document.querySelector('#impress > div:first-of-type');
-	firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="public/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
+	firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="src/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
 
-	loadScript("public/js/impress.js", myPrettyCode);
+	loadScript("src/js/impress.js", myPrettyCode);
 } else {
 	// When mobile, do this instead ...
 	console.log("should only run on mobile");
