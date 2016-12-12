@@ -1,0 +1,2284 @@
+<!DOCTYPE html>
+<html lang="en" itemscope itemtype="http://schema.org/Blog">
+<head>
+	<meta charset="UTF-8">
+	<title>Is it Possible to Increase the Rate of Innovation?</title>
+
+	<meta name="viewport" content="user-scalable=yes, maximum-scale=10, width=device-width" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+
+	<link rel="stylesheet" type="text/css" href="public/css/desktop-styles.css">
+	<link rel="stylesheet" type="text/css" href="public/css/tablet-styles.css">
+	<link rel="stylesheet" type="text/css" href="public/css/mobile-styles.css">
+
+	<link rel='shortcut icon' href='get-big-things-done-favicon.png' type='image/x-icon'/ >
+
+	<link rel="stylesheet" type="text/css" href="public/css/materialize.css">
+	<link rel="stylesheet" type="text/css" href="public/css/animate.css">
+
+	<!-- For Material Icons, slightly annoying when this occasionally does not fetch -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<script src="public/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+	<script src="public/js/js.cookie.js" type="text/javascript"></script>
+	<script src="public/js/materialize.js" type="text/javascript"></script>
+	<script src="public/js/device.js" type="text/javascript"></script>
+	<script src="public/js/jquery.kinetic.js" type="text/javascript" charset="utf-8"></script>
+	<script src="public/js/jquery.scrollTo.js" type="text/javascript"></script>
+	<script src="public/js/ScrollToPlugin.min.js" type="text/javascript"></script>
+	<script src="public/js/ScrollMagic.min.js" type="text/javascript"></script>
+	<!-- <script src="public/js/iScroll.js" type="text/javascript"></script> -->
+
+	<!-- G+ sharing -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+
+	<!-- FACEBOOK -->
+
+	<!-- Validator at https://developers.facebook.com/tools/debug/og/object/ -->
+
+	<!-- Meta tags for sharing to social networks, more info here:
+	https://developers.facebook.com/docs/sharing/overview#content -->
+	<meta property="og:title" content="Is it Possible to Increase the Rate of Innovation?"/>
+	<meta property="og:url" content="https://worldviewer.github.io"/>
+
+	<!-- 297 characters, and should speak to the Facebook audience -->
+	<meta property="og:description" content="We have an unfortunate tradition of treating our best scientific critics as cranks or pseudoscientists. Yet there are potential answers to the biggest questions in science which are precluded by this incremental approach. Let me show you some examples of promising challenges to textbook theory."/>
+
+	<!-- This image should be square, and it seems that the FB scraper is not able to see this image from the desktop
+	version of the site (?) -->
+	<meta property="og:image" content="https://worldviewer.github.io/public/img-mobile/get-big-things-done-1-facebook.jpg"/>
+
+	<!-- This apparently necessary fix comes from ...
+	http://stackoverflow.com/questions/15346444/provided-ogimage-is-not-big-enough-in-facebook-linter -->
+	<link rel="image_src" type="image/jpeg" href="img_path" />
+
+	<!-- From http://www.h3xed.com/web-and-internet/how-to-use-og-image-meta-tag-facebook-reddit
+	Facebook recommends 1200 x 630 pixels for the og:image dimensions (info), which
+	is an approximate aspect ratio of 1.91:1. This gives your shared post a full-size image
+	above the post text. According to Facebook, you can go as low as 600 x 315 and still
+	receive a full-size image, but I found that you can go as low as around 450 width. If
+	you go too small (about 400 in width or less), your post will only receive a small
+	square thumbnail on the left side. Also, if your image has a tall aspect ratio, Facebook
+	may display a tall aspect ratio thumbnail on the left side (not square).
+
+	A note on cropping: If you have a large image that is not in the 1.91:1 aspect ratio,
+	Facebook may center and crop it to fit. If you have a small image that is not square,
+	Facebook may crop it or shrink it to fit the small thumbnail size.
+
+	Reddit uses a 70 x 70 square image for its thumbnail. Images of all sizes are resized
+	down to this. Images that are wider than square will be shrunk down further to fit the
+	width, while images that are taller will be cropped. Having a wide image is not good as
+	it reduces the overall size of the thumbnail space that your image utilizes. Due to this,
+	going with the Facebook recommendation of 1200 x 630 is bad for Reddit sharing.
+
+	To work well on both Facebook and Reddit, be sure to make your og:image 1200 x 1200 (or
+	larger) that looks good both square and cropped. Facebook will crop the top and bottom,
+	while Reddit will keep it square. This gives you the largest thumbnail image on both
+	sharing platforms.
+
+	One last thing: If you do want to have the smaller square image thumbnail on Facebook, just
+	make sure your og:image is smaller than 400x400 and square in aspect ratio. -->
+
+	<meta property="og:type" content="article"/>
+
+	<!-- This is required to access Facebook Insights -->
+	<meta property="fb:admins" content="100007259376234" />
+	<meta property="fb:app_id" content="414453428751445">
+
+	<!-- TWITTER -->
+
+	<!-- Validator at https://cards-dev.twitter.com/validator -->
+
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:url" content="https://worldviewer.github.io">
+
+	<!-- 70 character limit -->
+	<meta name="twitter:title" content="Is it Possible to Increase the Rate of Innovation?">
+
+	<!-- 200 characters before truncate, but the card validator seems to truncate earlier -->
+	<meta name="twitter:description" content="There are potential answers to the biggest questions in science which are precluded by our incremental approach. Let me show you why we have a problem.">
+
+	<!-- No smaller than 60 x 60, typical large card ratio is 280 x 150, so I'll have to create these custom -->
+	<meta name="twitter:image" content="https://worldviewer.github.io/public/img-mobile/get-big-things-done-1-twitter.jpg">
+
+	<!-- G+ -->
+
+	<!-- Rich Snippet Generator: https://developers.google.com/+/web/snippet/?hl=en -->
+	<!-- NOTE: Descriptions are no longer shown for simple shares. Only interactive posts still show descriptions. -->
+	<!-- https://developers.google.com/+/web/share/interactive -->
+	<meta itemprop="name" content="Is It Possible to Increase the Rate of Innovation?">
+	<meta itemprop="description" content="There are potential answers to the biggest questions in science which are precluded by our incremental approach. Let me show you why we have a problem.">
+	<meta itemprop="image" content="https://worldviewer.github.io/public/img-mobile/get-big-things-done-7.jpg">
+
+	<!-- This does not seem to get picked up by the G+ crawler regardless of where I place it ...
+	<meta itemprop="description" content="There are potential answers to the biggest questions in science which are precluded by our incremental approach. Let me show you why we have a problem."> -->
+
+	<!-- GOOGLE SCHEMA -->
+
+	<!-- For information from Google on structured data markup, see
+	https://developers.google.com/structured-data/?rd=1 -->
+
+	<!-- The beauty of it is since it’s Schema.org you can use it on nearly any HTML tag 
+	on content that is already on the page.
+
+	- Itemscope=”[pageType]” – where [pageType] is Article, Blog, Book, Event, LocalBusiness, 
+	  Organization, Person, Product or Review.
+	- itemprop=”name” – This acts as the title attribute of the rich snippet and should be 
+	  limited to 140 characters.
+	- itemprop=”description” – This is the description of the rich snippet and should be 
+	  limited to 185 characters.
+	- itemprop=”image” This is the image of the rich snippet with an optimal size is 180 x 120. 
+	  Google+ will shrink this image, but if it is too small it will not be displayed.
+
+	While all the other types of metadata go in the <head> section of the code, this code will 
+	potentially live in various places throughout the website. -->
+
+ 	<!-- Schema metadata for Google rich snippets.  I'm using it hear to show the crawler how 
+	to access the individual slides.  Instructions here: 
+	https://developers.google.com/structured-data/breadcrumbs?rd=1 -->
+	<script type="application/ld+json">
+		// var schema = {
+		// 	"@context": "http://schema.org",
+		// 	"@type": "BlogPosting",
+		// 	"mainEntityOfPage":{
+		// 		"@type":"WebPage",
+		// 		"@id":"https://worldviewer.github.io"
+		// 	},
+
+		// 	// headlines should not exceed 110 characters
+		// 	"headline": "Is it Possible to Increase the Rate of Innovation?",
+		// 	"image": {
+		// 		"@type": "ImageObject",
+		// 		"url": "https://worldviewer.github.io/public/img-mobile/get-big-things-done-7.jpg",
+		// 		"height": 640,
+		// 		"width": 458
+		// 	},
+		// 	"datePublished": "2016-01-05",
+		// 	"dateModified": "2016-01-05",
+		// 	"author": {
+		// 		"@type": "Person",
+		// 		"name": "Chris Reeve"
+		// 	},
+		// 	"publisher": {
+		// 		"@type": "Person",
+		// 		"name": "Chris Reeve"
+		// 	},
+		// 	// 185 chars max -- this is not getting picked up by G+ crawler
+		// 	"description": "There are potential answers to the biggest questions in science which are precluded by our incremental approach. Let me show you why we have a problem."
+		// }
+
+		{
+			"@context": "http://schema.org",
+			"@type": "BreadcrumbList",
+			"itemListElement": [{
+				"@type": "ListItem",
+				"position": 1,
+				"item": {
+					"@id": "http://worldviewer.github.io",
+					"name": "Infographic"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#ineluctable",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#risk",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#forgotten",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#specialization",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#internet_era",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#get_big_things_done",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#china",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#get_big_things_done_fail",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#stories_not_told",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#lightning",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#peratt_galaxies",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#halton_arp",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#gerrit_verschuur",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#gerrit_verschuur_cmb",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#earthquake_lights",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#fermi_paradox",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#lightning_to_space",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#gel_cell_theory",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#origin_of_life",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#peratt_petroglyphs",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#petroglyph_plasmas",
+					"name": "Slide"
+				}
+			},{
+				"@type": "ListItem",
+				"position": 2,
+				"item": {
+					"@id": "http://worldviewer.github.io#cranks",
+					"name": "Slide"
+				}
+			}]
+		}
+	</script>
+</head>
+
+<body>
+	<!-- The Facebook SDK for JavaScript provides a rich set of client-side functionality that:
+
+	- Enables you to use the Like Button and other Social Plugins on your site.
+	- Enables you to use Facebook Login to lower the barrier for people to sign up on your site.
+	- Makes it easy to call into Facebook's Graph API.
+	- Launch Dialogs that let people perform various actions like sharing stories.
+	- Facilitates communication when you're building a game or an app tab on Facebook.
+
+	The SDK, social plugins and dialogs work on both desktop and mobile web browsers.
+
+	The Facebook SDK for JavaScript doesn't have any standalone files that need to be downloaded 
+	or installed, instead you simply need to include a short piece of regular JavaScript in your 
+	HTML that will asynchronously load the SDK into your pages. The async load means that it does 
+	not block loading other elements of your page.
+
+	The following snippet of code will give the basic version of the SDK where the options are 
+	set to their most common defaults. You should insert it directly after the opening <body> tag 
+	on each page you want to load it. 
+
+	Like Button:
+	<div class="fb-like" data-share="true" data-width="450" data-show-faces="true"></div>
+	-->
+
+	<!-- This is the first snippet they gave me ...
+  	<script>
+		window.fbAsyncInit = function() {
+			FB.init({
+				appId      : '414453428751445',
+				xfbml      : true,
+				version    : 'v2.5'
+			});
+		};
+
+		(function(d, s, id){
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) {return;}
+			js = d.createElement(s); js.id = id;
+			js.src="https://connect.facebook.net/en_US/all.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script> -->
+
+	<!-- This is the snippet they gave me to activate the FB share button -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=414453428751445";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+	<!-- Compact Share Button:
+	<div class="fb-share-button" data-href="http://worldviewer.github.io" data-layout="button"></div>
+
+	Alternatively, trigger a Share Dialog using the FB.ui function with the share method parameter to share a link...
+
+	FB.ui({
+		method: 'share',
+		href: 'https://developers.facebook.com/docs/',
+	}, function(response){}); 
+
+	More info at https://developers.facebook.com/docs/javascript/reference/FB.ui or
+	https://developers.facebook.com/quickstarts/414453428751445/?platform=web -->
+
+
+ 	<div id="hamburger" class="perimeter-buttons">
+ 		<!-- This tooltip is annoying ... -->
+		<!-- <i class="material-icons tooltipped" data-position="right" data-delay="200" data-tooltip="Reveal the references">view_list</i> -->
+		<i class="material-icons">view_list</i>		
+	</div>
+
+	<div id="page-up" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="top" data-delay="200" data-tooltip="Go to top">fast_rewind</i>
+	</div>
+
+	<div id="page-down" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="top" data-delay="200" data-tooltip="Go to bottom">fast_forward</i>
+	</div>
+
+	<div id="mobile-view" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="left" data-delay="200" data-tooltip="Switch to mobile-friendly view">stay_current_portrait</i>
+	</div>
+
+	<div id="zoom-in" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="left" data-delay="200" data-tooltip="Zoom in">zoom_in</i>
+	</div>
+
+	<div id="zoom-out" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="left" data-delay="200" data-tooltip="Zoom out">zoom_out</i>
+	</div>
+
+	<div id="previous-slide" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="top" data-delay="200" data-tooltip="Previous slide">skip_previous</i>
+	</div>
+
+	<div id="next-slide" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="top" data-delay="200" data-tooltip="Next slide">skip_next</i>
+	</div>
+
+	<div id="discuss-slide" class="perimeter-buttons">
+		<i class="material-icons tooltipped" data-position="left" data-delay="200" data-tooltip="Discuss slide">comment</i>
+	</div>
+
+	<div class="preloader-vertical-center">
+
+		<!-- Place active class on this to activate the preloader -->
+		<div class="preloader-wrapper big">
+			<div class="spinner-layer spinner-blue-only">
+				<div class="circle-clipper left">
+					<div class="circle"></div>
+				</div>
+				<div class="gap-patch">
+					<div class="circle"></div>
+				</div>
+				<div class="circle-clipper right">
+					<div class="circle"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+
+		<!-- Side Nav provides onsite infographic links, offsite references linking, and comments related to the infographic.  We need it to persist and overlay on top of impress.js -->
+
+		<div class="col l3">
+			<ul id="slide-out" class="side-nav fixed">
+
+				<!-- Use this upper-left corner to persist a title in white text on black background, identical to toast style, plus information on how to navigate the infographic -->
+
+				<div class="title-box">
+					<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">view_list</i></a>	
+
+					<h1>Is it Possible to Increase<br>the Rate of Innovation?</h1>
+					<p>Chris Reeve, Made for Parlio!</p>
+
+					<div class="info-left">
+						<p>Part 1 of 4</p>
+						<p>See Part 2 on Jan 1, 2016</p>
+					</div>
+
+					<div class="pic-right">
+						<img src="public/img-desktop/chris-at-bm-small.png" alt="Author, Chris, at Burning Man">
+					</div>
+				</div>
+
+				<!-- Normally, would be a good idea to red-number everything, because not doing so makes the zoom inaccessible from the side navbar.  We need to keep the meaning of the red numbers very clear, so there should be a simple, perfect correspondence in the future -->
+
+				<li data-slide="stephenson"><b>ineluctable:</b> <i>(adjective)</i> incapable of being evaded; inescapable.<br><br>All of the quotes at the top of this article come from an article written by science fiction author, Neal Stephenson.  <a href="http://www.worldpolicy.org/journal/fall2011/innovation-starvation" target="_blank">That article</a> was written for the World Policy Institute.<br><br>Please note that the list of the graphic's list of scientific controversies is not intended to be comprehensive.  I've decided to limit the number of examples to avoid overwhelming people.</li>
+
+				<li data-slide="lightning"><a href="http://space.io9.com/lightning-mysterious-gamma-ray-bursts-1549723614" target="_blank">io9</a></li>
+
+				<li data-slide="lightning"><a href="http://www.nasa.gov/home/hqnews/2005/mar/HQ_05070_radiation_belt.html#.VmYK11krIsM" target="_blank">NASA</a></li>
+
+				<li data-slide="lightning"><a href="http://www.bbc.com/future/story/20120926-what-causes-lightening" target="_blank">BBC Future</a></li>
+
+				<li data-slide="peratt_galaxies"><a href="http://www.plasma-universe.com/Galaxy_formation" target="_blank">Ian Tresman's plasma universe wiki</a>.  This site was created because the wikipedia encyclopedia refused to acknowledge this peer-reviewed research.</li>
+
+				<li data-slide="halton_arp">Image is from this <a href="http://plazmauniverzum.hu/arp" target="_blank">Hungarian plasma cosmology site</a>.  There is a technical analysis of Arp's claim <a href="http://www.astr.ua.edu/keel/galaxies/arp.html" target="_blank">here</a>.  For a more broad view of this subject, see the excellent YouTube documentary, <a href="https://www.youtube.com/watch?v=IFFl9S39CTM" target="_blank">Universe: The Cosmology Quest</a>.</li>
+
+				<li data-slide="halton_arp">I wouldn't normally advise using wikipedia to look up controversial subjects, but <a href="https://en.wikipedia.org/wiki/Halton_Arp" target="_blank">this entry</a> is okay.</li>
+
+				<li data-slide="gerrit_verschuur">Paper at <a href="http://arxiv.org/abs/1002.1661" target="_blank">arXiv.org</a>.  Verschuur has a couple of fantastic books on these subjects.  See his book, <i>The Invisible Universe</i>, where he emphasizes how astronomers initially considered radio waves from space either a hoax or a mistake.  His book, <i>Interstellar Matters</i>, contains a couple of chapters which in great detail explain how to read a radio astronomy paper.  With not much more than that, Verschuur's numerous IEEE papers will become accessible to most laypeople.  His papers on interstellar HI hydrogen and critical ionization velocities (CIV's) are particularly noteworthy because they appear to suggest that ionization is an ongoing process in space -- directly contradicting what is taught to astrophysicists today.  Verschuur frequently questions the use of the term "cloud" to describe the interstellar matter structures, due to its unusually filamentary nature.  Although his publications do not directly raise the question of electricity in space (due to ongoing resistance to the idea amongst peer reviewers), it is clear to many that he is entertaining the notion.</li>
+
+				<li data-slide="gerrit_verschuur"><a href="http://news.discovery.com/space/cosmic-background-radiation-big-bang-120615.htm" target="_blank">Discovery News</a></li>
+
+				<li data-slide="gerrit_verschuur_cmb"><a href="http://archive.wired.com/science/space/news/2007/11/big_bang" target="_blank">Wired Magazine</a></li>
+
+				<li data-slide="earthquake_lights">Comes from <a href="http://www.q-mag.org/the-tangible-proof-of-earthquake-lights.html" target="_blank">Alfred de Grazia's Magazine of Quantavolution</a>.  This research was originally published in German in <a href="http://www.spiegel.de/wissenschaft/natur/erdbebenlichter-erklaerung-fuer-blitze-aus-dem-boden-a-1035800.html" target="_blank">Der Spiegel</a> on June 8, 2015.  It was translated from German by Anne-Marie de Grazia, the wife of the late Alfred de Grazia.  There are additional pictures in the German article.</li>
+
+				<li data-slide="fermi_paradox">Source: <a href="http://www.holoscience.com/wp/other-stars-other-worlds-other-life/" target="_blank">Wal Thornhill's Holoscience site</a>.  From wikipedia: "The Fermi paradox — or Fermi's paradox — is the apparent contradiction between high estimates of the probability of the existence of extraterrestrial civilizations, such as in the Drake equation, and the lack of evidence for such civilizations."  Wal's approach would neatly explain the paradox because electromagnetic communications are commonly obstructed by plasma double layers like our own ionosphere.  In the configuration proposed, the planet would be deeply embedded within the star's electromagnetic envelope -- hence we'd struggle to observe these radio signals.  The whole idea might sound like a wacky, unsupported claim, but in fact, Dwardu Cardona has published a number of excellent books which dedicate a few thousand pages filled with references to supporting these claims.  I cannot recommend enough Dwardu's books.</li>
+
+				<li data-slide="lightning_to_space">These snapshots actually come from two separate links -- the first is from <a href="http://www.rense.com/general68/gint.htm" target="_blank">Giant Lightning From Earth To Space from Rense.com</a> and the second is from <a href="https://www.thunderbolts.info/tpod/2005/arch05/051110sprite.htm" target="_blank">Giant Lightning to Space at thunderbolts.info</a>.</li>
+
+				<li data-slide="gel_cell_theory">More information at <a href="http://faculty.washington.edu/ghp/" target="_blank">Gerald Pollack's University of Washington pages</a>.  Gerald Pollack is an excellent speaker.  See his many talks on YouTube.</li>
+
+				<li data-slide="origin_of_life"><a href="http://faculty.washington.edu/ghp/images/stories/pubPDF/2005-Trevors_Pollack-Origin_of_life_hydrogel.pdf" target="_blank">Hypothesis: the origin of life in a hydrogel environment, by Jack T. Trevorsa and Gerald H. Pollack</a></li>
+
+				<li data-slide="peratt_petroglyphs">This paper can be tricky to track down.  The best option might be to fill out the form <a href="http://www.everythingselectric.com/product/anthony-peratt-z-pinch-aurora/" target="_blank">here</a>.</li>
+
+				<li data-slide="petroglyph_plasmas">I created this explanatory graphic based upon Peratt's paper.  These are morphologies (shapes) that electricity takes when it is conducted over gas (more properly termed plasma) at extremely high charge densities.  If you look carefully at the last morphology, the central ring is the source of what is called synchrotron radiation.  Peratt explains that this would have been very dangerous radiation.  The 2d squatter man drawing appears to follow from the luminosity which results from viewing the 3d form edge-wise.</li>
+
+				<li data-slide="center-4">Top-most background image comes from The Jetson's cartoon</li>
+
+				<li data-slide="future">Awesome futuristic cityscape artwork by <a href="http://peteamachree.deviantart.com/art/future-city-1-187502843" target="_blank">PeteAmachree at Deviant Art</a></li>
+
+				<li data-slide="underground_city">Awesome underground cityscape artwork by <a href="http://cyberkolbasa.deviantart.com/art/underground-city-357211806" target="_blank">cyberkolbasa at Deviant Art</a></li>
+
+			</ul>		
+		</div>
+
+		<div class="col s12 m12 l9" id="infographic">
+
+			<div id="impress" data-scale-factor="1">
+
+				<!-- Load img tag into this ... -->
+				<div></div>
+
+				<!-- High-level view of entire graphic -->
+				<div id="intro" class="step" data-y="0" data-x="0" data-scale="15"></div>
+
+				<!-- Ineluctable certainty quote -->
+				<div id="stephenson" class="step" data-y="-4500" data-x="0" data-scale="5"></div>
+
+				<!-- Ineluctable definition -->
+				<div id="ineluctable" class="step" data-y="-6500" data-x="0" data-scale="1.5"></div>
+
+				<!-- Ref [1] -->
+				<div id="risk" class="step" data-y="-6700" data-x="-1500" data-scale="1.5"></div>
+
+				<!-- Return to center -->
+				<div id="center-4" class="step" data-y="-5800" data-x="0" data-scale="2.5"></div>
+
+				<div id="forgotten" class="step" data-y="-6640" data-x="1870" data-scale=".5"></div>
+
+				<!-- Return to center -->
+				<div id="center-5" class="step" data-y="-5800" data-x="0" data-scale="2.5"></div>
+
+				<div id="specialization" class="step" data-y="-5750" data-x="1550" data-scale=".5"></div>
+
+				<!-- Return to center -->
+				<div id="center-6" class="step" data-y="-5800" data-x="0" data-scale="2.5"></div>
+
+				<div id="internet_era" class="step" data-y="-4630" data-x="630" data-scale=".5"></div>
+
+				<!-- Return to center -->
+				<div id="center-7" class="step" data-y="-4630" data-x="0" data-scale="2.5"></div>
+
+				<div id="get_big_things_done" class="step" data-y="-4300" data-x="-300" data-scale="1"></div>
+
+				<!-- Return to center -->
+				<div id="center-8" class="step" data-y="-4300" data-x="0" data-scale="2.5"></div>
+
+				<div id="china" class="step" data-y="-4000" data-x="-1500" data-scale="1"></div>
+
+				<!-- Return to center -->
+				<div id="center-9" class="step" data-y="-4300" data-x="0" data-scale="2.5"></div>
+
+				<!-- key Stephenson quote -->
+				<div id="get_big_things_done_fail" class="step" data-y="-3530" data-x="1600" data-scale="2"></div>
+
+				<!-- We are just as affected by the stories we don't tell -->
+				<div id="stories_not_told" class="step" data-y="-3000" data-x="0" data-scale="2.5"></div>
+
+				<!-- First controversy on lightning -->
+				<div id="lightning" class="step" data-y="-2650" data-x="-1500" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="center-12" class="step" data-y="-2650" data-x="0" data-scale="2.5"></div>
+
+				<!-- Scroll down -->
+				<div id="future" class="step" data-y="-1830" data-x="0" data-scale="2.5"></div>
+
+				<!-- galactic simulation -->
+				<div id="peratt_galaxies" class="step" data-y="-850" data-x="1700" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="center-14" class="step" data-y="200" data-x="0" data-scale="2.5"></div>
+
+				<!-- halton arp -->
+				<div id="halton_arp" class="step" data-y="200" data-x="1620" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="center-15" class="step" data-y="1550" data-x="0" data-scale="2.5"></div>
+
+				<!-- gerrit verschuur -->
+				<div id="gerrit_verschuur" class="step" data-y="1550" data-x="1600" data-scale="1.2"></div>
+				<div id="gerrit_verschuur_cmb" class="step" data-y="1920" data-x="1850" data-scale=".5"></div>
+
+				<!-- Return to center -->
+				<div id="center-17" class="step" data-y="1650" data-x="0" data-scale="2.5"></div>
+
+				<!-- earthquake lights -->
+				<div id="earthquake_lights" class="step" data-y="1650" data-x="0" data-scale="1"></div>
+
+				<!-- Return to center -->
+				<div id="center-18" class="step" data-y="2000" data-x="0" data-scale="2.5"></div>
+
+				<!-- Fermi Paradox -->
+				<div id="fermi_paradox" class="step" data-y="2000" data-x="-1800" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="center-19" class="step" data-y="1020" data-x="0" data-scale="2.5"></div>
+
+				<!-- lightning to space -->
+				<div id="lightning_to_space" class="step" data-y="1020" data-x="-1500" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="center-20" class="step" data-y="0" data-x="0" data-scale="2.5"></div>
+
+				<!-- gel cell theory -->
+				<div id="gel_cell_theory" class="step" data-y="0" data-x="-1700" data-scale="1.0"></div>
+				<div id="origin_of_life" class="step" data-y="200" data-x="-1700" data-scale="0.5"></div>
+
+				<!-- Return to center -->
+				<div id="center-22" class="step" data-y="280" data-x="0" data-scale="2.5"></div>
+
+				<!-- petroglyphs -->
+				<div id="peratt_petroglyphs" class="step" data-y="280" data-x="0" data-scale="1.25"></div>
+				<div id="petroglyph_plasmas" class="step" data-y="780" data-x="0" data-scale=".7"></div>
+
+				<!-- Return to center -->
+				<div id="underground_city" class="step" data-y="2800" data-x="0" data-scale="2.5"></div>
+
+				<!-- First conclusion -->
+				<div id="cranks" class="step" data-y="4000" data-x="0" data-scale="2.5"></div>
+
+				<!-- Second conclusion -->
+				<div id="futurism" class="step" data-y="5500" data-x="0" data-scale="2.5"></div>
+
+			</div> <!-- impress -->
+
+			<!-- The mobile markup uses smaller graphics, no impress.js, and instead uses Materialize cards to display small 640-pixel wide, zoomed chunks of the infographic.  Eventually, will want to configure that it is only downloading ten at a time.  Currently, setting JPG quality to 50. -->
+
+			<!-- <div id="iscroll"> -->
+			<div id="mobile" class="expanded">
+				
+				<header class="top-header">
+					<span class="menu-icon">☰</span>
+
+					<!-- To paint svg, use:
+					svg:hover path {
+						fill: #ecd291;
+					} -->
+
+					<!-- Note to self: Cannot directly reference SVG's with CSS; always have to place them into a div -->
+					<!-- <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://worldviewer.github.io" class="twitter logo"> -->
+
+					<!-- EXPLANATION OF HOW TO GENERATE LARGE IMAGE TWEETS
+					From http://onlinejournalismblog.com/2015/02/11/how-to-make-a-tweetable-image-in-your-blog-post/
+					Finding the right Twitter image URL
+
+					This particular image URL is one generated by Twitter itself, after someone 
+					has tweeted the image.
+
+					Assuming no one has already done so, then, you’ll need to start by tweeting the 
+					image yourself.
+
+					Once you’ve done that, open the tweet. You can normally do this by clicking on the 
+					date or time next to it (for example “Jan 27” or “1d” or “2h”).
+
+					The tweet URL will look something like https://twitter.com/paulbradshaw/status/560171610309926913.
+
+					It is important to note that this image has two URLs. One begins with pbs.twimg.com and 
+					another begins with pic.twitter.com. Only the second will be embedded when tweeted – this 
+					is the one you need.
+
+					If you right-click on the image, for example, to ‘Copy image URL’ you will get the wrong 
+					type of URL – the one beginning with pbs.twimg.com. Do not copy that link
+
+					Instead, while still on the tweet page, you need to click again on the image. This should 
+					bring up the tweet once more – only this time with the pic.twitter.com URL visible. Copy 
+					this link to use later.
+
+					If you cannot see the pic.twitter URL then try right-clicking on the tweet and selecting 
+					View source (or similar). Use CTRL+F to search for pic.twitter and you should be able to find 
+					the URL there.
+
+					Adding your image URL to the ‘tweet this’ link
+
+					From this point you can just follow the steps in the first post in this series only 
+					making sure to add the pic.twitter URL in the text= parameter along with any quote – and 
+					a space of course.
+
+					But I’ll recap them quickly here:
+
+					1. Create a URL beginning https://twitter.com/intent/tweet?text= and add whatever text 
+					you want to appear in the tweet at the end of this URL. Then include a space and the link 
+					to the image that you copied.
+
+					2. Press Enter. A Twitter box should appear in the browser with the text you specified, 
+					and the link too. (Make sure you’re logged in)
+
+					3. The URL will have changed slightly, to replace spaces and other awkward characters. 
+					Copy that URL.
+					
+					4. In your post, switch to HTML (Text) view and link a relevant phrase (like ‘Tweet this 
+					image’) by putting <a href="` - then your URL - then `" target="_blank"> before it, and </a> 
+					after it. -->
+
+					<a href="https://twitter.com/intent/tweet?text=Is%20It%20Possible%20to%20Increase%20the%20Rate%20of%20Innovation?%20pic.twitter.com/SNZfEDDMkM" data-url="http://worldviewer.github.io" data-related="quasineutral" class="twitter logo">
+					<!-- <div class="twitter logo"> -->
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							 width="14px" height="11.392px" viewBox="20.1 64 14 11.392" enable-background="new 20.1 64 14 11.392" xml:space="preserve">
+						<path fill="#FFFFFF" d="M34.1,65.35c-0.516,0.228-1.068,0.382-1.649,0.454c0.593-0.356,1.05-0.919,1.264-1.59
+							c-0.555,0.33-1.169,0.57-1.825,0.697C31.365,64.35,30.617,64,29.792,64c-1.587,0-2.872,1.288-2.872,2.875
+							c0,0.225,0.024,0.445,0.074,0.655c-2.388-0.119-4.506-1.264-5.921-3.005c-0.246,0.424-0.389,0.92-0.389,1.445
+							c0,0.997,0.51,1.878,1.282,2.395c-0.475-0.012-0.92-0.143-1.306-0.359c0,0.012,0,0.024,0,0.036c0,1.395,0.991,2.555,2.305,2.818
+							c-0.24,0.065-0.495,0.101-0.756,0.101c-0.184,0-0.365-0.018-0.54-0.053c0.365,1.142,1.427,1.973,2.685,1.997
+							c-0.982,0.771-2.222,1.231-3.569,1.231c-0.231,0-0.46-0.015-0.686-0.042c1.267,0.825,2.777,1.299,4.396,1.299
+							c5.29,0,8.18-4.382,8.18-8.182c0-0.125-0.003-0.249-0.009-0.371C33.228,66.433,33.714,65.928,34.1,65.35z"/>
+						</svg>
+					<!-- </div> -->
+					</a>
+
+					<!-- <div class="g-plus" data-action="share" data-annotation="none" data-height="15" data-href="http://worldviewer.github.io"></div> -->
+
+					<a href="https://plus.google.com/share?url="+"http://worldviewer.github.io" class="gplus logo">
+						<svg alt="Share on Google+" title="Google+" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							 width="14px" height="12.576px" viewBox="3.437 7.679 14 12.576" enable-background="new 3.437 7.679 14 12.576"
+							 xml:space="preserve">
+						<g>
+							<path fill="#FFFFFF" d="M17.145,12.786h-2.111v-2.111c0-0.16-0.131-0.291-0.292-0.291h-0.601c-0.162,0-0.292,0.131-0.292,0.291
+								v2.111h-2.111c-0.161,0-0.292,0.131-0.292,0.292v0.601c0,0.161,0.131,0.292,0.292,0.292h2.111v2.111
+								c0,0.162,0.131,0.292,0.292,0.292h0.601c0.161,0,0.292-0.13,0.292-0.292v-2.112h2.111c0.161,0,0.292-0.13,0.292-0.292v-0.601
+								C17.437,12.917,17.306,12.786,17.145,12.786z"/>
+							<path fill="#FFFFFF" d="M10.052,14.637c-0.444-0.314-0.848-0.775-0.854-0.918c0-0.258,0.023-0.38,0.602-0.832
+								c0.748-0.585,1.16-1.355,1.16-2.169c0-0.738-0.226-1.393-0.609-1.854h0.298c0.062,0,0.123-0.019,0.171-0.055l0.831-0.602
+								c0.103-0.074,0.146-0.206,0.107-0.326c-0.04-0.12-0.151-0.202-0.277-0.202H7.764c-0.406,0-0.819,0.072-1.224,0.211
+								c-1.353,0.466-2.3,1.62-2.3,2.804c0,1.678,1.299,2.949,3.037,2.989c-0.034,0.134-0.052,0.264-0.052,0.393
+								c0,0.258,0.065,0.503,0.2,0.74c-0.016,0-0.03,0-0.048,0c-1.656,0-3.15,0.812-3.717,2.021c-0.148,0.313-0.223,0.632-0.223,0.945
+								c0,0.306,0.078,0.6,0.232,0.875c0.357,0.638,1.122,1.133,2.158,1.394c0.533,0.135,1.107,0.205,1.704,0.205
+								c0.536,0,1.047-0.069,1.518-0.206c1.472-0.427,2.424-1.511,2.424-2.762C11.473,16.088,11.087,15.369,10.052,14.637z M5.361,17.385
+								c0-0.873,1.109-1.639,2.374-1.639h0.034c0.275,0.004,0.543,0.044,0.796,0.122c0.086,0.06,0.169,0.117,0.25,0.171
+								c0.586,0.4,0.973,0.663,1.08,1.085c0.026,0.106,0.039,0.213,0.039,0.316c0,1.087-0.812,1.639-2.411,1.639
+								C6.311,19.078,5.361,18.335,5.361,17.385z M6.511,9.135c0.198-0.226,0.457-0.345,0.747-0.345l0.033,0
+								c0.821,0.024,1.606,0.939,1.75,2.04c0.081,0.615-0.055,1.195-0.366,1.548c-0.198,0.226-0.453,0.345-0.755,0.345c0,0,0,0,0,0H7.906
+								c-0.803-0.025-1.606-0.974-1.75-2.073C6.076,10.036,6.206,9.484,6.511,9.135z"/>
+						</g>
+						</svg>
+					</a>
+
+					<div class="fb logo active">
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+							 width="14px" height="13.977px" viewBox="0 120.5 14 13.977" enable-background="new 0 120.5 14 13.977" xml:space="preserve">
+						<path fill="#FFFFFF" d="M1.451,120.5h11.076c1.036,0,1.474,0.438,1.474,1.451v11.076c0,0.967-0.438,1.451-1.474,1.451H8.727v-4.559
+							h1.796v-2.188H8.727v-1.451c0-0.438,0.092-0.875,0.829-0.875h0.967v-2.049H8.474c-1.451,0-2.21,0.737-2.21,2.049v2.326H4.79v2.188
+							h1.474v4.559H1.451c-0.944,0-1.451-0.483-1.451-1.451v-11.076C0,120.938,0.506,120.5,1.451,120.5z"/>
+						</svg>
+					</div>
+
+				</header>
+
+				<div class="page-hash">
+					<p>Click to copy this URL</p>
+				</div>
+
+				<div class="top">
+					<div class="hero">
+
+						<!-- NOTE: Facebook like button will need to be styled or moved; it's moving the entire title box down.
+						Would like to place on both title box and sticky navbar -->
+						<div class="mobile-title-box">
+							<h1 class="controversy-title-bar">Is it Possible to Increase the Rate of Innovation?</h4>
+
+							<div class="pic-right">
+								<img src="public/img-desktop/chris-at-bm-small.png" alt="Author, Chris, at Burning Man">
+							</div>
+
+							<p>Chris Reeve, Made for Parlio!</p>
+							<p>Part 1 of 4</p>
+							<p>Click to copy this URL</p>
+
+						</div>
+
+					</div>
+				</div>
+
+				<div id="intro"></div>
+				<div id="stephenson"></div>
+
+				<div class="card" id="ineluctable">
+					<div class="content card-image">
+						<img class="activator card-images" src="public/img-mobile/get-big-things-done-1.jpg">
+					</div>
+
+					<div class="content card-content">
+						<p class="content card-text"><b>ineluctable:</b> <i>(adjective)</i> incapable of being evaded; inescapable.</p>
+					</div>
+				</div>
+
+				<div class="card" id="risk">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-2.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Innovation Can't Happen Without Failure</span>
+						<p class="content card-text">
+						<i class="material-icons right">more_vert</i>
+						<span class="red-num">1</span> All of the quotes in these first slides come from an article written by science fiction author, Neal Stephenson.  <a href="http://www.worldpolicy.org/journal/fall2011/innovation-starvation" target="_blank">That article</a> was written for the World Policy Institute.<br><br>Please note that the list of the graphic's list of scientific controversies is not intended to be comprehensive.  I've decided to limit the number of examples to avoid overwhelming people.</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>				
+
+				<div class="card just-image" id="forgotten">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-3.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Forgotten How to Do It</span>
+					</div>					
+				</div>				
+
+				<div class="card just-image" id="specialization">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-4.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Specialization</span>
+					</div>					
+				</div>
+
+				<div class="card just-image" id="internet_era">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-5.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Risk as a Quaint Artifact</span>
+					</div>				
+				</div>
+
+				<div class="card just-image" id="get_big_things_done">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-6.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Failure to Get Big Things Done</span>
+					</div>					
+				</div>
+
+				<!-- Jetsons -->
+				<div class="card" data-id="get_big_things_done">
+					<div class="content card-image">
+
+						<!-- This is the Google Rich Snippet Image, preferred size of 180 x 120 -->
+						<img class="card-images" src="public/img-mobile/get-big-things-done-7.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Jetsons</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">18</span> The Jetsons future that never happened.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-image" id="china">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-8.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">China Not Innovation</span>
+					</div>					
+				</div>
+
+				<div class="card just-image" id="get_big_things_done_fail">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-9.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Today's Belief in Ineluctable Certainty</span>
+					</div>						
+				</div>
+
+				<div class="card just-image" id="stories_not_told">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-10.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">The Stories We Don't Tell in Science</span>
+					</div>		
+				</div>
+
+				<div class="card just-image" data-id="stories_not_told">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-11.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Our Newfound Access to Information</span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="lightning">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-12.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Lightning Textbook Theory in Trouble</span>
+					</div>
+				</div>
+
+				<div class="card" data-id="lightning">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-13.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Mysterious Gamma Rays</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">2</span> <a href="http://space.io9.com/lightning-mysterious-gamma-ray-bursts-1549723614" target="_blank">io9</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" data-id="lightning">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-14.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Van Allen Radiation Belts</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">3</span> <a href="http://www.nasa.gov/home/hqnews/2005/mar/HQ_05070_radiation_belt.html#.VmYK11krIsM" target="_blank">NASA</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" data-id="lightning">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-15.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Unknown Cause</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">4</span> <a href="http://www.bbc.com/future/story/20120926-what-causes-lightening" target="_blank">BBC Future</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="peratt_galaxies">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-16a.jpg">
+					</div>
+
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">No Need for Dark Matter</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="peratt_galaxies">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-16b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Flat Galactic Rotation Curves</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">5</span> <a href="http://www.plasma-universe.com/Galaxy_formation" target="_blank">Ian Tresman's plasma universe wiki</a>.  This site was created because the wikipedia encyclopedia refused to acknowledge this peer-reviewed research.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="halton_arp">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-17a.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Big Bang Disproven</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="halton_arp">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-17b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Redshift Problem</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">6</span> Image is from this <a href="http://plazmauniverzum.hu/arp" target="_blank">Hungarian plasma cosmology site</a>.  There is a technical analysis of Arp's claim <a href="http://www.astr.ua.edu/keel/galaxies/arp.html" target="_blank">here</a>.  For a more broad view of this subject, see the excellent YouTube documentary, <a href="https://www.youtube.com/watch?v=IFFl9S39CTM" target="_blank">Universe: The Cosmology Quest</a>.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" data-id="halton_arp">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-18.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Troubling Quasars</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">7</span> I wouldn't normally advise using wikipedia to look up controversial subjects, but <a href="https://en.wikipedia.org/wiki/Halton_Arp" target="_blank">this entry</a> is okay.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="gerrit_verschuur">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-19a.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Local CMB</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="gerrit_verschuur">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-19b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">HI-WMAP Associations</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">8</span> Paper at <a href="http://arxiv.org/abs/1002.1661" target="_blank">arXiv.org</a>.  Verschuur has a couple of fantastic books on these subjects.  See his book, <i>The Invisible Universe</i>, where he emphasizes how astronomers initially considered radio waves from space either a hoax or a mistake.  His book, <i>Interstellar Matters</i>, contains a couple of chapters which in great detail explain how to read a radio astronomy paper.  With not much more than that, Verschuur's numerous IEEE papers will become accessible to most laypeople.  His papers on interstellar HI hydrogen and critical ionization velocities (CIV's) are particularly noteworthy because they appear to suggest that ionization is an ongoing process in space -- directly contradicting what is taught to astrophysicists today.  Verschuur frequently questions the use of the term "cloud" to describe the interstellar matter structures, due to its unusually filamentary nature.  Although his publications do not directly raise the question of electricity in space (due to ongoing resistance to the idea amongst peer reviewers), it is clear to many that he is entertaining the notion.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" id="gerrit_verschuur_cmb">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-20.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">"If I'm right, this is a paradigm shift."</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">9</span> <a href="http://news.discovery.com/space/cosmic-background-radiation-big-bang-120615.htm" target="_blank">Discovery News</a><br><br>
+
+							<span class="red-num">10</span> <a href="http://archive.wired.com/science/space/news/2007/11/big_bang" target="_blank">Wired Magazine</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="earthquake_lights">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-21a.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Earthquake Lights</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="earthquake_lights">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-21b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Fear of Being Considered a Crank</span>
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">11</span> Comes from <a href="http://www.q-mag.org/the-tangible-proof-of-earthquake-lights.html" target="_blank">Alfred de Grazia's Magazine of Quantavolution</a>.  This research was originally published in German in <a href="http://www.spiegel.de/wissenschaft/natur/erdbebenlichter-erklaerung-fuer-blitze-aus-dem-boden-a-1035800.html" target="_blank">Der Spiegel</a> on June 8, 2015.  It was translated from German by Anne-Marie de Grazia, the wife of the late Alfred de Grazia.  There are additional pictures in the German article.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="fermi_paradox">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-22.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Fermi Paradox Solution</span>
+					</div>
+				</div>
+
+				<div class="card" data-id="fermi_paradox">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-23.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Planet in a Star</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">12</span> Source: <a href="http://www.holoscience.com/wp/other-stars-other-worlds-other-life/" target="_blank">Wal Thornhill's Holoscience site</a>.  From wikipedia: "The Fermi paradox — or Fermi's paradox — is the apparent contradiction between high estimates of the probability of the existence of extraterrestrial civilizations, such as in the Drake equation, and the lack of evidence for such civilizations."  Wal's approach would neatly explain the paradox because electromagnetic communications are commonly obstructed by plasma double layers like our own ionosphere.  In the configuration proposed, the planet would be deeply embedded within the star's electromagnetic envelope -- hence we'd struggle to observe these radio signals.  The whole idea might sound like a wacky, unsupported claim, but in fact, Dwardu Cardona has published a number of excellent books which dedicate a few thousand pages filled with references to supporting these claims.  I cannot recommend enough Dwardu's books.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="lightning_to_space">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-24a.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Lightning to Space</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="lightning_to_space">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-24b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Is Space Really Neutral?</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">13</span> These snapshots actually come from two separate links -- the first is from <a href="http://www.rense.com/general68/gint.htm" target="_blank">Giant Lightning From Earth To Space from Rense.com</a> and the second is from <a href="https://www.thunderbolts.info/tpod/2005/arch05/051110sprite.htm" target="_blank">Giant Lightning to Space at thunderbolts.info</a>.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div id="origin_of_life"></div>
+
+				<div class="card just-quote" id="gel_cell_theory">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-25a.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Origin of Life</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="gel_cell_theory">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-25b.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Cytoplasm as a Gel</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">14</span> More information at <a href="http://faculty.washington.edu/ghp/" target="_blank">Gerald Pollack's University of Washington pages</a>.  Gerald Pollack is an excellent speaker.  See his many talks on YouTube.<br><br>
+
+							<span class="red-num">15</span> <a href="http://faculty.washington.edu/ghp/images/stories/pubPDF/2005-Trevors_Pollack-Origin_of_life_hydrogel.pdf" target="_blank">Hypothesis: the origin of life in a hydrogel environment, by Jack T. Trevorsa and Gerald H. Pollack</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card just-quote" id="peratt_petroglyphs">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-26.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Did the Sky Change?</span>
+					</div>					
+				</div>
+
+				<div class="card" data-id="peratt_petroglyphs">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-27.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Peratt Paper</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">16</span> This paper can be tricky to track down.  The best option might be to fill out the form <a href="http://www.everythingselectric.com/product/anthony-peratt-z-pinch-aurora/" target="_blank">here</a>.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" id="petroglyph_plasmas">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-28.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Plasma Morphologies</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">16</span> This paper can be tricky to track down.  The best option might be to fill out the form <a href="http://www.everythingselectric.com/product/anthony-peratt-z-pinch-aurora/" target="_blank">here</a>.<br><br>
+
+							<span class="red-num">17</span> I created this explanatory graphic based upon Peratt's paper.  These are morphologies (shapes) that electricity takes when it is conducted over gas (more properly termed plasma) at extremely high charge densities.  If you look carefully at the last morphology, the central ring is the source of what is called synchrotron radiation.  Peratt explains that this would have been very dangerous radiation.  The 2d squatter man drawing appears to follow from the luminosity which results from viewing the 3d form edge-wise.
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div class="card" id="underground_city">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-29.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Background Art</span>
+
+						<p class="content card-text">
+							<i class="material-icons right">more_vert</i><span class="red-num">19</span> Awesome futuristic cityscape artwork by <a href="http://peteamachree.deviantart.com/art/future-city-1-187502843" target="_blank">PeteAmachree at Deviant Art</a><br><br>
+
+							<span class="red-num">20</span> Awesome underground cityscape artwork by <a href="http://cyberkolbasa.deviantart.com/art/underground-city-357211806" target="_blank">cyberkolbasa at Deviant Art</a>
+						</p>
+					</div>
+
+					<div class="card-reveal">
+						<span class="card-text grey-text text-darken-4"><i class="material-icons right">close</i></span>
+					</div>
+				</div>
+
+				<div id="futurism"></div>
+
+				<div class="card just-image" id="cranks">
+					<div class="content card-image">
+						<img class="card-images" src="public/img-mobile/get-big-things-done-30.jpg">
+					</div>
+
+					<div class="activator content card-content">
+						<span class="content card-title grey-text text-darken-4">Cranks</span>
+					</div>					
+				</div>
+
+			<!-- </div> -->
+
+			</div>
+		</div> <!-- Materialize col -->
+	</div> <!-- Materialize row -->
+
+	<script>
+		// executes when complete page is fully loaded, including all frames, objects and images
+		$(window).load(function() {
+
+			console.log("cookie: " + Cookies.get('display'));
+			if (Cookies.get('display') === 'mobile') {
+				$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
+			}
+
+			if (!device.mobile() && !device.tablet() && (Cookies.get('display') !== 'mobile')) {
+				$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
+				$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
+				$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
+				$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
+				$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
+				$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible')
+				$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+				$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+
+				setTimeout(function() {
+					$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+				}, 1000);
+
+				setTimeout(function() {
+					$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
+					$('.preloader-wrapper').removeClass('active');
+				}, 3000);
+
+				Materialize.toast('Use < and > arrow keys to navigate', 9000);
+
+				setTimeout(function() {
+					Materialize.toast('Change views with the mobile icon, top-right', 10000);
+				}, 10000);
+
+				// Add in drag scroll once all animations have completed.  For some reason,
+				// I'm not able to get the deceleration to work for this, even when I modify
+				// the slowdown value in the original code ...
+				$(window).kinetic();
+
+			// When mobile, do this instead ...
+			} else {
+				console.log("mobile window.load()");
+
+				// Set the height of #mobile to the window height.  This is necessary in order
+				// to ensure a consistent scrollTop value
+				$('#mobile').css('height', window.innerHeight);
+				$(window).resize(function() {
+					$('#mobile').css('height', window.innerHeight);
+				});
+
+				// var myScroll;
+				// setTimeout(function() {
+				// 	myScroll = new IScroll('#iscroll',
+				// 		{deceleration: 0.000001});
+				// }, 200);
+
+				// Get a handle on the jQuery object
+				var pageHash = $('.page-hash').find('p');
+				var hash = '';
+
+				// The new URL is only posted after scrolling has stopped for a full second
+				var scrollTrigger = debounce(function (newHash) {
+					if($('#mobile').hasClass('expanded')) {
+						hash = newHash;
+						console.log("id in scrollTrigger: " + newHash);
+
+						// Set the active slide, just in case user switches to table of contents;
+						// We then want it to be painted red
+						currentSlide = '#' + newHash;
+
+						// First, slide old page-hash out for half-second, debounced on the
+						// leading edge (with 3rd debounce parameter, 'true')
+						pageHash.addClass('animated bounceOutLeft');
+
+						// This code snippet surprisingly works, and it comes from
+						// http://www.gmarwaha.com/blog/2009/06/09/jquery-waiting-for-multiple-animations-to-complete/
+						var wait1 = setInterval(function() {
+							if( !$(".page-hash").is(":animated") ) {
+								clearInterval(wait1);
+
+								pageHash.removeClass('animated bounceOutLeft');
+
+								// Slide the new message in
+								pageHash.html('<a><b>#' + newHash + '</b></a>').addClass('animated bounceInLeft');
+
+								var wait2 = setInterval(function() {
+									if( !$(".page-hash").is(":animated") ) {
+										clearInterval(wait2);
+
+										pageHash.removeClass('animated bounceInLeft');
+										window.location.hash = newHash;
+									}
+								}, 200);
+							}
+						}, 200);
+
+					}
+				}, 1000);
+
+				// This function posts to the page-hash display during scroll a reminder
+				// to click to copy
+				var scrollMessage = debounce(function(message) {
+					// First, slide old page-hash out for half-second, debounced on the
+					// leading edge (with 3rd debounce parameter, 'true')
+
+					var expanded = $('#mobile').hasClass('expanded');
+					if (!startState && expanded) {
+						pageHash.addClass('animated bounceOutLeft');
+
+						var wait1 = setInterval(function() {
+							if( !$(".page-hash").is(":animated") ) {
+								clearInterval(wait1);
+
+								pageHash.removeClass('animated bounceOutLeft');
+
+								// Slide the new message in
+								pageHash.html(message).addClass('animated bounceInLeft');
+								var wait2 = setInterval(function() {
+									if( !$(".page-hash").is(":animated") ) {
+										clearInterval(wait2);
+
+										pageHash.removeClass('animated bounceInLeft');
+									}
+								}, 200);
+
+							}
+						}, 200);
+
+					} else if (expanded) {
+						pageHash.html('Click to copy this URL');
+						startState = false;
+					}
+				}, 1000, true);
+
+				// This comes from Underscore.js ...
+				// Returns a function, that, as long as it continues to be invoked, 
+				// will not be triggered. The function will be called after it stops 
+				// being called for N milliseconds. If `immediate` is passed, trigger the 
+				// function on the leading edge, instead of the trailing.
+				function debounce(func, wait, immediate) {
+					var timeout;
+					return function() {
+						var context = this, args = arguments;
+						var later = function() {
+							timeout = null;
+							if (!immediate) func.apply(context, args);
+						};
+						var callNow = immediate && !timeout;
+						clearTimeout(timeout);
+						timeout = setTimeout(later, wait);
+						if (callNow) func.apply(context, args);
+					};
+				};					
+
+				function scrollBetween(scrollObject, min, max) {
+					var maximum = max || scrollObject[0].scrollHeight;
+					var x = scrollObject.scrollTop;
+					return x >= min && x <= maximum;
+				}
+
+				// This implements the sticky navbar
+				var wrap = $("#mobile");
+
+				wrap.on("scroll", function(e) {
+					// console.log("scrollTop: " + this.scrollTop);
+
+					scrollMessage('Click to copy this URL');
+
+					if (scrollBetween(this, 0, 109)) {
+						wrap.removeClass("fix-hash");
+						wrap.addClass("detach-hash");
+					} else {
+						wrap.addClass("fix-hash");
+						wrap.removeClass("detach-hash");
+					}
+				});
+
+				// Cut up slides based upon vertical scroll distances
+				var newSlides = function () {
+					// initialize the ScrollMagic controller
+					var controller = new ScrollMagic.Controller();
+
+					var slides = [];
+					var duration;
+
+					// Select all cards
+					// On the first pass, we want all undefined cards to add their heights into
+					// the defined cards which precede them
+					$('.card').each(function(i) {
+						// Calculate card heights as height plus some margin
+						duration = $(this).height() + 22;
+
+						// console.log("i: " + i + ", height: " + duration + ", id: " + $(this).attr('id'));
+
+						// Does it have an id attribute?
+						if($(this).attr('id')) {
+							slides.push( {'height': duration, 'hash': $(this).attr('id')} );
+
+						// If not, then add its height to the last pushed array element
+						} else if (slides.length == 0) {
+							// Do nothing, because there are no slides yet
+						} else {
+							slides[slides.length-1]['height'] += duration;
+						}
+					});
+
+					// console.log("pre-scenes");
+					// console.log(slides);
+
+					// Select just the cards with id's
+					cards = $('.card[id]');
+
+					// On the second pass, we want to create the scenes and record the vertical positions
+					slides.forEach(function(slide) {
+
+						// Grab the id for each that has one
+						var id = slide['hash'];
+						var height = slide['height'];
+
+						var scrollYPos = $("#mobile #" + id).offset().top - 72;
+						slide['ypos'] = scrollYPos;
+
+						console.log("id: " + id + ", ypos: " + scrollYPos + ", height: " + height);
+
+						// console.log("duration: " + height + ", id: " + id);
+
+						// The 0.5 triggerHook sets the page-hash to whatever is in the middle of
+						// the screen.  I think this is more intuitive than the "onLeave" option (1)
+						slide['scene'] = new ScrollMagic.Scene(
+							   {triggerElement: "#mobile #" + id, 
+								offset: -72,
+								duration: height,
+								triggerHook: 0.5})
+								.addTo(controller)
+								.on("progress", function (e) {
+									if (e.state == "DURING") {
+										console.log('id at event: ' + id);
+								        scrollTrigger(id);
+
+										// This created a mysterious closure problem
+										// $('#mobile').scroll(function() {
+										//     clearTimeout($.data(this, 'scrollTimer'));
+										//     $.data(this, 'scrollTimer', setTimeout(function() {
+										    	
+										// 	    }
+										//     }, 2000));
+										// });
+									}
+								})
+					});
+
+					// console.log('last slide: ' + slides[slides.length-1]['hash']);
+
+					// Make the last slide accessible; this will affect the accessibility of the next-to-last
+					// as a consequence
+					slides[slides.length-1]['scene'] = new ScrollMagic.Scene(
+						   {triggerElement: "#mobile #" + slides[slides.length-1]['hash'], triggerHook: "onEnter"})
+							.addTo(controller)
+							.on("enter", function (e) {
+								scrollTrigger(slides[slides.length-1]['hash']);
+								console.log('end!');
+							});
+
+					// console.log("post-scenes");
+					console.log(slides);
+
+					return {'controller': controller, 'slides': slides};
+				}
+
+				var scrollObject = newSlides();
+
+				function scrollToHash(hash) {
+					var scrollYPos = 0;
+
+					// Make sure incoming hash is in the correct format
+					hash = hash.replace(/\//, '');
+					hash = hash.replace(/^#/, '');
+
+					// Check that the hash exists
+					var exists = false;
+					for (var i=0; i<scrollObject.slides.length; i++) {
+						if (hash === scrollObject.slides[i]['hash']) {
+							exists = true;
+						}
+					}
+
+					if (exists) {
+						scrollYPos = $('#mobile').scrollTop() + 
+							$('#mobile #' + hash).offset().top - window.innerHeight/2 + 30;
+					} 
+
+					console.log("hash: " + hash + ", scrollYPos: " + scrollYPos);
+					$("#mobile").scrollTo(scrollYPos, 800);
+				}
+
+				function slideToggle () {
+					$('#mobile').find(currentSlide).toggleClass('current-card');
+					console.log("currentSlide: " + currentSlide);
+
+					$('#mobile').toggleClass('collapsed');
+					$('#mobile').toggleClass('expanded');
+
+					$('.content .card-images:not(:first)').slideToggle().promise().done(function(e) {
+						// This awesome snippet of code was inspired by this page ...
+						// http://stackoverflow.com/questions/27632300/jquery-offset-returns-negative-value
+						// I'm not sure why 30 makes this centered, btw ...
+
+						// This is where I scroll for collapsed state
+						if ($('#mobile').hasClass('collapsed')) {
+							scrollToHash(currentSlide);
+						}
+				    });
+				}
+
+				// Code comes from http://stackoverflow.com/questions/400212/how-do-i-copy-to-the-clipboard-in-javascript
+				function copyTextToClipboard(text) {
+					var textArea = document.createElement("textarea");
+
+					//
+					// *** This styling is an extra step which is likely not required. ***
+					//
+					// Why is it here? To ensure:
+					// 1. the element is able to have focus and selection.
+					// 2. if element was to flash render it has minimal visual impact.
+					// 3. less flakyness with selection and copying which **might** occur if
+					//    the textarea element is not visible.
+					//
+					// The likelihood is the element won't even render, not even a flash,
+					// so some of these are just precautions. However in IE the element
+					// is visible whilst the popup box asking the user for permission for
+					// the web page to copy to the clipboard.
+					//
+
+					// Place in top-left corner of screen regardless of scroll position.
+					textArea.style.position = 'fixed';
+					textArea.style.top = 0;
+					textArea.style.left = 0;
+
+					// Ensure it has a small width and height. Setting to 1px / 1em
+					// doesn't work as this gives a negative w/h on some browsers.
+					textArea.style.width = '2em';
+					textArea.style.height = '2em';
+
+					// We don't need padding, reducing the size if it does flash render.
+					textArea.style.padding = 0;
+
+					// Clean up any borders.
+					textArea.style.border = 'none';
+					textArea.style.outline = 'none';
+					textArea.style.boxShadow = 'none';
+
+					// Avoid flash of white box if rendered for any reason.
+					textArea.style.background = 'transparent';
+
+					textArea.value = text;
+
+					document.body.appendChild(textArea);
+
+					textArea.select();
+
+					try {
+						var successful = document.execCommand('copy');
+						var msg = successful ? 'successful' : 'unsuccessful';
+						scrollMessage('Copy was ' + msg);
+					} catch (err) {
+						scrollMessage('Copy unsupported');
+					}
+
+					document.body.removeChild(textArea);
+				}
+
+				// var copyBobBtn = document.querySelector('.js-copy-bob-btn'),
+				// 	copyJaneBtn = document.querySelector('.js-copy-jane-btn');
+
+				// copyBobBtn.addEventListener('click', function(event) {
+				// 	copyTextToClipboard('Bob');
+				// });
+
+				// copyJaneBtn.addEventListener('click', function(event) {
+				// 	copyTextToClipboard('Jane');
+				// });
+
+				// Copy should set og:title, og:url, og:description, og:image
+				$('.top-header, .page-hash').on('click', function() {
+					// var metaTitle = document.querySelector('meta[property$="title"]');
+					// var metaURL = document.querySelector('meta[property$="url"]');
+					// var metaDescription = document.querySelector('meta[property$="description"]');
+					// var metaImage = document.querySelector('meta[property$="image"]');
+
+					copyTextToClipboard("https://worldviewer.github.io" + currentSlide);
+				});
+
+				// $('.content .card-images:not(:first)').slideToggle();
+
+				// This click handler toggles between collapsed and expanded states for slides
+				$('.menu-icon').on('click', function() {
+					console.log('toggle collapse state for mobile cards');
+
+					// When in Table of Contents mode, do not display cards with scroll
+					if ($('#mobile').hasClass('expanded')) {
+						$('.page-hash').find('p').html('Click card to jump to it');
+						scrollObject.controller.enabled(false);
+
+					} else {
+						scrollObject.controller.enabled(true);
+					}
+
+					slideToggle();
+
+					// Make sure that the recalculation does not occur until the collapse state
+					// is fully toggled
+					// var callbacks = $.Callbacks();
+					// callbacks.add(slideToggle);
+					// callbacks.add(recalculateSlides);
+					// callbacks.fire();
+
+					// console.log(slides);
+				});
+
+				$('.card').on('click', function(e) {
+					if ($('#mobile').hasClass('collapsed')) {
+						e.stopPropagation();
+
+						slideToggle();
+						scrollObject.controller.enabled(true);
+
+						var hash = $(this).attr('id') || $(this).data('id');
+						console.log('hash: ' + hash);
+						window.location.hash = hash;
+
+						// Wait for screen to re-draw before scrolling.  This is where I scroll for
+						// expanded state.
+						setTimeout(function() {
+							var scrollYPos = 0;
+							for (var i=0; i<scrollObject.slides.length; i++) {
+								if (scrollObject.slides[i]['hash'] === hash) {
+									scrollYPos = scrollObject.slides[i]['ypos'];
+								}
+							}
+
+							// var scrollYPos = $("#mobile #" + hash).offset().top - 72;
+							console.log("scrollYPos: " + scrollYPos);
+
+							$("#mobile").scrollTo(scrollYPos, 800);
+						}, 900);
+					}
+				})
+
+				// To save screen real estate, we want to cycle between all of the social share icons
+				// once every 5 seconds.  SVG's are .twitter, .gplus, .fb
+				var initializeShareIcons = (function() {
+					var logos = ['.twitter', '.gplus', '.fb'];
+
+					// All social share icons are initially hidden, via CSS
+					// $('.top-header svg').css('visibility', 'hidden');
+
+					// We will use this to cycle through the logos array
+					var currentLogo = 0;
+					var lastLogo = 2;
+					var $currentLogo, $lastLogo;
+
+					var switchShareIcon = setInterval(function() {
+						// Access the DOM once
+						$currentLogo = $(logos[currentLogo]);
+						$lastLogo = $(logos[lastLogo]);
+
+						// console.log('currentLogo: ' + currentLogo);
+						// console.log($currentLogo);
+						// console.log('lastLogo: ' + lastLogo);
+						// console.log($lastLogo);
+
+						// First, animate out the former logo
+						$lastLogo.addClass('animated zoomOut');
+
+						// This code snippet comes from
+						// http://www.gmarwaha.com/blog/2009/06/09/jquery-waiting-for-multiple-animations-to-complete/
+						var wait1 = setInterval(function() {
+							if( !$lastLogo.is(":animated") ) {
+								clearInterval(wait1);
+
+								// Reset the animation and hide the element
+								$lastLogo.removeClass('animated zoomOut active');
+
+								// Animate in the new share icon
+								$currentLogo.addClass('animated zoomIn active');
+
+								var wait2 = setInterval(function() {
+									if( !$currentLogo.is(":animated") ) {
+										clearInterval(wait2);
+
+										$currentLogo.removeClass('animated zoomIn');
+									}
+								}, 200);
+							}
+						}, 200);
+
+						currentLogo = (currentLogo + 1) % 3;
+						lastLogo = (lastLogo + 1) % 3;
+					}, 7000);
+
+				})();
+
+				// HTML must be marked up as follows in order for G+ to provide options for images
+				// <body itemscope itemtype="http://schema.org/Product">
+				// 		<h1 itemprop="name">Shiny Trinket</h1>
+				// 		<img itemprop="image" src="image-url"></img>
+				// 		<p itemprop="description">Shiny trinkets are shiny.</p>
+				// </body>				
+
+				// Note that these annotations are only valid in the current itemscope. The +1 button has to 
+				// be placed inside this scope as well, since it looks for the first itemscope that occur 
+				// above the button in the DOM hierarchy.
+
+				// The positive side of that is that you can define multiple itemscopes per page, thus easily 
+				// integrate multiple +1 buttons with different share snippets on it.
+
+				$('a.gplus').on('click', function(e) {
+					e.stopPropagation();
+					console.log("https://plus.google.com/share?url=" + "http://worldviewer.github.io");
+					window.open("https://plus.google.com/share?url=" + "http://worldviewer.github.io", '', 
+						'menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+					return false;
+				});
+
+				$('a.twitter').on('click', function(e) {
+					e.stopPropagation();
+					!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+				});
+
+				// This comes from http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website
+				$('div.fb').on('click', function(e) {
+					e.preventDefault();
+					e.stopPropagation();
+
+					FB.ui({
+						method: 'feed',
+						name: 'Is It Possible to Increase the Rate of Innovation?',
+						link: 'https://www.worldviewer.github.io',
+						picture: 'https://worldviewer.github.io/public/img-mobile/get-big-things-done-7.jpg',
+						caption: 'worldviewer.github.io',
+
+						// 297 max
+						description: "We have an unfortunate tradition of treating our best scientific critics as cranks or pseudoscientists. Yet there are potential answers to the biggest questions in science which are precluded by this incremental approach. Let me show you some examples of promising challenges to textbook theory.",
+						message: ""
+					});
+				});
+
+				// bind scroll to anchor links
+				// check history situation with this code
+				// $(document).on("click", "a[href^='#']", function (e) {
+				// 	var id = $(this).attr("href");
+				// 	if ($(id).length > 0) {
+				// 		e.preventDefault();
+
+				// 		// trigger scroll
+				// 		controller.scrollTo(id);
+
+				// 		// if supported by the browser we can even update the URL.
+				// 		if (window.history && window.history.pushState) {
+				// 			history.pushState("", document.title, id);
+				// 		}
+				// 	}
+				// });	
+
+				// Grab anchor to scroll to from URL hash
+				var URLhash = window.location.hash;
+
+				// If a URL hash exists, then we want to store state information to avoid
+				// scrolling the 'click to copy' message off the screen during scroll
+				var startState = URLhash ? true : false;
+
+				// Remove the forward-slash that is sometimes added into the URL
+				URLhash = URLhash.replace(/\//, '');
+				console.log("window.location.hash: " + URLhash);
+
+				// Keep track of the current slide, so that we can paint it red in the
+				// table of contents
+				currentSlide = URLhash;
+
+				// Calculate pixel position of anchor
+				var scrollYPos = $("#mobile " + URLhash).offset().top - 72;
+				console.log("scrollYPos: " + scrollYPos);
+
+				// None of these three approaches worked ...
+				// controller.scrollTo(URLhash);
+				// controller.scrollTo(scrollYPos);
+				// TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
+
+				// But this did ...
+				$("#mobile").scrollTo(scrollYPos, 800);
+
+				setTimeout(function() {
+					Materialize.toast('Click top-right for table of contents', 10000);
+				}, 3000);
+			}
+		});
+
+		// Useful info on integrating Google Analytics using Google's Tag Manager to track by CSS Selector ...
+		// http://www.simoahava.com/analytics/matches-css-selector-operator-in-gtm-triggers/
+		// This would be the best way to observe the page interactions
+
+		// Explanation of how to put Impress in a container here ...
+		// https://github.com/impress/impress.js/issues/111
+
+		// Explanation of how to invoke a JS file from within a JS script at ...
+		// http://stackoverflow.com/questions/950087/include-a-javascript-file-in-another-javascript-file
+
+		function loadScript(url, callback) {
+		    // Adding the script tag to the head as suggested before
+		    var head = document.getElementsByTagName('head')[0];
+		    var script = document.createElement('script');
+		    script.type = 'text/javascript';
+		    script.src = url;
+
+		    // Then bind the event to the callback function.
+		    // There are several events for cross browser compatibility.
+		    script.onreadystatechange = callback;
+		    script.onload = callback;
+
+		    // Fire the loading
+		    head.appendChild(script);
+		}
+
+		// This function returns the current scale of the element marked with
+		// the #impress ID.  Comes from site here ...
+		// https://css-tricks.com/get-value-of-css-rotation-through-javascript/
+		function getScale() {
+			var el = document.getElementById("impress");
+			var st = window.getComputedStyle(el, null);
+			var tr = st.getPropertyValue("-webkit-transform") ||
+			         st.getPropertyValue("-moz-transform") ||
+			         st.getPropertyValue("-ms-transform") ||
+			         st.getPropertyValue("-o-transform") ||
+			         st.getPropertyValue("transform") ||
+			         "fail...";
+
+			// With rotate(30deg)...
+			// matrix(0.866025, 0.5, -0.5, 0.866025, 0px, 0px)
+			console.log('Matrix: ' + tr);
+
+			// rotation matrix - http://en.wikipedia.org/wiki/Rotation_matrix
+
+			var values = tr.split('(')[1];
+			    values = values.split(')')[0];
+			    values = values.split(',');
+			var a = values[0];
+			var b = values[1];
+			var c = values[2];
+			var d = values[3];
+
+			console.log("scale: " + Math.sqrt(a*a + b*b));
+
+			return(Math.sqrt(a*a + b*b));
+		}
+
+		function setScaleFactor(factor) {
+			$('#impress').attr('data-scale-factor', factor);
+			console.log("set scale factor: " + factor);
+		}
+
+		var myPrettyCode = function() {
+			impress().init();
+
+			// When not mobile, do this ...
+
+			$(document).ready(function() {
+				console.log("desktop or tablet document.ready()");
+
+				// Materialize.css does not currently work well with iPad touches, so for now,
+				// I'm going to bump tablet users to the simpler mobile interface ...
+				// 
+				// var ua = navigator.userAgent,
+				// event = (device.ipad()) ? "touchstart" : "click";
+				// $("theElement").bind(event, function(e) {
+				// }
+				//
+				// Explanations of the problem here ...
+				// http://www.danwellman.co.uk/fixing-jquery-click-events-for-the-ipad/
+				// https://github.com/Dogfalo/materialize/issues/2319
+
+				// Initialize the presentation scale to 1
+				$('#impress').attr('data-set-scale-factor', 1);
+
+				$('.tooltipped').tooltip({delay: 50});
+
+				$('.button-collapse').sideNav({
+					menuWidth: 360 // Default is 240
+				});
+
+				// Always start infographic with active side-nav bar
+				$('.button-collapse').sideNav('show');
+				$('#slide-out').addClass('active');
+
+				// Allow side-nav collapse by pressing the hamburger icon
+				$('.button-collapse').on('click', function() {
+					// $("#slide").animate({width:'toggle'},350);
+					// $('.button-collapse').sideNav('hide');
+					$('#slide-out').removeClass('active');
+
+					$('#hamburger').css('visibility', 'visible');
+
+					console.log("collapse side-nav");
+				});
+
+				// Show side-nav bar when corner hamburger is clicked
+				$('#hamburger').on('click', function() {
+					$('.button-collapse').sideNav('show');
+					$('#slide-out').addClass('active');
+					$('#hamburger').css('visibility', 'hidden');
+				});
+
+				// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
+				// (URL CHANGE --> LI CHANGE)
+				// $('#impress > .present').attr('id') can be used to grab the id that is currently
+				// activated by impress.js, and with that, we can can apply border styling to
+				// the right border of $('.side-nav > li[id="id"');
+
+				$(window).on('hashchange', function(e){
+					console.log('slide transition');
+
+					// grab active impress.js slide ID
+					var currentSlideHash = $('#impress .active').attr('id');
+
+					// Reality-check to console
+					console.log("current slide hash: " + currentSlideHash);
+
+					// toggle the active-slide class for the list item with that ID
+					$('.side-nav > li').removeClass('active-slide');
+					$('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
+				});
+
+				// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
+				// (LI CLICK --> URL CHANGE)
+				// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
+				// '#your-page-element';
+
+				$('.side-nav > li').on('click', function() {
+					console.log('click-induced transition');
+					window.location.hash = '#' + $(this).data('slide');
+				});
+
+				$('#page-up').on('click', function() {
+					window.location.hash = '#intro';
+				});
+
+				$('#page-down').on('click', function() {
+					window.location.hash = '#futurism';
+				});
+
+				// I want to persist this setting between sessions, so I'll use js.cookie.js
+				// Usage information here ...
+				// https://github.com/js-cookie/js-cookie
+				//
+				// Cookies.set('name', 'value');
+				//
+				// Valid across entire site ...
+				// Cookies.set('name', 'value', { expires: 7 });
+				// 
+				// Cookies.get('name'); // => 'value'
+				// Cookies.get('nothing'); // => undefined
+				$('#mobile-view').on('click', function() {
+					Cookies.set('display', 'mobile', {expires: 365});
+
+					console.log("display: " + Cookies.get('display'));
+
+					// Then reload the page ...
+					document.location.reload();
+				});
+
+				// jQuery automatically adds in necessary vendor prefixes when using
+				// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
+				$('#zoom-in').on('click', function() {
+					$('#impress').css('transform', 'scale(' + getScale()*1.25 + ')');
+				});
+
+				$('#zoom-out').on('click', function() {
+					$('#impress').css('transform', 'scale(' + getScale()/1.25 + ')');
+				});
+
+				$('#discuss-slide').on('click', function() {
+
+				});
+
+				$('#previous-slide').on('click', function() {
+					// This approach does not work because it does not preventDefault(),
+					// and the key is already being captured by impress.js, which causes
+					// a conflict ...
+
+					// var e = jQuery.Event("keydown");
+					// e.which = 37;
+					// e.keyCode = 37;
+					// $(document).trigger(e);
+
+					// Instead, we can in this case just use impress ...
+					impress().prev();
+
+					// And see below for an example of how to capture keypresses in other
+					// cases ...
+				});
+
+				$('#next-slide').on('click', function() {
+					impress().next();
+				});
+
+				var count = 0;
+				var current, start, end, previous, diff, factor;
+
+				// Define shortcuts here
+				// REFACTOR THIS
+				$(document).keydown(function(e) {
+					// When plus or minus is hit, count the number of times
+
+					if ((e.keyCode === 9) || (e.keyCode === 189) || 
+						(e.keyCode === 187) || (e.keyCode === 13)) {
+		                e.preventDefault();
+		            }
+
+				    console.log("key code: " + e.keyCode);
+
+					// Use ENTER key to set the scale for all slides
+					// if (e.keyCode === 13) {
+					// 	factor = $('#impress').attr('data-scale-factor');
+					// 	$('#impress').attr('data-set-scale-factor', factor);
+					// 	console.log('Set scale to active');
+					// }
+
+				    // TAB key: Use tab key as a shortcut for toggling the side-nav
+				    if (e.keyCode === 9) {
+				    	if ($('#slide-out').hasClass('active')) {
+							$('.button-collapse').trigger('click');
+						} else {
+							$('#hamburger').trigger('click');
+						}
+
+				    } else if ((e.keyCode === 189) || (e.keyCode === 187)) {
+
+						// Subtract key: Use for zooming out
+					    if (e.keyCode === 189) {
+					    	current = Date.now();
+							console.log("current: " + current);
+							console.log("previous: " + previous);
+							diff = parseInt(current) - parseInt(previous);
+							console.log("diff: " + diff);
+
+							// First keypress in a series
+							if (count === 0) {
+								start = current;
+								count++;
+								console.log('count: ' + count);
+
+								setTimeout(function(currentCount) {
+									console.log('count: ' + count + ", currentCount: " + currentCount);
+									if (currentCount === count) {
+										factor = Math.pow(Math.log(count+2), 3);
+										$('#impress').css('transform', 'scale(' + getScale()/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+										// setScaleFactor(-factor);
+										count = 0;
+									}
+								}, 500, count);
+
+								previous = current;
+
+							// This keypress occurred within half a second of the last
+							} else {
+								if (parseInt(current) - parseInt(previous) < 250) {
+									count++;
+									console.log('count: ' + count);
+
+									// Wait half a second and check to see if any more of these same
+									// keypresses have occurred.  If not, then currentCount will equal
+									// the count.  It is only then that we want to calculate and invoke
+									// the zoom function
+									setTimeout(function(currentCount) {
+										console.log('count: ' + count + ", currentCount: " + currentCount);
+										if (currentCount === count) {
+											factor = Math.pow(Math.log(count+2), 3);
+											$('#impress').css('transform', 'scale(' + getScale()/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+											// setScaleFactor(-factor);
+											count = 0;
+										}
+									}, 500, count);
+								}
+
+								previous = current;								
+							}
+
+						// Add key: Use for zooming in						
+					    } else if (e.keyCode === 187) {
+					    	current = Date.now();
+							console.log("current: " + current);
+							console.log("previous: " + previous);
+							diff = parseInt(current) - parseInt(previous);
+							console.log("diff: " + diff);
+
+							// First keypress in a series
+							if (count === 0) {
+								start = current;
+								count++;
+								console.log('count: ' + count);
+
+								setTimeout(function(currentCount) {
+									console.log('count: ' + count + ", currentCount: " + currentCount);
+									if (currentCount === count) {
+										factor = Math.pow(Math.log(count+2), 3);
+										$('#impress').css('transform', 'scale(' + getScale()*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+										// setScaleFactor(factor);
+										count = 0;
+									}
+								}, 500, count);
+
+								previous = current;	
+
+							// This keypress occurred within half a second of the last
+							} else {
+								if (parseInt(current) - parseInt(previous) < 250) {
+									count++;
+									console.log('count: ' + count);
+
+									// Wait half a second and check to see if any more of these same
+									// keypresses have occurred.  If not, then currentCount will equal
+									// the count.  It is only then that we want to calculate and invoke
+									// the zoom function
+									setTimeout(function(currentCount) {
+										console.log('count: ' + count + ", currentCount: " + currentCount);
+										if (currentCount === count) {
+											factor = Math.pow(Math.log(count+2), 3);
+											$('#impress').css('transform', 'scale(' + getScale()*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+											// setScaleFactor(factor);
+											count = 0;
+										}
+									}, 500, count);
+								}
+
+								previous = current;								
+							}
+					    }
+					}
+				});
+			});
+		};
+
+		if (Cookies.get('display') === 'mobile') {
+			$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
+		}
+
+		if (!device.mobile() && !device.tablet() && (Cookies.get('display') !== 'mobile')) {
+			$('.preloader-wrapper').addClass('active');
+
+			// Dynamically add in the img tag, so that this huge file never downloads for mobile
+
+			var firstDiv = document.querySelector('#impress > div:first-of-type');
+			firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="public/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
+
+			loadScript("public/js/impress.js", myPrettyCode);
+		} else {
+			// When mobile, do this instead ...
+			console.log("should only run on mobile");
+
+			$(document).ready(function() {
+
+			});
+		}
+	</script>
+
+</body>
+</html>
+
