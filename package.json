@@ -4,7 +4,8 @@
   "description": "To view the current state of the site, go <a href=\"http://worldviewer.github.io/\">here</a>.",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/js -d dist/js",
+    "scss": "node-sass --output-style compressed -o dist/css src/scss"
   },
   "repository": {
     "type": "git",
@@ -16,11 +17,9 @@
     "url": "https://github.com/worldviewer/worldviewer-refactor/issues"
   },
   "homepage": "https://github.com/worldviewer/worldviewer-refactor#readme",
-  "scripts": {
-    "build": "babel src/js -d dist/js"
-  },
   "devDependencies": {
     "babel-cli": "^6.18.0",
-    "babel-preset-latest": "^6.16.0"
+    "babel-preset-latest": "^6.16.0",
+    "node-sass": "^4.0.0"
   }
 }

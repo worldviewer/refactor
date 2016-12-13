@@ -1,6 +1,5 @@
 'use strict';
 
-// executes when complete page is fully loaded, including all frames, objects and images
 $(window).load(function () {
 
 	console.log("cookie: " + Cookies.get('display'));
