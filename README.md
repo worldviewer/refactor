@@ -23,5 +23,6 @@ To view the current state of the refactor, go <a href="http://worldviewer.github
 - Explore the possibility of a more responsive approach
   Can impress.js run on a mobile device?
   Is there an intuitive UI for smaller devices which extends desktop approach?
+- Can I eliminate hardcoded URL's?
 
 

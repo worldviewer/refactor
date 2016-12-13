@@ -1,7 +1,7 @@
 {
   "name": "refactor",
   "version": "1.0.0",
-  "description": "To view the current state of the site, go <a href=\"http://worldviewer.github.io/\">here</a>.",
+  "description": "Original: http://worldviewer.github.io/, Refactor: http://worldviewer.github.io/refactor/",
   "main": "main.js",
   "scripts": {
     "build": "npm run babel && npm run scss && npm run autoprefixer && npm run uglify",
