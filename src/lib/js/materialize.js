@@ -5039,7 +5039,8 @@ return PickerConstructor
 
     // Node.js/browserify.
     else if ( typeof exports == 'object' )
-        module.exports = factory( require('./picker.js'), require('jquery') )
+        module.exports = factory( require('../../../node_modules/pickadate/lib/picker.js'), require('jquery') )
+	    // module.exports = factory( require('../../js/date_picker/picker.js'), require('jquery') )
 
     // Browser globals.
     else factory( Picker, jQuery )

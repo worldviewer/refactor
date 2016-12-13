@@ -1,4 +1,13 @@
-$(window).load(function() {
+import Infographic from './infographic.js';
+import Cookies from 'js-cookie';
+import ScrollMagic from 'scrollmagic';
+import scrollTo from 'jquery.scrollto';
+import $ from 'jquery';
+
+$(window).on('load', function() {
+
+	let infographic = new Infographic();
+	infographic.init();
 
 	console.log("cookie: " + Cookies.get('display'));
 	if (Cookies.get('display') === 'mobile') {
@@ -45,12 +54,6 @@ $(window).load(function() {
 		$(window).resize(function() {
 			$('#mobile').css('height', window.innerHeight);
 		});
-
-		// var myScroll;
-		// setTimeout(function() {
-		// 	myScroll = new IScroll('#iscroll',
-		// 		{deceleration: 0.000001});
-		// }, 200);
 
 		// Get a handle on the jQuery object
 		var pageHash = $('.page-hash').find('p');

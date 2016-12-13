@@ -4,26 +4,37 @@
   "description": "Original: http://worldviewer.github.io/, Refactor: http://worldviewer.github.io/refactor/",
   "main": "main.js",
   "scripts": {
-    "build": "npm run babel && npm run scss && npm run autoprefixer && npm run uglify",
-    "babel": "babel src/js -d src",
+    "build": "npm run babel && npm run scss && npm run autoprefixer && npm run browserify",
+    "babel": "babel src/js -d tmp",
     "scss": "node-sass --output-style compressed -o dist/css src/scss lib/scss",
     "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
-    "uglify": "uglifyjs src/lib/js/jquery-2.1.4.min.js src/lib/js/device.js src/lib/js/js.cookie.js src/lib/js/jquery.kinetic.min.js src/lib/js/jquery.scrollTo.min.js src/lib/js/materialize.js src/lib/js/ScrollMagic.min.js src/lib/js/ScrollToPlugin.min.js src/main.js -m -o dist/js/app.js"
+    "browserify": "browserify src/lib/js/* tmp/* -o dist/js/app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/worldviewer/worldviewer-refactor.git"
+    "url": "git+https://github.com/worldviewer/refactor.git"
   },
   "author": "Chris Reeve",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/worldviewer/worldviewer-refactor/issues"
+    "url": "https://github.com/worldviewer/refactor/issues"
   },
-  "homepage": "https://github.com/worldviewer/worldviewer-refactor#readme",
+  "homepage": "https://github.com/worldviewer/refactor#readme",
+  "dependencies": {
+    "hammerjs": "^2.0.8",
+    "jquery": "^3.1.1",
+    "jquery.kinetic": "^2.1.1",
+    "jquery.scrollto": "^2.1.2",
+    "js-cookie": "^2.1.3",
+    "pickadate": "^3.5.6",
+    "scrollmagic": "^2.0.5"
+  },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
+    "browserify": "^13.1.1",
+    "materialize-css": "^0.97.8",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0"
   }

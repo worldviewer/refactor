@@ -25,4 +25,16 @@ To view the current state of the refactor, go <a href="http://worldviewer.github
   Is there an intuitive UI for smaller devices which extends desktop approach?
 - Can I eliminate hardcoded URL's?
 
+## Notes
+
+- "Uncaught ReferenceError: require is not defined": Babel will transpile ES6 -> ES5, but it will not perform the module bundling for you ...
+
+http://stackoverflow.com/questions/31593694/do-i-need-require-js-when-i-use-babel
+
+https://stackoverflow.com/questions/28125554/javascript-6to5-now-babel-export-module-usage
+
+https://github.com/substack/browserify-handbook
+
+- jQuery Kinetic produces errors if I simply drop the code into the directory, but works fine if I add it via npm.
+
 
