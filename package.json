@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run babel && npm run scss && npm run autoprefixer",
     "babel": "babel src/js -d dist/js",
-    "scss": "node-sass --output-style compressed -o dist/css src/scss",
+    "scss": "node-sass --output-style compressed -o dist/css src/scss lib/scss",
     "autoprefixer": "postcss -u autoprefixer -r dist/css/*"
   },
   "repository": {

@@ -965,7 +965,7 @@ if (!device.mobile() && !device.tablet() && Cookies.get('display') !== 'mobile')
 	var firstDiv = document.querySelector('#impress > div:first-of-type');
 	firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="src/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
 
-	loadScript("src/lib/impress.js", myPrettyCode);
+	loadScript("dist/js/impress.js", myPrettyCode);
 } else {
 	// When mobile, do this instead ...
 	console.log("should only run on mobile");
