@@ -402,7 +402,7 @@ $(window).load(function () {
 				// var metaDescription = document.querySelector('meta[property$="description"]');
 				// var metaImage = document.querySelector('meta[property$="image"]');
 
-				copyTextToClipboard("https://worldviewer.github.io" + currentSlide);
+				copyTextToClipboard("https://worldviewer.github.io/refactor/" + currentSlide);
 			});
 
 			// $('.content .card-images:not(:first)').slideToggle();
@@ -530,8 +530,8 @@ $(window).load(function () {
 
 			$('a.gplus').on('click', function (e) {
 				e.stopPropagation();
-				console.log("https://plus.google.com/share?url=" + "http://worldviewer.github.io");
-				window.open("https://plus.google.com/share?url=" + "http://worldviewer.github.io", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
+				console.log("https://plus.google.com/share?url=" + "http://worldviewer.github.io/refactor/");
+				window.open("https://plus.google.com/share?url=" + "http://worldviewer.github.io/refactor/", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
 				return false;
 			});
 
@@ -554,8 +554,8 @@ $(window).load(function () {
 				FB.ui({
 					method: 'feed',
 					name: 'Is It Possible to Increase the Rate of Innovation?',
-					link: 'https://www.worldviewer.github.io',
-					picture: 'https://worldviewer.github.io/dist/img-mobile/get-big-things-done-7.jpg',
+					link: 'https://www.worldviewer.github.io/refactor/',
+					picture: 'https://worldviewer.github.io/refactor/dist/assets/img-mobile/get-big-things-done-7.jpg',
 					caption: 'worldviewer.github.io',
 
 					// 297 max
@@ -963,7 +963,7 @@ if (!device.mobile() && !device.tablet() && Cookies.get('display') !== 'mobile')
 	// Dynamically add in the img tag, so that this huge file never downloads for mobile
 
 	var firstDiv = document.querySelector('#impress > div:first-of-type');
-	firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="dist/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
+	firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="dist/assets/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
 
 	loadScript("dist/js/impress.js", myPrettyCode);
 } else {
