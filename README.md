@@ -27,7 +27,7 @@ To view the current state of the refactor, go <a href="http://worldviewer.github
 
 ## Notes
 
-- "Uncaught ReferenceError: require is not defined": Babel will transpile ES6 -> ES5, but it will not perform the module bundling for you ...
+"Uncaught ReferenceError: require is not defined": Babel will transpile ES6 -> ES5, but it will not perform the module bundling for you ...
 
 http://stackoverflow.com/questions/31593694/do-i-need-require-js-when-i-use-babel
 
@@ -35,6 +35,72 @@ https://stackoverflow.com/questions/28125554/javascript-6to5-now-babel-export-mo
 
 https://github.com/substack/browserify-handbook
 
-- jQuery Kinetic produces errors if I simply drop the code into the directory, but works fine if I add it via npm.
+jQuery Kinetic produces errors if I simply drop the code into the directory, but works fine if I add it via npm.  Presuming it's a dependency issue, moving on.
 
+Materialize.css: This package runs into serious issues when bundling.  I've attempted to create a Browserify shim to address them, but each time I resolve one dependency error, I get another ...
+
+    {
+      "name": "refactor",
+      "version": "1.0.0",
+      "description": "Original: http://worldviewer.github.io/, Refactor: http://worldviewer.github.io/refactor/",
+      "main": "main.js",
+      "scripts": {
+        "build": "npm run babel && npm run scss && npm run autoprefixer && npm run browserify",
+        "babel": "babel src/js -d src/tmp",
+        "scss": "node-sass --output-style compressed -o dist/css src/scss src/lib/scss",
+        "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
+        "browserify": "browserify src/lib/js/* src/tmp/* -o dist/js/app.js"
+      },
+      "repository": {
+        "type": "git",
+        "url": "git+https://github.com/worldviewer/refactor.git"
+      },
+      "author": "Chris Reeve",
+      "license": "ISC",
+      "bugs": {
+        "url": "https://github.com/worldviewer/refactor/issues"
+      },
+      "browserify": {
+        "transform": [
+          "browserify-shim"
+        ]
+      },
+      "browserify-shim": {
+        "jquery-js": "jQuery",
+        "materialize-js": {
+          "exports": "Materialize",
+          "depends": [
+            "velocity:Vel",
+            "jquery-js:jQuery"
+          ]
+        }
+      },
+      "browser": {
+        "jquery-js": "./node_modules/jquery/dist/jquery.js",
+        "materialize-js": "./src/lib/js/materialize.js",
+        "velocity": "./node_modules/velocity-animate/velocity.js"
+      },
+      "homepage": "https://github.com/worldviewer/refactor#readme",
+      "dependencies": {
+        "hammerjs": "^2.0.8",
+        "jquery": "^3.1.1",
+        "jquery.kinetic": "^2.1.1",
+        "jquery.scrollto": "^2.1.2",
+        "js-cookie": "^2.1.3",
+        "pickadate": "^3.5.6",
+        "scrollmagic": "^2.0.5",
+        "velocity-animate": "^1.4.0"
+      },
+      "devDependencies": {
+        "autoprefixer": "^6.5.4",
+        "babel-cli": "^6.18.0",
+        "babel-preset-latest": "^6.16.0",
+        "browserify": "^13.1.1",
+        "browserify-shim": "^3.8.12",
+        "node-sass": "^4.0.0",
+        "postcss-cli": "^2.6.0"
+      }
+    }
+
+In the interest of keeping this project timeboxed and focused on all aspects of the refactor, I'm going to pull Materialize out of the bundle.
 

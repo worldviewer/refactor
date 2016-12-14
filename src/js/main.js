@@ -4,6 +4,7 @@ import ScrollMagic from 'scrollmagic';
 import scrollTo from 'jquery.scrollto';
 import jQuery from 'jquery';
 import Vel from 'velocity-animate';
+import Materialize from '../lib/js/materialize.js';
 
 $(window).on('load', function() {
 
