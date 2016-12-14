@@ -19,6 +19,28 @@
   "bugs": {
     "url": "https://github.com/worldviewer/refactor/issues"
   },
+
+  "browserify": {
+    "transform": [
+      "browserify-shim"
+    ]
+  },
+  "browserify-shim": {
+    "jquery-js": "jQuery",
+    "materialize-js": {
+      "exports": "Materialize",
+      "depends": [
+        "velocity:Vel",
+        "jquery-js:jQuery"
+      ]
+    }
+  },
+  "browser": {
+    "jquery-js": "./node_modules/jquery/dist/jquery.js",
+    "materialize-js": "./src/lib/js/materialize.js",
+    "velocity": "./node_modules/velocity-animate/velocity.js"
+  },
+
   "homepage": "https://github.com/worldviewer/refactor#readme",
   "dependencies": {
     "hammerjs": "^2.0.8",
@@ -27,14 +49,15 @@
     "jquery.scrollto": "^2.1.2",
     "js-cookie": "^2.1.3",
     "pickadate": "^3.5.6",
-    "scrollmagic": "^2.0.5"
+    "scrollmagic": "^2.0.5",
+    "velocity-animate": "^1.4.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-cli": "^6.18.0",
     "babel-preset-latest": "^6.16.0",
     "browserify": "^13.1.1",
-    "materialize-css": "^0.97.8",
+    "browserify-shim": "^3.8.12",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0"
   }

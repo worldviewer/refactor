@@ -2,7 +2,8 @@ import Infographic from './infographic.js';
 import Cookies from 'js-cookie';
 import ScrollMagic from 'scrollmagic';
 import scrollTo from 'jquery.scrollto';
-import $ from 'jquery';
+import jQuery from 'jquery';
+import Vel from 'velocity-animate';
 
 $(window).on('load', function() {
 

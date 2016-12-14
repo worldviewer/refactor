@@ -18,37 +18,39 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 var _jquery3 = require('jquery');
 
-var _jquery4 = _interopRequireDefault(_jquery3);
+var _velocityAnimate = require('velocity-animate');
+
+var _velocityAnimate2 = _interopRequireDefault(_velocityAnimate);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-(0, _jquery4.default)(window).on('load', function () {
+(0, _jquery3.$)(window).on('load', function () {
 
 	var infographic = new _infographic2.default();
 	infographic.init();
 
 	console.log("cookie: " + _jsCookie2.default.get('display'));
 	if (_jsCookie2.default.get('display') === 'mobile') {
-		(0, _jquery4.default)('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
+		(0, _jquery3.$)('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
 
 	if (!device.mobile() && !device.tablet() && _jsCookie2.default.get('display') !== 'mobile') {
-		(0, _jquery4.default)('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
-		(0, _jquery4.default)('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
-		(0, _jquery4.default)('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
-		(0, _jquery4.default)('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
-		(0, _jquery4.default)('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
-		(0, _jquery4.default)('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-		(0, _jquery4.default)('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-		(0, _jquery4.default)('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+		(0, _jquery3.$)('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
+		(0, _jquery3.$)('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
+		(0, _jquery3.$)('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
+		(0, _jquery3.$)('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
+		(0, _jquery3.$)('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
+		(0, _jquery3.$)('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+		(0, _jquery3.$)('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+		(0, _jquery3.$)('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
 
 		setTimeout(function () {
-			(0, _jquery4.default)('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+			(0, _jquery3.$)('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
 		}, 1000);
 
 		setTimeout(function () {
-			(0, _jquery4.default)('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
-			(0, _jquery4.default)('.preloader-wrapper').removeClass('active');
+			(0, _jquery3.$)('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
+			(0, _jquery3.$)('.preloader-wrapper').removeClass('active');
 		}, 3000);
 
 		Materialize.toast('Use < and > arrow keys to navigate', 9000);
@@ -60,7 +62,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 		// Add in drag scroll once all animations have completed.  For some reason,
 		// I'm not able to get the deceleration to work for this, even when I modify
 		// the slowdown value in the original code ...
-		(0, _jquery4.default)(window).kinetic();
+		(0, _jquery3.$)(window).kinetic();
 
 		// When mobile, do this instead ...
 	} else {
@@ -124,27 +126,27 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 				}
 
 				if (exists) {
-					scrollYPos = (0, _jquery4.default)('#mobile').scrollTop() + (0, _jquery4.default)('#mobile #' + hash).offset().top - window.innerHeight / 2 + 30;
+					scrollYPos = (0, _jquery3.$)('#mobile').scrollTop() + (0, _jquery3.$)('#mobile #' + hash).offset().top - window.innerHeight / 2 + 30;
 				}
 
 				console.log("hash: " + hash + ", scrollYPos: " + scrollYPos);
-				(0, _jquery4.default)("#mobile").scrollTo(scrollYPos, 800);
+				(0, _jquery3.$)("#mobile").scrollTo(scrollYPos, 800);
 			};
 
 			var slideToggle = function slideToggle() {
-				(0, _jquery4.default)('#mobile').find(currentSlide).toggleClass('current-card');
+				(0, _jquery3.$)('#mobile').find(currentSlide).toggleClass('current-card');
 				console.log("currentSlide: " + currentSlide);
 
-				(0, _jquery4.default)('#mobile').toggleClass('collapsed');
-				(0, _jquery4.default)('#mobile').toggleClass('expanded');
+				(0, _jquery3.$)('#mobile').toggleClass('collapsed');
+				(0, _jquery3.$)('#mobile').toggleClass('expanded');
 
-				(0, _jquery4.default)('.content .card-images:not(:first)').slideToggle().promise().done(function (e) {
+				(0, _jquery3.$)('.content .card-images:not(:first)').slideToggle().promise().done(function (e) {
 					// This awesome snippet of code was inspired by this page ...
 					// http://stackoverflow.com/questions/27632300/jquery-offset-returns-negative-value
 					// I'm not sure why 30 makes this centered, btw ...
 
 					// This is where I scroll for collapsed state
-					if ((0, _jquery4.default)('#mobile').hasClass('collapsed')) {
+					if ((0, _jquery3.$)('#mobile').hasClass('collapsed')) {
 						scrollToHash(currentSlide);
 					}
 				});
@@ -227,19 +229,19 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 			// Set the height of #mobile to the window height.  This is necessary in order
 			// to ensure a consistent scrollTop value
-			(0, _jquery4.default)('#mobile').css('height', window.innerHeight);
-			(0, _jquery4.default)(window).resize(function () {
-				(0, _jquery4.default)('#mobile').css('height', window.innerHeight);
+			(0, _jquery3.$)('#mobile').css('height', window.innerHeight);
+			(0, _jquery3.$)(window).resize(function () {
+				(0, _jquery3.$)('#mobile').css('height', window.innerHeight);
 			});
 
 			// Get a handle on the jQuery object
-			pageHash = (0, _jquery4.default)('.page-hash').find('p');
+			pageHash = (0, _jquery3.$)('.page-hash').find('p');
 			hash = '';
 
 			// The new URL is only posted after scrolling has stopped for a full second
 
 			scrollTrigger = debounce(function (newHash) {
-				if ((0, _jquery4.default)('#mobile').hasClass('expanded')) {
+				if ((0, _jquery3.$)('#mobile').hasClass('expanded')) {
 					hash = newHash;
 					console.log("id in scrollTrigger: " + newHash);
 
@@ -254,7 +256,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 					// This code snippet surprisingly works, and it comes from
 					// http://www.gmarwaha.com/blog/2009/06/09/jquery-waiting-for-multiple-animations-to-complete/
 					var wait1 = setInterval(function () {
-						if (!(0, _jquery4.default)(".page-hash").is(":animated")) {
+						if (!(0, _jquery3.$)(".page-hash").is(":animated")) {
 							clearInterval(wait1);
 
 							pageHash.removeClass('animated bounceOutLeft');
@@ -263,7 +265,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 							pageHash.html('<a><b>#' + newHash + '</b></a>').addClass('animated bounceInLeft');
 
 							var wait2 = setInterval(function () {
-								if (!(0, _jquery4.default)(".page-hash").is(":animated")) {
+								if (!(0, _jquery3.$)(".page-hash").is(":animated")) {
 									clearInterval(wait2);
 
 									pageHash.removeClass('animated bounceInLeft');
@@ -282,12 +284,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 				// First, slide old page-hash out for half-second, debounced on the
 				// leading edge (with 3rd debounce parameter, 'true')
 
-				var expanded = (0, _jquery4.default)('#mobile').hasClass('expanded');
+				var expanded = (0, _jquery3.$)('#mobile').hasClass('expanded');
 				if (!startState && expanded) {
 					pageHash.addClass('animated bounceOutLeft');
 
 					var wait1 = setInterval(function () {
-						if (!(0, _jquery4.default)(".page-hash").is(":animated")) {
+						if (!(0, _jquery3.$)(".page-hash").is(":animated")) {
 							clearInterval(wait1);
 
 							pageHash.removeClass('animated bounceOutLeft');
@@ -295,7 +297,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 							// Slide the new message in
 							pageHash.html(message).addClass('animated bounceInLeft');
 							var wait2 = setInterval(function () {
-								if (!(0, _jquery4.default)(".page-hash").is(":animated")) {
+								if (!(0, _jquery3.$)(".page-hash").is(":animated")) {
 									clearInterval(wait2);
 
 									pageHash.removeClass('animated bounceInLeft');
@@ -310,7 +312,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			}, 1000, true);
 			;
 
-			wrap = (0, _jquery4.default)("#mobile");
+			wrap = (0, _jquery3.$)("#mobile");
 
 
 			wrap.on("scroll", function (e) {
@@ -339,15 +341,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 				// Select all cards
 				// On the first pass, we want all undefined cards to add their heights into
 				// the defined cards which precede them
-				(0, _jquery4.default)('.card').each(function (i) {
+				(0, _jquery3.$)('.card').each(function (i) {
 					// Calculate card heights as height plus some margin
-					duration = (0, _jquery4.default)(this).height() + 22;
+					duration = (0, _jquery3.$)(this).height() + 22;
 
 					// console.log("i: " + i + ", height: " + duration + ", id: " + $(this).attr('id'));
 
 					// Does it have an id attribute?
-					if ((0, _jquery4.default)(this).attr('id')) {
-						slides.push({ 'height': duration, 'hash': (0, _jquery4.default)(this).attr('id') });
+					if ((0, _jquery3.$)(this).attr('id')) {
+						slides.push({ 'height': duration, 'hash': (0, _jquery3.$)(this).attr('id') });
 
 						// If not, then add its height to the last pushed array element
 					} else if (slides.length == 0) {
@@ -361,7 +363,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 				// console.log(slides);
 
 				// Select just the cards with id's
-				cards = (0, _jquery4.default)('.card[id]');
+				cards = (0, _jquery3.$)('.card[id]');
 
 				// On the second pass, we want to create the scenes and record the vertical positions
 				slides.forEach(function (slide) {
@@ -370,7 +372,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 					var id = slide['hash'];
 					var height = slide['height'];
 
-					var scrollYPos = (0, _jquery4.default)("#mobile #" + id).offset().top - 72;
+					var scrollYPos = (0, _jquery3.$)("#mobile #" + id).offset().top - 72;
 					slide['ypos'] = scrollYPos;
 
 					console.log("id: " + id + ", ypos: " + scrollYPos + ", height: " + height);
@@ -415,7 +417,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			};
 
 			scrollObject = newSlides();
-			(0, _jquery4.default)('.top-header, .page-hash').on('click', function () {
+			(0, _jquery3.$)('.top-header, .page-hash').on('click', function () {
 				// var metaTitle = document.querySelector('meta[property$="title"]');
 				// var metaURL = document.querySelector('meta[property$="url"]');
 				// var metaDescription = document.querySelector('meta[property$="description"]');
@@ -427,12 +429,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			// $('.content .card-images:not(:first)').slideToggle();
 
 			// This click handler toggles between collapsed and expanded states for slides
-			(0, _jquery4.default)('.menu-icon').on('click', function () {
+			(0, _jquery3.$)('.menu-icon').on('click', function () {
 				console.log('toggle collapse state for mobile cards');
 
 				// When in Table of Contents mode, do not display cards with scroll
-				if ((0, _jquery4.default)('#mobile').hasClass('expanded')) {
-					(0, _jquery4.default)('.page-hash').find('p').html('Click card to jump to it');
+				if ((0, _jquery3.$)('#mobile').hasClass('expanded')) {
+					(0, _jquery3.$)('.page-hash').find('p').html('Click card to jump to it');
 					scrollObject.controller.enabled(false);
 				} else {
 					scrollObject.controller.enabled(true);
@@ -450,14 +452,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 				// console.log(slides);
 			});
 
-			(0, _jquery4.default)('.card').on('click', function (e) {
-				if ((0, _jquery4.default)('#mobile').hasClass('collapsed')) {
+			(0, _jquery3.$)('.card').on('click', function (e) {
+				if ((0, _jquery3.$)('#mobile').hasClass('collapsed')) {
 					e.stopPropagation();
 
 					slideToggle();
 					scrollObject.controller.enabled(true);
 
-					var hash = (0, _jquery4.default)(this).attr('id') || (0, _jquery4.default)(this).data('id');
+					var hash = (0, _jquery3.$)(this).attr('id') || (0, _jquery3.$)(this).data('id');
 					console.log('hash: ' + hash);
 					window.location.hash = hash;
 
@@ -474,7 +476,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 						// var scrollYPos = $("#mobile #" + hash).offset().top - 72;
 						console.log("scrollYPos: " + scrollYPos);
 
-						(0, _jquery4.default)("#mobile").scrollTo(scrollYPos, 800);
+						(0, _jquery3.$)("#mobile").scrollTo(scrollYPos, 800);
 					}, 900);
 				}
 			});
@@ -495,8 +497,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 				var switchShareIcon = setInterval(function () {
 					// Access the DOM once
-					$currentLogo = (0, _jquery4.default)(logos[currentLogo]);
-					$lastLogo = (0, _jquery4.default)(logos[lastLogo]);
+					$currentLogo = (0, _jquery3.$)(logos[currentLogo]);
+					$lastLogo = (0, _jquery3.$)(logos[lastLogo]);
 
 					// console.log('currentLogo: ' + currentLogo);
 					// console.log($currentLogo);
@@ -547,14 +549,14 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			// The positive side of that is that you can define multiple itemscopes per page, thus easily 
 			// integrate multiple +1 buttons with different share snippets on it.
 
-			(0, _jquery4.default)('a.gplus').on('click', function (e) {
+			(0, _jquery3.$)('a.gplus').on('click', function (e) {
 				e.stopPropagation();
 				console.log("https://plus.google.com/share?url=" + "http://worldviewer.github.io/refactor/");
 				window.open("https://plus.google.com/share?url=" + "http://worldviewer.github.io/refactor/", '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes');
 				return false;
 			});
 
-			(0, _jquery4.default)('a.twitter').on('click', function (e) {
+			(0, _jquery3.$)('a.twitter').on('click', function (e) {
 				e.stopPropagation();
 				!function (d, s, id) {
 					var js,
@@ -566,7 +568,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			});
 
 			// This comes from http://stackoverflow.com/questions/16463030/how-to-add-facebook-share-button-on-my-website
-			(0, _jquery4.default)('div.fb').on('click', function (e) {
+			(0, _jquery3.$)('div.fb').on('click', function (e) {
 				e.preventDefault();
 				e.stopPropagation();
 
@@ -618,7 +620,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			currentSlide = URLhash;
 
 			// Calculate pixel position of anchor
-			scrollYPos = (0, _jquery4.default)("#mobile " + URLhash).offset().top - 72;
+			scrollYPos = (0, _jquery3.$)("#mobile " + URLhash).offset().top - 72;
 
 			console.log("scrollYPos: " + scrollYPos);
 
@@ -628,7 +630,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 			// TweenLite.to(window, 2, {scrollTo:{y:scrollYPos, x:0}, ease:Power4.easeOut})
 
 			// But this did ...
-			(0, _jquery4.default)("#mobile").scrollTo(scrollYPos, 800);
+			(0, _jquery3.$)("#mobile").scrollTo(scrollYPos, 800);
 
 			setTimeout(function () {
 				Materialize.toast('Click top-right for table of contents', 10000);
@@ -691,7 +693,7 @@ function getScale() {
 }
 
 function setScaleFactor(factor) {
-	(0, _jquery4.default)('#impress').attr('data-scale-factor', factor);
+	(0, _jquery3.$)('#impress').attr('data-scale-factor', factor);
 	console.log("set scale factor: " + factor);
 }
 
@@ -700,7 +702,7 @@ var myPrettyCode = function myPrettyCode() {
 
 	// When not mobile, do this ...
 
-	(0, _jquery4.default)(document).ready(function () {
+	(0, _jquery3.$)(document).ready(function () {
 		console.log("desktop or tablet document.ready()");
 
 		// Materialize.css does not currently work well with iPad touches, so for now,
@@ -716,34 +718,34 @@ var myPrettyCode = function myPrettyCode() {
 		// https://github.com/Dogfalo/materialize/issues/2319
 
 		// Initialize the presentation scale to 1
-		(0, _jquery4.default)('#impress').attr('data-set-scale-factor', 1);
+		(0, _jquery3.$)('#impress').attr('data-set-scale-factor', 1);
 
-		(0, _jquery4.default)('.tooltipped').tooltip({ delay: 50 });
+		(0, _jquery3.$)('.tooltipped').tooltip({ delay: 50 });
 
-		(0, _jquery4.default)('.button-collapse').sideNav({
+		(0, _jquery3.$)('.button-collapse').sideNav({
 			menuWidth: 360 // Default is 240
 		});
 
 		// Always start infographic with active side-nav bar
-		(0, _jquery4.default)('.button-collapse').sideNav('show');
-		(0, _jquery4.default)('#slide-out').addClass('active');
+		(0, _jquery3.$)('.button-collapse').sideNav('show');
+		(0, _jquery3.$)('#slide-out').addClass('active');
 
 		// Allow side-nav collapse by pressing the hamburger icon
-		(0, _jquery4.default)('.button-collapse').on('click', function () {
+		(0, _jquery3.$)('.button-collapse').on('click', function () {
 			// $("#slide").animate({width:'toggle'},350);
 			// $('.button-collapse').sideNav('hide');
-			(0, _jquery4.default)('#slide-out').removeClass('active');
+			(0, _jquery3.$)('#slide-out').removeClass('active');
 
-			(0, _jquery4.default)('#hamburger').css('visibility', 'visible');
+			(0, _jquery3.$)('#hamburger').css('visibility', 'visible');
 
 			console.log("collapse side-nav");
 		});
 
 		// Show side-nav bar when corner hamburger is clicked
-		(0, _jquery4.default)('#hamburger').on('click', function () {
-			(0, _jquery4.default)('.button-collapse').sideNav('show');
-			(0, _jquery4.default)('#slide-out').addClass('active');
-			(0, _jquery4.default)('#hamburger').css('visibility', 'hidden');
+		(0, _jquery3.$)('#hamburger').on('click', function () {
+			(0, _jquery3.$)('.button-collapse').sideNav('show');
+			(0, _jquery3.$)('#slide-out').addClass('active');
+			(0, _jquery3.$)('#hamburger').css('visibility', 'hidden');
 		});
 
 		// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
@@ -752,18 +754,18 @@ var myPrettyCode = function myPrettyCode() {
 		// activated by impress.js, and with that, we can can apply border styling to
 		// the right border of $('.side-nav > li[id="id"');
 
-		(0, _jquery4.default)(window).on('hashchange', function (e) {
+		(0, _jquery3.$)(window).on('hashchange', function (e) {
 			console.log('slide transition');
 
 			// grab active impress.js slide ID
-			var currentSlideHash = (0, _jquery4.default)('#impress .active').attr('id');
+			var currentSlideHash = (0, _jquery3.$)('#impress .active').attr('id');
 
 			// Reality-check to console
 			console.log("current slide hash: " + currentSlideHash);
 
 			// toggle the active-slide class for the list item with that ID
-			(0, _jquery4.default)('.side-nav > li').removeClass('active-slide');
-			(0, _jquery4.default)('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
+			(0, _jquery3.$)('.side-nav > li').removeClass('active-slide');
+			(0, _jquery3.$)('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
 		});
 
 		// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
@@ -771,16 +773,16 @@ var myPrettyCode = function myPrettyCode() {
 		// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
 		// '#your-page-element';
 
-		(0, _jquery4.default)('.side-nav > li').on('click', function () {
+		(0, _jquery3.$)('.side-nav > li').on('click', function () {
 			console.log('click-induced transition');
-			window.location.hash = '#' + (0, _jquery4.default)(this).data('slide');
+			window.location.hash = '#' + (0, _jquery3.$)(this).data('slide');
 		});
 
-		(0, _jquery4.default)('#page-up').on('click', function () {
+		(0, _jquery3.$)('#page-up').on('click', function () {
 			window.location.hash = '#intro';
 		});
 
-		(0, _jquery4.default)('#page-down').on('click', function () {
+		(0, _jquery3.$)('#page-down').on('click', function () {
 			window.location.hash = '#futurism';
 		});
 
@@ -795,7 +797,7 @@ var myPrettyCode = function myPrettyCode() {
 		// 
 		// Cookies.get('name'); // => 'value'
 		// Cookies.get('nothing'); // => undefined
-		(0, _jquery4.default)('#mobile-view').on('click', function () {
+		(0, _jquery3.$)('#mobile-view').on('click', function () {
 			_jsCookie2.default.set('display', 'mobile', { expires: 365 });
 
 			console.log("display: " + _jsCookie2.default.get('display'));
@@ -806,17 +808,17 @@ var myPrettyCode = function myPrettyCode() {
 
 		// jQuery automatically adds in necessary vendor prefixes when using
 		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
-		(0, _jquery4.default)('#zoom-in').on('click', function () {
-			(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() * 1.25 + ')');
+		(0, _jquery3.$)('#zoom-in').on('click', function () {
+			(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() * 1.25 + ')');
 		});
 
-		(0, _jquery4.default)('#zoom-out').on('click', function () {
-			(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() / 1.25 + ')');
+		(0, _jquery3.$)('#zoom-out').on('click', function () {
+			(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() / 1.25 + ')');
 		});
 
-		(0, _jquery4.default)('#discuss-slide').on('click', function () {});
+		(0, _jquery3.$)('#discuss-slide').on('click', function () {});
 
-		(0, _jquery4.default)('#previous-slide').on('click', function () {
+		(0, _jquery3.$)('#previous-slide').on('click', function () {
 			// This approach does not work because it does not preventDefault(),
 			// and the key is already being captured by impress.js, which causes
 			// a conflict ...
@@ -833,7 +835,7 @@ var myPrettyCode = function myPrettyCode() {
 			// cases ...
 		});
 
-		(0, _jquery4.default)('#next-slide').on('click', function () {
+		(0, _jquery3.$)('#next-slide').on('click', function () {
 			impress().next();
 		});
 
@@ -842,7 +844,7 @@ var myPrettyCode = function myPrettyCode() {
 
 		// Define shortcuts here
 		// REFACTOR THIS
-		(0, _jquery4.default)(document).keydown(function (e) {
+		(0, _jquery3.$)(document).keydown(function (e) {
 			// When plus or minus is hit, count the number of times
 
 			if (e.keyCode === 9 || e.keyCode === 189 || e.keyCode === 187 || e.keyCode === 13) {
@@ -860,10 +862,10 @@ var myPrettyCode = function myPrettyCode() {
 
 			// TAB key: Use tab key as a shortcut for toggling the side-nav
 			if (e.keyCode === 9) {
-				if ((0, _jquery4.default)('#slide-out').hasClass('active')) {
-					(0, _jquery4.default)('.button-collapse').trigger('click');
+				if ((0, _jquery3.$)('#slide-out').hasClass('active')) {
+					(0, _jquery3.$)('.button-collapse').trigger('click');
 				} else {
-					(0, _jquery4.default)('#hamburger').trigger('click');
+					(0, _jquery3.$)('#hamburger').trigger('click');
 				}
 			} else if (e.keyCode === 189 || e.keyCode === 187) {
 
@@ -885,7 +887,7 @@ var myPrettyCode = function myPrettyCode() {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
 								factor = Math.pow(Math.log(count + 2), 3);
-								(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 								// setScaleFactor(-factor);
 								count = 0;
 							}
@@ -907,7 +909,7 @@ var myPrettyCode = function myPrettyCode() {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count + 2), 3);
-									(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(-factor);
 									count = 0;
 								}
@@ -935,7 +937,7 @@ var myPrettyCode = function myPrettyCode() {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
 								factor = Math.pow(Math.log(count + 2), 3);
-								(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 								// setScaleFactor(factor);
 								count = 0;
 							}
@@ -957,7 +959,7 @@ var myPrettyCode = function myPrettyCode() {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count + 2), 3);
-									(0, _jquery4.default)('#impress').css('transform', 'scale(' + getScale() * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									(0, _jquery3.$)('#impress').css('transform', 'scale(' + getScale() * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(factor);
 									count = 0;
 								}
@@ -973,11 +975,11 @@ var myPrettyCode = function myPrettyCode() {
 };
 
 if (_jsCookie2.default.get('display') === 'mobile') {
-	(0, _jquery4.default)('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
+	(0, _jquery3.$)('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
 }
 
 if (!device.mobile() && !device.tablet() && _jsCookie2.default.get('display') !== 'mobile') {
-	(0, _jquery4.default)('.preloader-wrapper').addClass('active');
+	(0, _jquery3.$)('.preloader-wrapper').addClass('active');
 
 	// Dynamically add in the img tag, so that this huge file never downloads for mobile
 
@@ -989,5 +991,5 @@ if (!device.mobile() && !device.tablet() && _jsCookie2.default.get('display') !=
 	// When mobile, do this instead ...
 	console.log("should only run on mobile");
 
-	(0, _jquery4.default)(document).ready(function () {});
+	(0, _jquery3.$)(document).ready(function () {});
 }
