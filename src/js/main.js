@@ -4,7 +4,10 @@ import ScrollMagic from 'scrollmagic';
 import scrollTo from 'jquery.scrollto';
 import jQuery from 'jquery';
 import Vel from 'velocity-animate';
-import Materialize from '../lib/js/materialize.js';
+import Materialize from 'materialize-css';
+import picker from '../../node_modules/pickadate/lib/picker.js';
+import hammer from '../../node_modules/hammerjs/hammer.js';
+import jqueryHammer from '../../node_modules/jquery-hammerjs/jquery.hammer.js';
 
 $(window).on('load', function() {
 

@@ -39,12 +39,15 @@ jQuery Kinetic produces errors if I simply drop the code into the directory, but
 
 Materialize.css: This package runs into serious issues when bundling.  I've attempted to create a Browserify shim to address them, but each time I resolve one dependency error, I get another ...
 
+// package.json
+
     {
       "name": "refactor",
       "version": "1.0.0",
       "description": "Original: http://worldviewer.github.io/, Refactor: http://worldviewer.github.io/refactor/",
       "main": "main.js",
       "scripts": {
+        "postinstall": "cp ./src/lib/js/materialize.js ./node_modules/materialize-css/bin",
         "build": "npm run babel && npm run scss && npm run autoprefixer && npm run browserify",
         "babel": "babel src/js -d src/tmp",
         "scss": "node-sass --output-style compressed -o dist/css src/scss src/lib/scss",
@@ -66,19 +69,22 @@ Materialize.css: This package runs into serious issues when bundling.  I've atte
         ]
       },
       "browserify-shim": {
-        "jquery-js": "jQuery",
         "materialize-js": {
           "exports": "Materialize",
           "depends": [
             "velocity:Vel",
-            "jquery-js:jQuery"
+            "jquery-js:jQuery",
+            "pickadate-js:picker",
+            "hammer-js:hammer"
           ]
         }
       },
       "browser": {
         "jquery-js": "./node_modules/jquery/dist/jquery.js",
-        "materialize-js": "./src/lib/js/materialize.js",
-        "velocity": "./node_modules/velocity-animate/velocity.js"
+        "materialize-js": "./node_modules/materialize-css/bin/materialize.js",
+        "velocity": "./node_modules/velocity-animate/velocity.js",
+        "pickadate-js": "./node_modules/pickadate/lib/picker.js",
+        "hammer-js": "./node_modules/hammer/js/hammer.js"
       },
       "homepage": "https://github.com/worldviewer/refactor#readme",
       "dependencies": {
@@ -89,7 +95,8 @@ Materialize.css: This package runs into serious issues when bundling.  I've atte
         "js-cookie": "^2.1.3",
         "pickadate": "^3.5.6",
         "scrollmagic": "^2.0.5",
-        "velocity-animate": "^1.4.0"
+        "velocity-animate": "^1.4.0",
+        "materialize-css": "^0.97.8"
       },
       "devDependencies": {
         "autoprefixer": "^6.5.4",
@@ -102,5 +109,19 @@ Materialize.css: This package runs into serious issues when bundling.  I've atte
       }
     }
 
-In the interest of keeping this project timeboxed and focused on all aspects of the refactor, I'm going to pull Materialize out of the bundle.
+// main.js
+
+    import Infographic from './infographic.js';
+    import Cookies from 'js-cookie';
+    import ScrollMagic from 'scrollmagic';
+    import scrollTo from 'jquery.scrollto';
+    import jQuery from 'jquery';
+    import Vel from 'velocity-animate';
+    import Materialize from 'materialize-css';
+    import picker from '../../node_modules/pickadate/lib/picker.js';
+    import hammer from '../../node_modules/hammerjs/hammer.js';
+
+This shim does indeed seem to get past some of the more typical errors that I've seen with this issue, but it leaves me with ...
+
+
 

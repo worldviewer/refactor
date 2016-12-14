@@ -4,6 +4,7 @@
   "description": "Original: http://worldviewer.github.io/, Refactor: http://worldviewer.github.io/refactor/",
   "main": "main.js",
   "scripts": {
+    "postinstall": "cp ./src/lib/js/materialize.js ./node_modules/materialize-css/bin",
     "build": "npm run babel && npm run scss && npm run autoprefixer && npm run browserify",
     "babel": "babel src/js -d src/tmp",
     "scss": "node-sass --output-style compressed -o dist/css src/scss src/lib/scss",
@@ -25,19 +26,24 @@
     ]
   },
   "browserify-shim": {
-    "jquery-js": "jQuery",
     "materialize-js": {
       "exports": "Materialize",
       "depends": [
         "velocity:Vel",
-        "jquery-js:jQuery"
+        "jquery-js:jQuery",
+        "pickadate-js:picker",
+        "hammer-js:hammer",
+        "jquery-hammer-js:jqueryHammer"
       ]
     }
   },
   "browser": {
     "jquery-js": "./node_modules/jquery/dist/jquery.js",
-    "materialize-js": "./src/lib/js/materialize.js",
-    "velocity": "./node_modules/velocity-animate/velocity.js"
+    "materialize-js": "./node_modules/materialize-css/bin/materialize.js",
+    "velocity": "./node_modules/velocity-animate/velocity.js",
+    "pickadate-js": "./node_modules/pickadate/lib/picker.js",
+    "hammer-js": "./node_modules/hammer/js/hammer.js",
+    "jquery-hammer-js": "./node_modules/jquery-hammerjs/jquery.hammer.js"
   },
   "homepage": "https://github.com/worldviewer/refactor#readme",
   "dependencies": {
@@ -48,7 +54,8 @@
     "js-cookie": "^2.1.3",
     "pickadate": "^3.5.6",
     "scrollmagic": "^2.0.5",
-    "velocity-animate": "^1.4.0"
+    "velocity-animate": "^1.4.0",
+    "materialize-css": "^0.97.8"
   },
   "devDependencies": {
     "autoprefixer": "^6.5.4",
@@ -56,6 +63,7 @@
     "babel-preset-latest": "^6.16.0",
     "browserify": "^13.1.1",
     "browserify-shim": "^3.8.12",
+    "jquery-hammerjs": "^2.0.0",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0"
   }
