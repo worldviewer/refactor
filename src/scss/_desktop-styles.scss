@@ -20,6 +20,24 @@
 		margin-right: 5px;
 	}
 
+	.side-nav li {
+		&:nth-of-type(odd) {
+			background-color: #ededed;
+		}
+
+		line-height: 1.5;
+		padding: 10px 15px;
+
+		a {
+			line-height: 1.5;
+			padding: 0;
+			color: #0000EE;
+			display: inline;
+			height: initial;
+		    text-decoration: underline;
+		}
+	}
+
 	li {
 		counter-increment: num;
 	}
