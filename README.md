@@ -121,7 +121,9 @@ Materialize.css: This package runs into serious issues when bundling.  I've atte
     import picker from '../../node_modules/pickadate/lib/picker.js';
     import hammer from '../../node_modules/hammerjs/hammer.js';
 
-This shim does indeed seem to get past some of the more typical errors that I've seen with this issue, but it leaves me with ...
+This shim does indeed seem to get past most of the more typical errors that I've seen with this issue, but it does not fully resolve them.  Since I'd like to get on to other aspects of the refactor, I'm going to go ahead and revert to pulling Materialize in via script tag.
 
+That worked, with some minor stylistic implications related to the new SCSS workflow (Materialize is overriding my list item styles).  So, I've added my own overrides to deal with that.
 
+Now, I'm going to refactor the SCSS to reduce redundancy.
 
