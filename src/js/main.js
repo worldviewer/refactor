@@ -11,8 +11,6 @@ $(document).ready( () => {
 	let preloaderWrapper = $('.preloader-wrapper');
 	let bigImageContainer = $('#impress > div:first-of-type');
 
-	console.log(bigImageContainer);
-
 	// Check if user has set a preferred device
 	if (infographic.deviceCookie === 'mobile') {
 		html.removeClass('desktop').removeClass('tablet').addClass('mobile');

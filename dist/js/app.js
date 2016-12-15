@@ -13914,6 +13914,10 @@ var _infographic = require('./infographic.js');
 
 var _infographic2 = _interopRequireDefault(_infographic);
 
+var _keyboard = require('./keyboard.js');
+
+var _keyboard2 = _interopRequireDefault(_keyboard);
+
 var _jqueryKinetic = require('../../node_modules/jquery.kinetic/jquery.kinetic.js');
 
 var _jqueryKinetic2 = _interopRequireDefault(_jqueryKinetic);
@@ -13948,8 +13952,8 @@ var DesktopInfographic = function () {
 		this.hamburgerExpandIcon = $('#hamburger');
 
 		// Icons
-		this.pageUpIcon = $('#page-up');
-		this.pageDownIcon = $('#page-down');
+		this.startIcon = $('#start');
+		this.endIcon = $('#end');
 		this.mobileViewIcon = $('#mobile-view');
 		this.zoomInIcon = $('#zoom-in');
 		this.zoomOutIcon = $('#zoom-out');
@@ -14001,8 +14005,8 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'showControls',
 		value: function showControls() {
-			this.pageUpIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-			this.pageDownIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.startIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.endIcon.addClass('animated fadeInUp').css('visibility', 'visible');
 			this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 			this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 			this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
@@ -14103,11 +14107,11 @@ var DesktopInfographic = function () {
 				window.location.hash = '#' + $(_this4).data('slide');
 			});
 
-			this.pageUpIcon.on('click', function () {
+			this.startIcon.on('click', function () {
 				window.location.hash = '#intro';
 			});
 
-			this.pageDownIcon.on('click', function () {
+			this.endIcon.on('click', function () {
 				window.location.hash = '#futurism';
 			});
 		}
@@ -14184,6 +14188,8 @@ var DesktopInfographic = function () {
 		value: function setupKeypresses() {
 			var _this6 = this;
 
+			var keyboard = new _keyboard2.default();
+
 			var count = 0;
 			var current, start, end, previous, diff, factor;
 
@@ -14192,7 +14198,7 @@ var DesktopInfographic = function () {
 			$(document).keydown(function (e) {
 				// When plus or minus is hit, count the number of times
 
-				if (e.keyCode === 9 || e.keyCode === 189 || e.keyCode === 187 || e.keyCode === 13) {
+				if (e.keyCode === 9 || e.keyCode === 189 || e.keyCode === 187) {
 					e.preventDefault();
 				}
 
@@ -14323,7 +14329,7 @@ var DesktopInfographic = function () {
 }();
 
 exports.default = DesktopInfographic;
-},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":8,"./utils.js":11}],8:[function(require,module,exports){
+},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":8,"./keyboard.js":9,"./utils.js":12}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14356,6 +14362,180 @@ exports.default = Infographic;
 },{"js-cookie":4}],9:[function(require,module,exports){
 'use strict';
 
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// Note that impress maps both the right/left arrows and page down/up for slide next/previous
+var Keyboard = function () {
+	function Keyboard(impressContainer, sideNav, hamburgerCollapseIcon, hamburgerExpandIcon) {
+		_classCallCheck(this, Keyboard);
+
+		this.impressContainer = impressContainer;
+		this.sideNav = sideNav;
+		this.hamburgerCollapseIcon = hamburgerCollapseIcon;
+		this.hamburgerExpandIcon = hamburgerExpandIcon;
+
+		this.tabKey = 9; // toggle sideNav
+		this.plusKey = 187; // zoom in
+		this.minusKey = 189; // zoom out
+	}
+
+	_createClass(Keyboard, [{
+		key: 'init',
+		value: function init() {
+			var _this = this;
+
+			setupSideNavToggle();
+			setupZoomOutKey();
+			setupZoomInKey();
+
+			$(document).keydown(function (e) {
+				if (e.keyCode === _this.tabKey || e.keyCode === _this.minusKey || e.keyCode === _this.plusKey) {
+
+					console.log("key code: " + e.keyCode);
+					e.preventDefault();
+				}
+			});
+		}
+	}, {
+		key: 'setupSideNavToggle',
+		value: function setupSideNavToggle() {
+			var _this2 = this;
+
+			$(document).keydown(function (e) {
+				if (e.keyCode === _this2.tabKey) {
+					if (_this2.sideNav.hasClass('active')) {
+						_this2.hamburgerCollapseIcon.trigger('click');
+					} else {
+						_this2.hamburgerExpandIcon.trigger('click');
+					}
+				}
+			});
+		}
+	}, {
+		key: 'setupZoomInKey',
+		value: function setupZoomInKey() {
+			var _this3 = this;
+
+			$(document).keydown(function (e) {
+				if (e.keyCode === _this3.plusKey) {
+					currentTime = Date.now();
+					console.log("current time: " + currentTime);
+					console.log("previous time: " + previousTime);
+					timeDiff = parseInt(currentTime) - parseInt(previousTime);
+					console.log("time diff: " + timeDiff);
+
+					// First keypress in a series
+					if (keypressCount === 0) {
+						startTime = currentTime;
+						keypressCount++;
+						console.log('keypress count: ' + keypressCount);
+
+						setTimeout(function (currentCount) {
+							console.log('keypress count: ' + keypressCount + ", currentCount: " + currentCount);
+							if (currentCount === count) {
+								factor = Math.pow(Math.log(count + 2), 3);
+								_this3.impressContainer.css('transform', 'scale(' + utils.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								count = 0;
+							}
+						}, 500, count);
+
+						previous = current;
+
+						// This keypress occurred within half a second of the last
+					} else {
+						if (parseInt(current) - parseInt(previous) < 250) {
+							count++;
+							console.log('count: ' + count);
+
+							// Wait half a second and check to see if any more of these same
+							// keypresses have occurred.  If not, then currentCount will equal
+							// the count.  It is only then that we want to calculate and invoke
+							// the zoom function
+							setTimeout(function (currentCount) {
+								console.log('count: ' + count + ", currentCount: " + currentCount);
+								if (currentCount === count) {
+									factor = Math.pow(Math.log(count + 2), 3);
+									_this3.impressContainer.css('transform', 'scale(' + utils.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									count = 0;
+								}
+							}, 500, count);
+						}
+
+						previous = current;
+					}
+				}
+			});
+		}
+	}, {
+		key: 'setupZoomOutKey',
+		value: function setupZoomOutKey() {
+			var _this4 = this;
+
+			$(document).keydown(function (e) {
+				if (e.keyCode === _this4.minusKey) {
+					current = Date.now();
+					console.log("current: " + current);
+					console.log("previous: " + previous);
+					diff = parseInt(current) - parseInt(previous);
+					console.log("diff: " + diff);
+
+					// First keypress in a series
+					if (count === 0) {
+						start = current;
+						count++;
+						console.log('count: ' + count);
+
+						setTimeout(function (currentCount) {
+							console.log('count: ' + count + ", currentCount: " + currentCount);
+							if (currentCount === count) {
+								factor = Math.pow(Math.log(count + 2), 3);
+								_this4.impressContainer.css('transform', 'scale(' + utils.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								count = 0;
+							}
+						}, 500, count);
+
+						previous = current;
+
+						// This keypress occurred within half a second of the last
+					} else {
+						if (parseInt(current) - parseInt(previous) < 250) {
+							count++;
+							console.log('count: ' + count);
+
+							// Wait half a second and check to see if any more of these same
+							// keypresses have occurred.  If not, then currentCount will equal
+							// the count.  It is only then that we want to calculate and invoke
+							// the zoom function
+							setTimeout(function (currentCount) {
+								console.log('count: ' + count + ", currentCount: " + currentCount);
+								if (currentCount === count) {
+									factor = Math.pow(Math.log(count + 2), 3);
+									_this4.impressContainer.css('transform', 'scale(' + utils.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									count = 0;
+								}
+							}, 500, count);
+						}
+
+						previous = current;
+					}
+				}
+			});
+		}
+	}]);
+
+	return Keyboard;
+}();
+
+exports.default = Keyboard;
+},{}],10:[function(require,module,exports){
+'use strict';
+
 var _infographic = require('./infographic.js');
 
 var _infographic2 = _interopRequireDefault(_infographic);
@@ -14381,8 +14561,6 @@ $(document).ready(function () {
 	var html = $('html');
 	var preloaderWrapper = $('.preloader-wrapper');
 	var bigImageContainer = $('#impress > div:first-of-type');
-
-	console.log(bigImageContainer);
 
 	// Check if user has set a preferred device
 	if (infographic.deviceCookie === 'mobile') {
@@ -14414,7 +14592,7 @@ $(document).ready(function () {
 		mobileInfographic.init();
 	}
 });
-},{"./desktop-infographic.js":7,"./infographic.js":8,"./mobile-infographic.js":10,"./utils.js":11}],10:[function(require,module,exports){
+},{"./desktop-infographic.js":7,"./infographic.js":8,"./mobile-infographic.js":11,"./utils.js":12}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -14991,7 +15169,7 @@ var MobileInfographic = function () {
 }();
 
 exports.default = MobileInfographic;
-},{"jquery.scrollto":2,"scrollmagic":5}],11:[function(require,module,exports){
+},{"jquery.scrollto":2,"scrollmagic":5}],12:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15068,4 +15246,4 @@ var utils = function () {
 }();
 
 exports.default = utils;
-},{}]},{},[6,7,8,9,10,11]);
+},{}]},{},[6,7,8,9,10,11,12]);

@@ -1,4 +1,5 @@
 import Infographic from './infographic.js';
+import Keyboard from './keyboard.js';
 import kinetic from '../../node_modules/jquery.kinetic/jquery.kinetic.js';
 import utils from './utils.js';
 
@@ -22,8 +23,8 @@ export default class DesktopInfographic {
 		this.hamburgerExpandIcon = $('#hamburger');
 
 		// Icons
-		this.pageUpIcon = $('#page-up');
-		this.pageDownIcon = $('#page-down');
+		this.startIcon = $('#start');
+		this.endIcon = $('#end');
 		this.mobileViewIcon = $('#mobile-view');
 		this.zoomInIcon = $('#zoom-in');
 		this.zoomOutIcon = $('#zoom-out');
@@ -70,8 +71,8 @@ export default class DesktopInfographic {
 	}
 
 	showControls() {
-		this.pageUpIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-		this.pageDownIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+		this.startIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+		this.endIcon.addClass('animated fadeInUp').css('visibility', 'visible');
 		this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 		this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 		this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
@@ -159,11 +160,11 @@ export default class DesktopInfographic {
 			window.location.hash = '#' + $(this).data('slide');
 		});
 
-		this.pageUpIcon.on('click', () => {
+		this.startIcon.on('click', () => {
 			window.location.hash = '#intro';
 		});
 
-		this.pageDownIcon.on('click', () => {
+		this.endIcon.on('click', () => {
 			window.location.hash = '#futurism';
 		});
 	}
@@ -233,6 +234,8 @@ export default class DesktopInfographic {
 	}
 
 	setupKeypresses() {
+		let keyboard = new Keyboard();
+
 		var count = 0;
 		var current, start, end, previous, diff, factor;
 
@@ -241,8 +244,9 @@ export default class DesktopInfographic {
 		$(document).keydown( (e) => {
 			// When plus or minus is hit, count the number of times
 
-			if ((e.keyCode === 9) || (e.keyCode === 189) || 
-				(e.keyCode === 187) || (e.keyCode === 13)) {
+			if ((e.keyCode === 9) || 
+				(e.keyCode === 189) || 
+				(e.keyCode === 187)) {
                 e.preventDefault();
             }
 
