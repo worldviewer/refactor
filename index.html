@@ -7,6 +7,19 @@
 	<meta name="viewport" content="user-scalable=yes, maximum-scale=10, width=device-width" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 
+	<!-- Must significantly precede body to prevent the flash of large image which occurs when image is cached, and therefore loads before document.ready fires -->
+	<style>
+		.big-image-container {
+			opacity: 0;
+		}
+	</style>
+	<script>
+		function bigImageLoaded(img) {
+			var imgWrapper = img.parentNode;
+			imgWrapper.className += imgWrapper.className ? ' loaded' : 'loaded';
+		}
+	</script>
+
 	<!-- Materialize.css -->
 	<link type="text/css" rel="stylesheet" href="dist/css/materialize.min.css"  media="screen,projection"/>
 
@@ -322,12 +335,15 @@
 			}]
 		}
 	</script>
+
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+	<!-- Materialize script, does not bundle due to RequireJS conflicts, must follow jQuery -->
+	<script src="./dist/js/materialize.js"></script>
+
 </head>
 
 <body>
-	<!-- Materialize script, does not bundle -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-	<script src="./dist/js/materialize.js"></script>
 
 	<!-- The Facebook SDK for JavaScript provides a rich set of client-side functionality that:
 
@@ -525,8 +541,8 @@
 
 			<div id="impress" data-scale-factor="1">
 
-				<!-- Load img tag into this ... -->
-				<div></div>
+				<!-- Load large image into this container ... -->
+				<div class="big-image-container"></div>
 
 				<!-- High-level view of entire graphic -->
 				<div id="intro" class="step" data-y="0" data-x="0" data-scale="15"></div>

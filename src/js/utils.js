@@ -49,4 +49,8 @@ export default class utils {
 
 		return(Math.sqrt(a*a + b*b));
 	}
+
+	static hasClass(elem, className) {
+	    return elem.className.split(' ').indexOf(className) > -1;
+	}
 }

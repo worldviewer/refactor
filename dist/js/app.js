@@ -13936,69 +13936,17 @@ var DesktopInfographic = function () {
 	_createClass(DesktopInfographic, [{
 		key: 'init',
 		value: function init() {
-			impress.init();
-
-			$('.preloader-wrapper').addClass('active');
-
-			// Dynamically add in the img tag, so that this huge file never downloads for mobile
-			// Explanation of how to put Impress in a container here ...
-			// https://github.com/impress/impress.js/issues/111
-			var firstDiv = document.querySelector('#impress > div:first-of-type');
-			firstDiv.insertAdjacentHTML('beforeend', '<img class="big-image" src="dist/assets/img-desktop/get-big-things-done-1.1.jpg" alt="Get Big Things Done Infographic">');
-
-			$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
-
-			setTimeout(function () {
-				$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
-			}, 1000);
-
-			setTimeout(function () {
-				$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
-				$('.preloader-wrapper').removeClass('active');
-			}, 3000);
-
-			Materialize.toast('Use < and > arrow keys to navigate', 9000);
-
-			setTimeout(function () {
-				Materialize.toast('Change views with the mobile icon, top-right', 10000);
-			}, 10000);
-
 			// Add in drag scroll once all animations have completed.  For some reason,
 			// I'm not able to get the deceleration to work for this, even when I modify
 			// the slowdown value in the original code ...
 			$(window).kinetic();
 
-			// Materialize.css does not currently work well with iPad touches, so for now,
-			// I'm going to bump tablet users to the simpler mobile interface ...
-			// 
-			// var ua = navigator.userAgent,
-			// event = (device.ipad()) ? "touchstart" : "click";
-			// $("theElement").bind(event, function(e) {
-			// }
-			//
-			// Explanations of the problem here ...
-			// http://www.danwellman.co.uk/fixing-jquery-click-events-for-the-ipad/
-			// https://github.com/Dogfalo/materialize/issues/2319
-
-			// Initialize the presentation scale to 1
-			$('#impress').attr('data-set-scale-factor', 1);
-
-			$('.tooltipped').tooltip({ delay: 50 });
-
-			$('.button-collapse').sideNav({
-				menuWidth: 360 // Default is 240
-			});
-
-			// Always start infographic with active side-nav bar
-			$('.button-collapse').sideNav('show');
-			$('#slide-out').addClass('active');
+			_utils2.default.loadScript("dist/js/impress.js", this.impressLoaded);
+		}
+	}, {
+		key: 'impressLoaded',
+		value: function impressLoaded() {
+			impress().init();
 
 			// Allow side-nav collapse by pressing the hamburger icon
 			$('.button-collapse').on('click', function () {
@@ -14266,6 +14214,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var Infographic = function Infographic() {
 	_classCallCheck(this, Infographic);
 
+	// Materialize.css does not currently work well with iPad touches, so for now,
+	// I'm going to bump tablet users to the simpler mobile interface ...
+	//
+	// Explanations of the problem here ...
+	// http://www.danwellman.co.uk/fixing-jquery-click-events-for-the-ipad/
+	// https://github.com/Dogfalo/materialize/issues/2319
+
 	this.deviceCookie = _jsCookie2.default.get('display');
 	this.isDesktop = !device.mobile() && !device.tablet();
 };
@@ -14293,6 +14248,7 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var infographic = new _infographic2.default();
+var desktopInfographic = new _desktopInfographic2.default();
 
 $(window).on('load', function () {
 	// Check if user has set a preferred device
@@ -14301,18 +14257,66 @@ $(window).on('load', function () {
 	}
 
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
-		// desktop stuff
+		$('.preloader-wrapper').addClass('active');
+
+		// Dynamically add in the img tag, so that this huge file never downloads for mobile
+		// Explanation of how to put Impress in a container here ...
+		// https://github.com/impress/impress.js/issues/111
+		var firstDiv = document.querySelector('#impress > div:first-of-type');
+
+		var largeImage = new Image();
+		largeImage.onload = function () {
+			bigImageLoaded(this);
+
+			console.log('infographic loaded.');
+
+			// Initialize the presentation scale to 1
+			$('#impress').attr('data-set-scale-factor', 1);
+
+			$('.tooltipped').tooltip({ delay: 50 });
+
+			$('.button-collapse').sideNav({
+				menuWidth: 360 // Default is 240
+			});
+
+			// Always start infographic with active side-nav bar
+			$('.button-collapse').sideNav('show');
+			$('#slide-out').addClass('active');
+
+			$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+			Materialize.toast('Use < and > keys to navigate', 10000);
+
+			$('#slide-out').show();
+			$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+
+			$('.big-image').show();
+
+			setTimeout(function () {
+				$('.preloader-wrapper').removeClass('active');
+				$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
+
+				desktopInfographic.init();
+			}, 5000);
+		};
+		largeImage.src = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
+		largeImage.alt = "Get Big Things Done Infographic";
+		largeImage.className = 'big-image';
+		firstDiv.appendChild(largeImage);
 	} else {
-			// mobile stuff
-		}
+		// mobile stuff
+	}
 });
 
 $(document).ready(function () {
 	if (infographic.isDesktop && infographic.deviceCookie != 'mobile') {
 		console.log("desktop or tablet document.ready()");
-
-		var desktopInfographic = new _desktopInfographic2.default();
-		desktopInfographic.init();
 	} else {
 		var mobileInfographic = new _mobileInfographic2.default();
 		mobileInfographic.init();
@@ -14960,6 +14964,11 @@ var utils = function () {
 			console.log("scale: " + Math.sqrt(a * a + b * b));
 
 			return Math.sqrt(a * a + b * b);
+		}
+	}, {
+		key: 'hasClass',
+		value: function hasClass(elem, className) {
+			return elem.className.split(' ').indexOf(className) > -1;
 		}
 	}]);
 
