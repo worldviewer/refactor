@@ -35,7 +35,7 @@ export default class DesktopInfographic {
 	}
 
 	init() {
-		$(document).ready(() => {
+		$(window).on('load', () => {
 			console.log("desktop or tablet document.ready()");
 
 			// Initialize impress.js presentation scale to 1

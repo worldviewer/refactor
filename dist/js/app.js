@@ -13965,7 +13965,7 @@ var DesktopInfographic = function () {
 		value: function init() {
 			var _this = this;
 
-			$(document).ready(function () {
+			$(window).on('load', function () {
 				console.log("desktop or tablet document.ready()");
 
 				// Initialize impress.js presentation scale to 1
@@ -14375,23 +14375,29 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var infographic = new _infographic2.default();
+var infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
-$(window).on('load', function () {
+$(document).ready(function () {
+	var html = $('html');
+	var preloaderWrapper = $('.preloader-wrapper');
+	var bigImageContainer = $('#impress > div:first-of-type');
+
+	console.log(bigImageContainer);
+
 	// Check if user has set a preferred device
 	if (infographic.deviceCookie === 'mobile') {
-		$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
+		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
 
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
-		$('.preloader-wrapper').addClass('active');
+		preloaderWrapper.addClass('active');
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
 		// Explanation of how to put Impress in a container here ...
 		// https://github.com/impress/impress.js/issues/111
-		var firstDiv = document.querySelector('#impress > div:first-of-type');
 
-		var largeImage = new Image();
-		largeImage.onload = function () {
+		var bigImage = new Image();
+		bigImage.onload = function () {
 			console.log('infographic loaded.');
 
 			// For flash of content on page load
@@ -14399,18 +14405,10 @@ $(window).on('load', function () {
 
 			var desktopInfographic = new _desktopInfographic2.default();
 		};
-		largeImage.src = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
-		largeImage.alt = "Get Big Things Done Infographic";
-		largeImage.className = 'big-image';
-		firstDiv.appendChild(largeImage);
-	} else {
-		// mobile stuff
-	}
-});
-
-$(document).ready(function () {
-	if (infographic.isDesktop && infographic.deviceCookie != 'mobile') {
-		// desktop
+		bigImage.src = infographicAsset;
+		bigImage.alt = "Get Big Things Done Infographic";
+		bigImage.className = 'big-image';
+		bigImageContainer.append(bigImage);
 	} else {
 		var mobileInfographic = new _mobileInfographic2.default();
 		mobileInfographic.init();
