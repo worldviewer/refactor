@@ -5,54 +5,84 @@ import utils from './utils.js';
 export default class DesktopInfographic {
 	constructor() {
 		console.log('desktop or tablet window.load()');
+
+		// Presentation
+		this.impressContainer = $('#impress');
+		this.bigImage = $('.big-image');
+
+		// Materialize
+		this.materializeToolTips = $('.tooltipped');
+		this.preloaderWrapper = $('.preloader-wrapper');
+
+		// SideNav
+		this.sideNav = $('#slide-out');
+		this.sideNavListItems = $('.side-nav > li');
+
+		this.hamburgerCollapseIcon = $('.button-collapse');
+		this.hamburgerExpandIcon = $('#hamburger');
+
+		// Icons
+		this.pageUpIcon = $('#page-up');
+		this.pageDownIcon = $('#page-down');
+		this.mobileViewIcon = $('#mobile-view');
+		this.zoomInIcon = $('#zoom-in');
+		this.zoomOutIcon = $('#zoom-out');
+		this.previousSlideIcon = $('#previous-slide');
+		this.nextSlideIcon = $('#next-slide');
+		this.discussSlideIcon = $('#discuss-slide');
+
+		this.init();
 	}
 
 	init() {
-		// Initialize impress.js presentation scale to 1
-		$('#impress').attr('data-set-scale-factor', 1);
+		$(document).ready(() => {
+			console.log("desktop or tablet document.ready()");
 
-		// Initialize Materialize tooltip
-		$('.tooltipped').tooltip({delay: 50});
+			// Initialize impress.js presentation scale to 1
+			this.impressContainer.attr('data-set-scale-factor', 1);
 
-		// Initialize Materialize sideNav
-		$('.button-collapse').sideNav({
-			menuWidth: 360 // Default is 240
+			// Initialize Materialize tooltip
+			this.materializeToolTips.tooltip({delay: 50});
+
+			// Initialize Materialize sideNav
+			this.hamburgerCollapseIcon.sideNav({
+				menuWidth: 360 // Default is 240
+			});
+
+			this.hamburgerCollapseIcon.sideNav('show');
+			this.sideNav.addClass('active');
+
+			this.showControls();
+
+			Materialize.toast('Use < and > keys to navigate', 10000);
+
+			this.showSideNav();
+
+			this.bigImage.show();
+
+			setTimeout(() => {
+				this.preloaderWrapper.removeClass('active');
+				this.bigImage.addClass('animated fadeIn').css('visibility', 'visible');
+
+				this.loadImpress();
+			}, 4000);
 		});
-
-		// Always start infographic with active side-nav bar
-		$('.button-collapse').sideNav('show');
-		$('#slide-out').addClass('active');
-
-		this.showControls();
-
-		Materialize.toast('Use < and > keys to navigate', 10000);
-
-		this.showSideNav();
-
-		$('.big-image').show();
-
-		setTimeout(() => {
-			$('.preloader-wrapper').removeClass('active');
-			$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
-
-			this.loadImpress();
-		}, 4000);		
 	}
 
 	showControls() {
-		$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
-		$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
-		$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
-		$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
-		$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
-		$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible')
-		$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-		$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+		this.pageUpIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+		this.pageDownIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+		this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+		this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+		this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+		this.previousSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible')
+		this.nextSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+		this.discussSlideIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 	}
 
 	showSideNav() {
-		$('#slide-out').show();
-		$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+		this.sideNav.show();
+		this.sideNav.addClass('animated fadeInLeft').css('visibility', 'visible');
 	}
 
 	loadImpress() {
@@ -80,21 +110,21 @@ export default class DesktopInfographic {
 
 	setupHamburger() {
 		// Allow side-nav collapse by pressing the hamburger icon
-		$('.button-collapse').on('click', function() {
+		this.hamburgerCollapseIcon.on('click', () => {
 			// $("#slide").animate({width:'toggle'},350);
 			// $('.button-collapse').sideNav('hide');
-			$('#slide-out').removeClass('active');
+			this.sideNav.removeClass('active');
 
-			$('#hamburger').css('visibility', 'visible');
+			this.hamburgerExpandIcon.css('visibility', 'visible');
 
 			console.log("collapse side-nav");
 		});
 
 		// Show side-nav bar when corner hamburger is clicked
-		$('#hamburger').on('click', function() {
-			$('.button-collapse').sideNav('show');
-			$('#slide-out').addClass('active');
-			$('#hamburger').css('visibility', 'hidden');
+		this.hamburgerExpandIcon.on('click', () => {
+			this.hamburgerCollapseIcon.sideNav('show');
+			this.sideNav.addClass('active');
+			this.hamburgerExpandIcon.css('visibility', 'hidden');
 		});
 	}
 
@@ -105,7 +135,7 @@ export default class DesktopInfographic {
 		// activated by impress.js, and with that, we can can apply border styling to
 		// the right border of $('.side-nav > li[id="id"');
 
-		$(window).on('hashchange', function(e){
+		$(window).on('hashchange', (e) => {
 			console.log('slide transition');
 
 			// grab active impress.js slide ID
@@ -115,7 +145,7 @@ export default class DesktopInfographic {
 			console.log("current slide hash: " + currentSlideHash);
 
 			// toggle the active-slide class for the list item with that ID
-			$('.side-nav > li').removeClass('active-slide');
+			this.sideNavListItems.removeClass('active-slide');
 			$('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
 		});
 
@@ -124,16 +154,16 @@ export default class DesktopInfographic {
 		// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
 		// '#your-page-element';
 
-		$('.side-nav > li').on('click', function() {
+		this.sideNavListItems.on('click', () => {
 			console.log('click-induced transition');
 			window.location.hash = '#' + $(this).data('slide');
 		});
 
-		$('#page-up').on('click', function() {
+		this.pageUpIcon.on('click', () => {
 			window.location.hash = '#intro';
 		});
 
-		$('#page-down').on('click', function() {
+		this.pageDownIcon.on('click', () => {
 			window.location.hash = '#futurism';
 		});
 	}
@@ -151,7 +181,7 @@ export default class DesktopInfographic {
 		// Cookies.get('name'); // => 'value'
 		// Cookies.get('nothing'); // => undefined
 
-		$('#mobile-view').on('click', function() {
+		this.mobileViewIcon.on('click', () => {
 			Cookies.set('display', 'mobile', {expires: 365});
 
 			console.log("display: " + Cookies.get('display'));
@@ -164,23 +194,23 @@ export default class DesktopInfographic {
 	setupZooms() {
 		// jQuery automatically adds in necessary vendor prefixes when using
 		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
-		$('#zoom-in').on('click', function() {
-			$('#impress').css('transform', 'scale(' + utils.getScale("impress")*1.25 + ')');
+		this.zoomInIcon.on('click', () => {
+			this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*1.25 + ')');
 		});
 
-		$('#zoom-out').on('click', function() {
-			$('#impress').css('transform', 'scale(' + utils.getScale("impress")/1.25 + ')');
+		this.zoomOutIcon.on('click', () => {
+			this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/1.25 + ')');
 		});
 	}
 
 	setupDiscuss() {
-		$('#discuss-slide').on('click', function() {
+		this.discussSlideIcon.on('click', () => {
 
 		});
 	}
 
 	setupNextPrev() {
-		$('#previous-slide').on('click', function() {
+		this.previousSlideIcon.on('click', () => {
 			// This approach does not work because it does not preventDefault(),
 			// and the key is already being captured by impress.js, which causes
 			// a conflict ...
@@ -197,7 +227,7 @@ export default class DesktopInfographic {
 			// cases ...
 		});
 
-		$('#next-slide').on('click', function() {
+		this.nextSlideIcon.on('click', () => {
 			impress().next();
 		});
 	}
@@ -208,7 +238,7 @@ export default class DesktopInfographic {
 
 		// Define shortcuts here
 		// REFACTOR THIS
-		$(document).keydown(function(e) {
+		$(document).keydown( (e) => {
 			// When plus or minus is hit, count the number of times
 
 			if ((e.keyCode === 9) || (e.keyCode === 189) || 
@@ -227,10 +257,10 @@ export default class DesktopInfographic {
 
 		    // TAB key: Use tab key as a shortcut for toggling the side-nav
 		    if (e.keyCode === 9) {
-		    	if ($('#slide-out').hasClass('active')) {
-					$('.button-collapse').trigger('click');
+		    	if (this.sideNav.hasClass('active')) {
+					this.hamburgerCollapseIcon.trigger('click');
 				} else {
-					$('#hamburger').trigger('click');
+					this.hamburgerExpandIcon.trigger('click');
 				}
 
 		    } else if ((e.keyCode === 189) || (e.keyCode === 187)) {
@@ -249,11 +279,11 @@ export default class DesktopInfographic {
 						count++;
 						console.log('count: ' + count);
 
-						setTimeout(function(currentCount) {
+						setTimeout( (currentCount) => {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
 								factor = Math.pow(Math.log(count+2), 3);
-								$('#impress').css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 								// setScaleFactor(-factor);
 								count = 0;
 							}
@@ -271,11 +301,11 @@ export default class DesktopInfographic {
 							// keypresses have occurred.  If not, then currentCount will equal
 							// the count.  It is only then that we want to calculate and invoke
 							// the zoom function
-							setTimeout(function(currentCount) {
+							setTimeout( (currentCount) => {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count+2), 3);
-									$('#impress').css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(-factor);
 									count = 0;
 								}
@@ -299,11 +329,11 @@ export default class DesktopInfographic {
 						count++;
 						console.log('count: ' + count);
 
-						setTimeout(function(currentCount) {
+						setTimeout( (currentCount) => {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
 								factor = Math.pow(Math.log(count+2), 3);
-								$('#impress').css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 								// setScaleFactor(factor);
 								count = 0;
 							}
@@ -321,11 +351,11 @@ export default class DesktopInfographic {
 							// keypresses have occurred.  If not, then currentCount will equal
 							// the count.  It is only then that we want to calculate and invoke
 							// the zoom function
-							setTimeout(function(currentCount) {
+							setTimeout( (currentCount) => {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count+2), 3);
-									$('#impress').css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(factor);
 									count = 0;
 								}

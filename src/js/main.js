@@ -11,8 +11,6 @@ $(window).on('load', function() {
 		$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
 
-	let desktopInfographic = new DesktopInfographic();
-
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		$('.preloader-wrapper').addClass('active');
 
@@ -28,7 +26,7 @@ $(window).on('load', function() {
 			// For flash of content on page load
 			bigImageLoaded(this);
 
-			desktopInfographic.init();
+			let desktopInfographic = new DesktopInfographic();
 		}
 		largeImage.src = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 		largeImage.alt = "Get Big Things Done Infographic";
@@ -41,7 +39,7 @@ $(window).on('load', function() {
 
 $(document).ready(function() {
 	if (infographic.isDesktop && infographic.deviceCookie != 'mobile') {
-		console.log("desktop or tablet document.ready()");
+		// desktop
 	} else {
 		let mobileInfographic = new MobileInfographic();
 		mobileInfographic.init();

@@ -13931,6 +13931,33 @@ var DesktopInfographic = function () {
 		_classCallCheck(this, DesktopInfographic);
 
 		console.log('desktop or tablet window.load()');
+
+		// Presentation
+		this.impressContainer = $('#impress');
+		this.bigImage = $('.big-image');
+
+		// Materialize
+		this.materializeToolTips = $('.tooltipped');
+		this.preloaderWrapper = $('.preloader-wrapper');
+
+		// SideNav
+		this.sideNav = $('#slide-out');
+		this.sideNavListItems = $('.side-nav > li');
+
+		this.hamburgerCollapseIcon = $('.button-collapse');
+		this.hamburgerExpandIcon = $('#hamburger');
+
+		// Icons
+		this.pageUpIcon = $('#page-up');
+		this.pageDownIcon = $('#page-down');
+		this.mobileViewIcon = $('#mobile-view');
+		this.zoomInIcon = $('#zoom-in');
+		this.zoomOutIcon = $('#zoom-out');
+		this.previousSlideIcon = $('#previous-slide');
+		this.nextSlideIcon = $('#next-slide');
+		this.discussSlideIcon = $('#discuss-slide');
+
+		this.init();
 	}
 
 	_createClass(DesktopInfographic, [{
@@ -13938,53 +13965,56 @@ var DesktopInfographic = function () {
 		value: function init() {
 			var _this = this;
 
-			// Initialize impress.js presentation scale to 1
-			$('#impress').attr('data-set-scale-factor', 1);
+			$(document).ready(function () {
+				console.log("desktop or tablet document.ready()");
 
-			// Initialize Materialize tooltip
-			$('.tooltipped').tooltip({ delay: 50 });
+				// Initialize impress.js presentation scale to 1
+				_this.impressContainer.attr('data-set-scale-factor', 1);
 
-			// Initialize Materialize sideNav
-			$('.button-collapse').sideNav({
-				menuWidth: 360 // Default is 240
+				// Initialize Materialize tooltip
+				_this.materializeToolTips.tooltip({ delay: 50 });
+
+				// Initialize Materialize sideNav
+				_this.hamburgerCollapseIcon.sideNav({
+					menuWidth: 360 // Default is 240
+				});
+
+				_this.hamburgerCollapseIcon.sideNav('show');
+				_this.sideNav.addClass('active');
+
+				_this.showControls();
+
+				Materialize.toast('Use < and > keys to navigate', 10000);
+
+				_this.showSideNav();
+
+				_this.bigImage.show();
+
+				setTimeout(function () {
+					_this.preloaderWrapper.removeClass('active');
+					_this.bigImage.addClass('animated fadeIn').css('visibility', 'visible');
+
+					_this.loadImpress();
+				}, 4000);
 			});
-
-			// Always start infographic with active side-nav bar
-			$('.button-collapse').sideNav('show');
-			$('#slide-out').addClass('active');
-
-			this.showControls();
-
-			Materialize.toast('Use < and > keys to navigate', 10000);
-
-			this.showSideNav();
-
-			$('.big-image').show();
-
-			setTimeout(function () {
-				$('.preloader-wrapper').removeClass('active');
-				$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
-
-				_this.loadImpress();
-			}, 4000);
 		}
 	}, {
 		key: 'showControls',
 		value: function showControls() {
-			$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+			this.pageUpIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.pageDownIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+			this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+			this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+			this.previousSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.nextSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
+			this.discussSlideIcon.addClass('animated fadeInRight').css('visibility', 'visible');
 		}
 	}, {
 		key: 'showSideNav',
 		value: function showSideNav() {
-			$('#slide-out').show();
-			$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+			this.sideNav.show();
+			this.sideNav.addClass('animated fadeInLeft').css('visibility', 'visible');
 		}
 	}, {
 		key: 'loadImpress',
@@ -14018,27 +14048,31 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupHamburger',
 		value: function setupHamburger() {
+			var _this3 = this;
+
 			// Allow side-nav collapse by pressing the hamburger icon
-			$('.button-collapse').on('click', function () {
+			this.hamburgerCollapseIcon.on('click', function () {
 				// $("#slide").animate({width:'toggle'},350);
 				// $('.button-collapse').sideNav('hide');
-				$('#slide-out').removeClass('active');
+				_this3.sideNav.removeClass('active');
 
-				$('#hamburger').css('visibility', 'visible');
+				_this3.hamburgerExpandIcon.css('visibility', 'visible');
 
 				console.log("collapse side-nav");
 			});
 
 			// Show side-nav bar when corner hamburger is clicked
-			$('#hamburger').on('click', function () {
-				$('.button-collapse').sideNav('show');
-				$('#slide-out').addClass('active');
-				$('#hamburger').css('visibility', 'hidden');
+			this.hamburgerExpandIcon.on('click', function () {
+				_this3.hamburgerCollapseIcon.sideNav('show');
+				_this3.sideNav.addClass('active');
+				_this3.hamburgerExpandIcon.css('visibility', 'hidden');
 			});
 		}
 	}, {
 		key: 'setupHashChange',
 		value: function setupHashChange() {
+			var _this4 = this;
+
 			// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
 			// (URL CHANGE --> LI CHANGE)
 			// $('#impress > .present').attr('id') can be used to grab the id that is currently
@@ -14055,7 +14089,7 @@ var DesktopInfographic = function () {
 				console.log("current slide hash: " + currentSlideHash);
 
 				// toggle the active-slide class for the list item with that ID
-				$('.side-nav > li').removeClass('active-slide');
+				_this4.sideNavListItems.removeClass('active-slide');
 				$('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
 			});
 
@@ -14064,16 +14098,16 @@ var DesktopInfographic = function () {
 			// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
 			// '#your-page-element';
 
-			$('.side-nav > li').on('click', function () {
+			this.sideNavListItems.on('click', function () {
 				console.log('click-induced transition');
-				window.location.hash = '#' + $(this).data('slide');
+				window.location.hash = '#' + $(_this4).data('slide');
 			});
 
-			$('#page-up').on('click', function () {
+			this.pageUpIcon.on('click', function () {
 				window.location.hash = '#intro';
 			});
 
-			$('#page-down').on('click', function () {
+			this.pageDownIcon.on('click', function () {
 				window.location.hash = '#futurism';
 			});
 		}
@@ -14092,7 +14126,7 @@ var DesktopInfographic = function () {
 			// Cookies.get('name'); // => 'value'
 			// Cookies.get('nothing'); // => undefined
 
-			$('#mobile-view').on('click', function () {
+			this.mobileViewIcon.on('click', function () {
 				Cookies.set('display', 'mobile', { expires: 365 });
 
 				console.log("display: " + Cookies.get('display'));
@@ -14104,25 +14138,27 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupZooms',
 		value: function setupZooms() {
+			var _this5 = this;
+
 			// jQuery automatically adds in necessary vendor prefixes when using
 			// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
-			$('#zoom-in').on('click', function () {
-				$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") * 1.25 + ')');
+			this.zoomInIcon.on('click', function () {
+				_this5.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * 1.25 + ')');
 			});
 
-			$('#zoom-out').on('click', function () {
-				$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
+			this.zoomOutIcon.on('click', function () {
+				_this5.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
 			});
 		}
 	}, {
 		key: 'setupDiscuss',
 		value: function setupDiscuss() {
-			$('#discuss-slide').on('click', function () {});
+			this.discussSlideIcon.on('click', function () {});
 		}
 	}, {
 		key: 'setupNextPrev',
 		value: function setupNextPrev() {
-			$('#previous-slide').on('click', function () {
+			this.previousSlideIcon.on('click', function () {
 				// This approach does not work because it does not preventDefault(),
 				// and the key is already being captured by impress.js, which causes
 				// a conflict ...
@@ -14139,13 +14175,15 @@ var DesktopInfographic = function () {
 				// cases ...
 			});
 
-			$('#next-slide').on('click', function () {
+			this.nextSlideIcon.on('click', function () {
 				impress().next();
 			});
 		}
 	}, {
 		key: 'setupKeypresses',
 		value: function setupKeypresses() {
+			var _this6 = this;
+
 			var count = 0;
 			var current, start, end, previous, diff, factor;
 
@@ -14169,10 +14207,10 @@ var DesktopInfographic = function () {
 
 				// TAB key: Use tab key as a shortcut for toggling the side-nav
 				if (e.keyCode === 9) {
-					if ($('#slide-out').hasClass('active')) {
-						$('.button-collapse').trigger('click');
+					if (_this6.sideNav.hasClass('active')) {
+						_this6.hamburgerCollapseIcon.trigger('click');
 					} else {
-						$('#hamburger').trigger('click');
+						_this6.hamburgerExpandIcon.trigger('click');
 					}
 				} else if (e.keyCode === 189 || e.keyCode === 187) {
 
@@ -14194,7 +14232,7 @@ var DesktopInfographic = function () {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count + 2), 3);
-									$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(-factor);
 									count = 0;
 								}
@@ -14216,7 +14254,7 @@ var DesktopInfographic = function () {
 									console.log('count: ' + count + ", currentCount: " + currentCount);
 									if (currentCount === count) {
 										factor = Math.pow(Math.log(count + 2), 3);
-										$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+										_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 										// setScaleFactor(-factor);
 										count = 0;
 									}
@@ -14244,7 +14282,7 @@ var DesktopInfographic = function () {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
 									factor = Math.pow(Math.log(count + 2), 3);
-									$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 									// setScaleFactor(factor);
 									count = 0;
 								}
@@ -14266,7 +14304,7 @@ var DesktopInfographic = function () {
 									console.log('count: ' + count + ", currentCount: " + currentCount);
 									if (currentCount === count) {
 										factor = Math.pow(Math.log(count + 2), 3);
-										$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+										_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
 										// setScaleFactor(factor);
 										count = 0;
 									}
@@ -14344,8 +14382,6 @@ $(window).on('load', function () {
 		$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
 
-	var desktopInfographic = new _desktopInfographic2.default();
-
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		$('.preloader-wrapper').addClass('active');
 
@@ -14361,7 +14397,7 @@ $(window).on('load', function () {
 			// For flash of content on page load
 			bigImageLoaded(this);
 
-			desktopInfographic.init();
+			var desktopInfographic = new _desktopInfographic2.default();
 		};
 		largeImage.src = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 		largeImage.alt = "Get Big Things Done Infographic";
@@ -14374,7 +14410,7 @@ $(window).on('load', function () {
 
 $(document).ready(function () {
 	if (infographic.isDesktop && infographic.deviceCookie != 'mobile') {
-		console.log("desktop or tablet document.ready()");
+		// desktop
 	} else {
 		var mobileInfographic = new _mobileInfographic2.default();
 		mobileInfographic.init();
