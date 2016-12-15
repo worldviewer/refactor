@@ -13936,18 +13936,88 @@ var DesktopInfographic = function () {
 	_createClass(DesktopInfographic, [{
 		key: 'init',
 		value: function init() {
+			var _this = this;
+
+			// Initialize impress.js presentation scale to 1
+			$('#impress').attr('data-set-scale-factor', 1);
+
+			// Initialize Materialize tooltip
+			$('.tooltipped').tooltip({ delay: 50 });
+
+			// Initialize Materialize sideNav
+			$('.button-collapse').sideNav({
+				menuWidth: 360 // Default is 240
+			});
+
+			// Always start infographic with active side-nav bar
+			$('.button-collapse').sideNav('show');
+			$('#slide-out').addClass('active');
+
+			this.showControls();
+
+			Materialize.toast('Use < and > keys to navigate', 10000);
+
+			this.showSideNav();
+
+			$('.big-image').show();
+
+			setTimeout(function () {
+				$('.preloader-wrapper').removeClass('active');
+				$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
+
+				_this.loadImpress();
+			}, 4000);
+		}
+	}, {
+		key: 'showControls',
+		value: function showControls() {
+			$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
+			$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+			$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+		}
+	}, {
+		key: 'showSideNav',
+		value: function showSideNav() {
+			$('#slide-out').show();
+			$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+		}
+	}, {
+		key: 'loadImpress',
+		value: function loadImpress() {
+			var _this2 = this;
+
+			var setup = function setup() {
+				return _this2.setupHandlers();
+			};
+
 			// Add in drag scroll once all animations have completed.  For some reason,
 			// I'm not able to get the deceleration to work for this, even when I modify
 			// the slowdown value in the original code ...
 			$(window).kinetic();
 
-			_utils2.default.loadScript("dist/js/impress.js", this.impressLoaded);
+			_utils2.default.loadScript("dist/js/impress.js", setup);
 		}
 	}, {
-		key: 'impressLoaded',
-		value: function impressLoaded() {
+		key: 'setupHandlers',
+		value: function setupHandlers() {
 			impress().init();
 
+			this.setupHamburger();
+			this.setupHashChange();
+			this.setupMobileChange();
+			this.setupZooms();
+			this.setupDiscuss();
+			this.setupNextPrev();
+			this.setupKeypresses();
+		}
+	}, {
+		key: 'setupHamburger',
+		value: function setupHamburger() {
 			// Allow side-nav collapse by pressing the hamburger icon
 			$('.button-collapse').on('click', function () {
 				// $("#slide").animate({width:'toggle'},350);
@@ -13965,7 +14035,10 @@ var DesktopInfographic = function () {
 				$('#slide-out').addClass('active');
 				$('#hamburger').css('visibility', 'hidden');
 			});
-
+		}
+	}, {
+		key: 'setupHashChange',
+		value: function setupHashChange() {
 			// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
 			// (URL CHANGE --> LI CHANGE)
 			// $('#impress > .present').attr('id') can be used to grab the id that is currently
@@ -14003,7 +14076,10 @@ var DesktopInfographic = function () {
 			$('#page-down').on('click', function () {
 				window.location.hash = '#futurism';
 			});
-
+		}
+	}, {
+		key: 'setupMobileChange',
+		value: function setupMobileChange() {
 			// I want to persist this setting between sessions, so I'll use js.cookie.js
 			// Usage information here ...
 			// https://github.com/js-cookie/js-cookie
@@ -14015,6 +14091,7 @@ var DesktopInfographic = function () {
 			// 
 			// Cookies.get('name'); // => 'value'
 			// Cookies.get('nothing'); // => undefined
+
 			$('#mobile-view').on('click', function () {
 				Cookies.set('display', 'mobile', { expires: 365 });
 
@@ -14023,7 +14100,10 @@ var DesktopInfographic = function () {
 				// Then reload the page ...
 				document.location.reload();
 			});
-
+		}
+	}, {
+		key: 'setupZooms',
+		value: function setupZooms() {
 			// jQuery automatically adds in necessary vendor prefixes when using
 			// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
 			$('#zoom-in').on('click', function () {
@@ -14033,9 +14113,15 @@ var DesktopInfographic = function () {
 			$('#zoom-out').on('click', function () {
 				$('#impress').css('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
 			});
-
+		}
+	}, {
+		key: 'setupDiscuss',
+		value: function setupDiscuss() {
 			$('#discuss-slide').on('click', function () {});
-
+		}
+	}, {
+		key: 'setupNextPrev',
+		value: function setupNextPrev() {
 			$('#previous-slide').on('click', function () {
 				// This approach does not work because it does not preventDefault(),
 				// and the key is already being captured by impress.js, which causes
@@ -14056,7 +14142,10 @@ var DesktopInfographic = function () {
 			$('#next-slide').on('click', function () {
 				impress().next();
 			});
-
+		}
+	}, {
+		key: 'setupKeypresses',
+		value: function setupKeypresses() {
 			var count = 0;
 			var current, start, end, previous, diff, factor;
 
@@ -14248,13 +14337,14 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var infographic = new _infographic2.default();
-var desktopInfographic = new _desktopInfographic2.default();
 
 $(window).on('load', function () {
 	// Check if user has set a preferred device
 	if (infographic.deviceCookie === 'mobile') {
 		$('html').removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
+
+	var desktopInfographic = new _desktopInfographic2.default();
 
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		$('.preloader-wrapper').addClass('active');
@@ -14266,44 +14356,12 @@ $(window).on('load', function () {
 
 		var largeImage = new Image();
 		largeImage.onload = function () {
-			bigImageLoaded(this);
-
 			console.log('infographic loaded.');
 
-			// Initialize the presentation scale to 1
-			$('#impress').attr('data-set-scale-factor', 1);
+			// For flash of content on page load
+			bigImageLoaded(this);
 
-			$('.tooltipped').tooltip({ delay: 50 });
-
-			$('.button-collapse').sideNav({
-				menuWidth: 360 // Default is 240
-			});
-
-			// Always start infographic with active side-nav bar
-			$('.button-collapse').sideNav('show');
-			$('#slide-out').addClass('active');
-
-			$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
-			$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
-			$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
-			Materialize.toast('Use < and > keys to navigate', 10000);
-
-			$('#slide-out').show();
-			$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
-
-			$('.big-image').show();
-
-			setTimeout(function () {
-				$('.preloader-wrapper').removeClass('active');
-				$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
-
-				desktopInfographic.init();
-			}, 5000);
+			desktopInfographic.init();
 		};
 		largeImage.src = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 		largeImage.alt = "Get Big Things Done Infographic";

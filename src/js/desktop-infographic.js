@@ -8,17 +8,77 @@ export default class DesktopInfographic {
 	}
 
 	init() {
+		// Initialize impress.js presentation scale to 1
+		$('#impress').attr('data-set-scale-factor', 1);
+
+		// Initialize Materialize tooltip
+		$('.tooltipped').tooltip({delay: 50});
+
+		// Initialize Materialize sideNav
+		$('.button-collapse').sideNav({
+			menuWidth: 360 // Default is 240
+		});
+
+		// Always start infographic with active side-nav bar
+		$('.button-collapse').sideNav('show');
+		$('#slide-out').addClass('active');
+
+		this.showControls();
+
+		Materialize.toast('Use < and > keys to navigate', 10000);
+
+		this.showSideNav();
+
+		$('.big-image').show();
+
+		setTimeout(() => {
+			$('.preloader-wrapper').removeClass('active');
+			$('.big-image').addClass('animated fadeIn').css('visibility', 'visible');
+
+			this.loadImpress();
+		}, 4000);		
+	}
+
+	showControls() {
+		$('#page-up').addClass('animated fadeInUp').css('visibility', 'visible');
+		$('#page-down').addClass('animated fadeInUp').css('visibility', 'visible');
+		$('#mobile-view').addClass('animated fadeInRight').css('visibility', 'visible');
+		$('#zoom-in').addClass('animated fadeInRight').css('visibility', 'visible');
+		$('#zoom-out').addClass('animated fadeInRight').css('visibility', 'visible');
+		$('#previous-slide').addClass('animated fadeInUp').css('visibility', 'visible')
+		$('#next-slide').addClass('animated fadeInUp').css('visibility', 'visible');
+		$('#discuss-slide').addClass('animated fadeInRight').css('visibility', 'visible');
+	}
+
+	showSideNav() {
+		$('#slide-out').show();
+		$('#slide-out').addClass('animated fadeInLeft').css('visibility', 'visible');
+	}
+
+	loadImpress() {
+		let setup = () => this.setupHandlers();
+
 		// Add in drag scroll once all animations have completed.  For some reason,
 		// I'm not able to get the deceleration to work for this, even when I modify
 		// the slowdown value in the original code ...
 		$(window).kinetic();
 
-		utils.loadScript("dist/js/impress.js", this.impressLoaded);
+		utils.loadScript("dist/js/impress.js", setup);
 	}
 
-	impressLoaded() {
+	setupHandlers() {
 		impress().init();
 
+		this.setupHamburger();
+		this.setupHashChange();
+		this.setupMobileChange();
+		this.setupZooms();
+		this.setupDiscuss();
+		this.setupNextPrev();
+		this.setupKeypresses();
+	}
+
+	setupHamburger() {
 		// Allow side-nav collapse by pressing the hamburger icon
 		$('.button-collapse').on('click', function() {
 			// $("#slide").animate({width:'toggle'},350);
@@ -36,7 +96,9 @@ export default class DesktopInfographic {
 			$('#slide-out').addClass('active');
 			$('#hamburger').css('visibility', 'hidden');
 		});
+	}
 
+	setupHashChange() {
 		// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
 		// (URL CHANGE --> LI CHANGE)
 		// $('#impress > .present').attr('id') can be used to grab the id that is currently
@@ -74,7 +136,9 @@ export default class DesktopInfographic {
 		$('#page-down').on('click', function() {
 			window.location.hash = '#futurism';
 		});
+	}
 
+	setupMobileChange() {
 		// I want to persist this setting between sessions, so I'll use js.cookie.js
 		// Usage information here ...
 		// https://github.com/js-cookie/js-cookie
@@ -86,6 +150,7 @@ export default class DesktopInfographic {
 		// 
 		// Cookies.get('name'); // => 'value'
 		// Cookies.get('nothing'); // => undefined
+
 		$('#mobile-view').on('click', function() {
 			Cookies.set('display', 'mobile', {expires: 365});
 
@@ -94,7 +159,9 @@ export default class DesktopInfographic {
 			// Then reload the page ...
 			document.location.reload();
 		});
+	}
 
+	setupZooms() {
 		// jQuery automatically adds in necessary vendor prefixes when using
 		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
 		$('#zoom-in').on('click', function() {
@@ -104,11 +171,15 @@ export default class DesktopInfographic {
 		$('#zoom-out').on('click', function() {
 			$('#impress').css('transform', 'scale(' + utils.getScale("impress")/1.25 + ')');
 		});
+	}
 
+	setupDiscuss() {
 		$('#discuss-slide').on('click', function() {
 
 		});
+	}
 
+	setupNextPrev() {
 		$('#previous-slide').on('click', function() {
 			// This approach does not work because it does not preventDefault(),
 			// and the key is already being captured by impress.js, which causes
@@ -129,7 +200,9 @@ export default class DesktopInfographic {
 		$('#next-slide').on('click', function() {
 			impress().next();
 		});
+	}
 
+	setupKeypresses() {
 		var count = 0;
 		var current, start, end, previous, diff, factor;
 
