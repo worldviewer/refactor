@@ -133,3 +133,5 @@ Now, I can finally get to refactoring into ES6 modules ...
 
 Split up mobile and desktop into separate files.  Eliminated redundant checks for device type.  Placed utility functions into a separate static class.  Nothing has blown up yet.
 
+Noticing that some of the mobile functionality has evaporated.  Will get to that soon.
+

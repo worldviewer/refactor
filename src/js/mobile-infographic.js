@@ -3,7 +3,7 @@ import ScrollMagic from 'scrollmagic';
 
 export default class MobileInfographic {
 	constructor() {
-		console.log('Loading mobile infographic ...');
+		console.log('mobile window.load()');
 	}
 
 	init() {
