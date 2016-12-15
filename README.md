@@ -129,3 +129,7 @@ Now, I'm going to refactor the SCSS to reduce redundancy.
 
 Noticing a few problems which were not occurring before ... (1) Arrow keys are not consistently working, (2) sidenav background colors are not consistently changing, (3) there's a flash of content when the page loads, and (4) the zooms are not consistently working (may be skipping slides).  This turned out to be a really easy fix: I had two copies of impress.js in my workflow: one in /dist/js/ and the other in src/lib/js, which was getting bundled with the rest of my code.  Removing the copy in src/lib/js fixed the problem.
 
+Now, I can finally get to refactoring into ES6 modules ...
+
+Split up mobile and desktop into separate files.  Eliminated redundant checks for device type.  Placed utility functions into a separate static class.  Nothing has blown up yet.
+
