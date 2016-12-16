@@ -69,7 +69,8 @@ export default class Keyboard {
 		return parseInt(currentTime) - parseInt(previousTime);
 	}
 
-	// Allows user to zoom in rapidly with consecutive keypresses
+	// Allows user to zoom in rapidly with consecutive keypresses, wait to zoom
+	// until no keypresses for half-second
 	bigCssZoom(element, direction) {
 		let factor = this.calculateZoom(this.keypressCount);
 
@@ -84,7 +85,7 @@ export default class Keyboard {
 		this.previousTime = this.currentTime;
 	}
 
-	// Evaluates total zoom based upon consecutive zoom keypresses
+	// Evaluates total zoom based upon the number of consecutive zoom keypresses
 	evaluateZoomScale(element, direction) {
     	this.currentTime = Date.now();
 		let timeDiff = this.getTimeDiff(this.currentTime, this.previousTime);
@@ -95,15 +96,11 @@ export default class Keyboard {
 
 			this.bigCssZoom(element, direction);
 
-		// This keypress occurred within half a second of the last
+		// This keypress occurred within a quarter second of the last
 		} else {
 			if (this.getTimeDiff(this.currentTime, this.previousTime) < 250) {
 				this.keypressCount++;
 
-				// Wait half a second and check to see if any more of these same
-				// keypresses have occurred.  If not, then currentCount will equal
-				// the count.  It is only then that we want to calculate and invoke
-				// the zoom function
 				this.bigCssZoom(element, direction);
 			}				
 		}
