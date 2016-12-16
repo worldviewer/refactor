@@ -185,3 +185,14 @@ Based on the testing, it's become apparent that at least five things must happen
 
 It probably makes sense to focus for now on desktop support, as I do know for a fact that the card-based approach I was going with for mobile is not a workable solution long-term.
 
+Pruned the unused Node packages which I was using in my attempt to bundle Materialize.
+
+I'm now going to experiment with setting up apigee-127's API dev environment, which includes the Swagger editor, the Swagger tools, Volos.js and Apache usergrid.  This is essentially an API construction suite which sits on top of a graph database, based upon Node.js.  This is in part just to get some more experience with Swagger, but it's especially nice that Swagger is open source.  I very much like the fact that this rests on Node, which gives me a non-blocking server.  And the fact that usergrid is a graph is really icing on the cake.  I'd even be interested in hosting my controversy API with apigee-127 if it's an option.
+
+My interest is in seeing how quickly I can get this API up with some content on a hosted URL, so that I can pull the Impress data out of my HTML.
+
+The video I'm watching is at ...
+
+Build APIs in Node.js and Swagger 2.0 with Apigee-127
+https://www.youtube.com/watch?v=Fw43z14Y1Xw
+
