@@ -139,3 +139,10 @@ I've broken the desktop version into modules.  The most challenging part is the 
 
 Debugging ...
 
+A few of the variables needed to be globals, so I turned them into Keyboard object properties.  That now works.
+
+Now noticing an issue with interactions with the sideNav list items; doesn't always take me to the correct slide, and posts URL as ...
+
+file:///Volumes/PRODUCTION/Database/code/worldviewer/refactor/index.html#undefined
+
+Looks like I might want to contemplate a more general-purpose solution to these hashes.

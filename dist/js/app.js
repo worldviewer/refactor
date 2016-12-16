@@ -14326,7 +14326,8 @@ var Keyboard = function () {
 			return parseInt(currentTime) - parseInt(previousTime);
 		}
 
-		// Allows user to zoom in rapidly with consecutive keypresses
+		// Allows user to zoom in rapidly with consecutive keypresses, wait to zoom
+		// until no keypresses for half-second
 
 	}, {
 		key: 'bigCssZoom',
@@ -14337,8 +14338,7 @@ var Keyboard = function () {
 
 			setTimeout(function (currentCount) {
 				if (currentCount === _this3.keypressCount) {
-					console.log('this.keypressCount: ' + _this3.keypressCount + ', currentCount: ' + currentCount);
-					console.log('factor in bigCssZoom: ' + factor);
+					console.log('key presses: ' + _this3.keypressCount);
 					_this3.cssZoom(element, direction, factor);
 					_this3.keypressCount = 0;
 				}
@@ -14347,7 +14347,7 @@ var Keyboard = function () {
 			this.previousTime = this.currentTime;
 		}
 
-		// Evaluates total zoom based upon consecutive zoom keypresses
+		// Evaluates total zoom based upon the number of consecutive zoom keypresses
 
 	}, {
 		key: 'evaluateZoomScale',
@@ -14361,20 +14361,14 @@ var Keyboard = function () {
 
 				this.bigCssZoom(element, direction);
 
-				// This keypress occurred within half a second of the last
+				// This keypress occurred within a quarter second of the last
 			} else {
 				if (this.getTimeDiff(this.currentTime, this.previousTime) < 250) {
 					this.keypressCount++;
 
-					// Wait half a second and check to see if any more of these same
-					// keypresses have occurred.  If not, then currentCount will equal
-					// the count.  It is only then that we want to calculate and invoke
-					// the zoom function
 					this.bigCssZoom(element, direction);
 				}
 			}
-
-			// return previousTime;
 		}
 	}, {
 		key: 'setupZoomInKey',
