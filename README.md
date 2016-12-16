@@ -27,7 +27,9 @@ To view the current state of the refactor, go <a href="http://worldviewer.github
 
 ## Notes
 
-"Uncaught ReferenceError: require is not defined": Babel will transpile ES6 -> ES5, but it will not perform the module bundling for you ...
+    "Uncaught ReferenceError: require is not defined"
+
+Babel will transpile ES6 -> ES5, but it will not perform the module bundling for you ...
 
 http://stackoverflow.com/questions/31593694/do-i-need-require-js-when-i-use-babel
 
@@ -143,7 +145,7 @@ A few of the variables needed to be globals, so I turned them into Keyboard obje
 
 Now noticing an issue with interactions with the sideNav list items; doesn't always take me to the correct slide, and posts URL as ...
 
-file:///Volumes/PRODUCTION/Database/code/worldviewer/refactor/index.html#undefined
+    file:///Volumes/PRODUCTION/Database/code/worldviewer/refactor/index.html#undefined
 
 Looks like I might want to contemplate a more general-purpose solution to these hashes.
 
@@ -156,6 +158,7 @@ Since January, I have adopted a standard template format for all of my controver
 I call this a "controversy card".  The idea with these cards is that I can construct them with HTML and CSS: The title, summary and circular annotation can all be overlayed onto the graphic in order to generate a controversy card.  There is also markdown associated with each of these cards which I generate in parallel with the graphics.  The full collection, as it stands, can be seen here:
 
 *Controversies of Science*
+
 https://plus.google.com/collection/Yhn4Y
 
 It's expected that at a later time a graphic designer might have their way with this template.  This permits me to continue to fill out the controversy API content until that time.  At the current moment -- December 16, 2016 -- I have created 170 of these controversy cards.  The hope is to double that over the next year, at which point I will completely switch over to creating the social network.
