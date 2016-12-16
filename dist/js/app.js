@@ -14418,6 +14418,24 @@ var Keyboard = function () {
 			});
 		}
 	}, {
+		key: 'calculateZoom',
+		value: function calculateZoom(keypressCount) {
+			return Math.pow(Math.log(keypressCount + 2), 3);
+		}
+	}, {
+		key: 'calculateScale',
+		value: function calculateScale(element, factor, direction) {
+			return direction === 'in' ? utils.getScale(element.attr('id')) * factor : utils.getScale(element.attr('id')) / factor;
+		}
+	}, {
+		key: 'cssZoom',
+		value: function cssZoom(element) {
+			var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'in';
+			var factor = arguments[2];
+
+			element.css('transform', 'scale(' + this.calculateScale() + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+		}
+	}, {
 		key: 'setupZoomInKey',
 		value: function setupZoomInKey() {
 			var _this3 = this;
@@ -14425,8 +14443,6 @@ var Keyboard = function () {
 			$(document).keydown(function (e) {
 				if (e.keyCode === _this3.plusKey) {
 					currentTime = Date.now();
-					console.log("current time: " + currentTime);
-					console.log("previous time: " + previousTime);
 					timeDiff = parseInt(currentTime) - parseInt(previousTime);
 					console.log("time diff: " + timeDiff);
 
@@ -14438,36 +14454,36 @@ var Keyboard = function () {
 
 						setTimeout(function (currentCount) {
 							console.log('keypress count: ' + keypressCount + ", currentCount: " + currentCount);
-							if (currentCount === count) {
-								factor = Math.pow(Math.log(count + 2), 3);
-								_this3.impressContainer.css('transform', 'scale(' + utils.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-								count = 0;
+							if (currentCount === keypressCount) {
+								factor = _this3.calculateZoom();
+								_this3.cssZoom(_this3.impressContainer, 'in', factor);
+								keypressCount = 0;
 							}
-						}, 500, count);
+						}, 500, keypressCount);
 
-						previous = current;
+						previousTime = currentTime;
 
 						// This keypress occurred within half a second of the last
 					} else {
-						if (parseInt(current) - parseInt(previous) < 250) {
-							count++;
-							console.log('count: ' + count);
+						if (parseInt(currentTime) - parseInt(previousTime) < 250) {
+							keypressCount++;
+							console.log('count: ' + keypressCount);
 
 							// Wait half a second and check to see if any more of these same
 							// keypresses have occurred.  If not, then currentCount will equal
 							// the count.  It is only then that we want to calculate and invoke
 							// the zoom function
 							setTimeout(function (currentCount) {
-								console.log('count: ' + count + ", currentCount: " + currentCount);
-								if (currentCount === count) {
-									factor = Math.pow(Math.log(count + 2), 3);
-									_this3.impressContainer.css('transform', 'scale(' + utils.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-									count = 0;
+								console.log('count: ' + keypressCount + ", currentCount: " + currentCount);
+								if (currentCount === keypressCount) {
+									factor = _this3.calculateZoom();
+									_this3.cssZoom(_this3.impressContainer, 'in', factor);
+									keypressCount = 0;
 								}
-							}, 500, count);
+							}, 500, keypressCount);
 						}
 
-						previous = current;
+						previousTime = currentTime;
 					}
 				}
 			});
@@ -14480,8 +14496,6 @@ var Keyboard = function () {
 			$(document).keydown(function (e) {
 				if (e.keyCode === _this4.minusKey) {
 					current = Date.now();
-					console.log("current: " + current);
-					console.log("previous: " + previous);
 					diff = parseInt(current) - parseInt(previous);
 					console.log("diff: " + diff);
 
@@ -14494,8 +14508,8 @@ var Keyboard = function () {
 						setTimeout(function (currentCount) {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
-								factor = Math.pow(Math.log(count + 2), 3);
-								_this4.impressContainer.css('transform', 'scale(' + utils.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								factor = _this4.calculateZoom();
+								_this4.cssZoom(_this4.impressContainer, 'out', factor);
 								count = 0;
 							}
 						}, 500, count);
@@ -14515,8 +14529,8 @@ var Keyboard = function () {
 							setTimeout(function (currentCount) {
 								console.log('count: ' + count + ", currentCount: " + currentCount);
 								if (currentCount === count) {
-									factor = Math.pow(Math.log(count + 2), 3);
-									_this4.impressContainer.css('transform', 'scale(' + utils.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+									factor = _this4.calculateZoom();
+									_this4.cssZoom(_this4.impressContainer, 'out', factor);
 									count = 0;
 								}
 							}, 500, count);

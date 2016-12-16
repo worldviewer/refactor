@@ -39,12 +39,25 @@ export default class Keyboard {
 		});
 	}
 
+	calculateZoom(keypressCount) {
+		return Math.pow(Math.log(keypressCount + 2), 3);
+	}
+
+	calculateScale(element, factor, direction) {
+		return direction === 'in' ? 
+			utils.getScale(element.attr('id')) * factor :
+			utils.getScale(element.attr('id')) / factor;
+	}
+
+	cssZoom(element, direction = 'in', factor) {
+		element.css('transform', 'scale(' + this.calculateScale() +
+			')').css('transition-duration', '0.25s').css('transition-delay', '0');
+	}
+
 	setupZoomInKey() {
 		$(document).keydown( (e) => {
 			if (e.keyCode === this.plusKey) {
 		    	currentTime = Date.now();
-				console.log("current time: " + currentTime);
-				console.log("previous time: " + previousTime);
 				timeDiff = parseInt(currentTime) - parseInt(previousTime);
 				console.log("time diff: " + timeDiff);
 
@@ -56,36 +69,36 @@ export default class Keyboard {
 
 					setTimeout( (currentCount) => {
 						console.log('keypress count: ' + keypressCount + ", currentCount: " + currentCount);
-						if (currentCount === count) {
-							factor = Math.pow(Math.log(count + 2), 3);
-							this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-							count = 0;
+						if (currentCount === keypressCount) {
+							factor = this.calculateZoom();
+							this.cssZoom(this.impressContainer, 'in', factor);
+							keypressCount = 0;
 						}
-					}, 500, count);
+					}, 500, keypressCount);
 
-					previous = current;	
+					previousTime = currentTime;	
 
 				// This keypress occurred within half a second of the last
 				} else {
-					if (parseInt(current) - parseInt(previous) < 250) {
-						count++;
-						console.log('count: ' + count);
+					if (parseInt(currentTime) - parseInt(previousTime) < 250) {
+						keypressCount++;
+						console.log('count: ' + keypressCount);
 
 						// Wait half a second and check to see if any more of these same
 						// keypresses have occurred.  If not, then currentCount will equal
 						// the count.  It is only then that we want to calculate and invoke
 						// the zoom function
 						setTimeout( (currentCount) => {
-							console.log('count: ' + count + ", currentCount: " + currentCount);
-							if (currentCount === count) {
-								factor = Math.pow(Math.log(count+2), 3);
-								this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-								count = 0;
+							console.log('count: ' + keypressCount + ", currentCount: " + currentCount);
+							if (currentCount === keypressCount) {
+								factor = this.calculateZoom();
+								this.cssZoom(this.impressContainer, 'in', factor);
+								keypressCount = 0;
 							}
-						}, 500, count);
+						}, 500, keypressCount);
 					}
 
-					previous = current;								
+					previousTime = currentTime;						
 				}
 			}
 		});
@@ -95,8 +108,6 @@ export default class Keyboard {
 		$(document).keydown( (e) => {
 			if (e.keyCode === this.minusKey) {
 		    	current = Date.now();
-				console.log("current: " + current);
-				console.log("previous: " + previous);
 				diff = parseInt(current) - parseInt(previous);
 				console.log("diff: " + diff);
 
@@ -109,8 +120,8 @@ export default class Keyboard {
 					setTimeout( (currentCount) => {
 						console.log('count: ' + count + ", currentCount: " + currentCount);
 						if (currentCount === count) {
-							factor = Math.pow(Math.log(count+2), 3);
-							this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+							factor = this.calculateZoom();
+							this.cssZoom(this.impressContainer, 'out', factor);
 							count = 0;
 						}
 					}, 500, count);
@@ -130,8 +141,8 @@ export default class Keyboard {
 						setTimeout( (currentCount) => {
 							console.log('count: ' + count + ", currentCount: " + currentCount);
 							if (currentCount === count) {
-								factor = Math.pow(Math.log(count+2), 3);
-								this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+								factor = this.calculateZoom();
+								this.cssZoom(this.impressContainer, 'out', factor);
 								count = 0;
 							}
 						}, 500, count);
