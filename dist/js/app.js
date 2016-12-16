@@ -13990,7 +13990,7 @@ var DesktopInfographic = function () {
 
 				Materialize.toast('Use < and > keys to navigate', 10000);
 
-				// this.showSideNav();
+				_this.showSideNav();
 
 				_this.bigImage.show();
 
@@ -14414,6 +14414,10 @@ var _desktopInfographic = require('./desktop-infographic.js');
 
 var _desktopInfographic2 = _interopRequireDefault(_desktopInfographic);
 
+var _mobileInfographic = require('./mobile-infographic.js');
+
+var _mobileInfographic2 = _interopRequireDefault(_mobileInfographic);
+
 var _utils = require('./utils.js');
 
 var _utils2 = _interopRequireDefault(_utils);
@@ -14421,8 +14425,6 @@ var _utils2 = _interopRequireDefault(_utils);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var infographic = new _infographic2.default();
-// import MobileInfographic from './mobile-infographic.js';
-
 var infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
 $(document).ready(function () {
@@ -14431,36 +14433,36 @@ $(document).ready(function () {
 	var bigImageContainer = $('#impress > div:first-of-type');
 
 	// Check if user has set a preferred device
-	// if (infographic.deviceCookie === 'mobile') {
-	// 	html.removeClass('desktop').removeClass('tablet').addClass('mobile');
-	// }
+	if (infographic.deviceCookie === 'mobile') {
+		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
+	}
 
-	// if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
-	preloaderWrapper.addClass('active');
+	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
+		preloaderWrapper.addClass('active');
 
-	// Dynamically add in the img tag, so that this huge file never downloads for mobile
-	// Explanation of how to put Impress in a container here ...
-	// https://github.com/impress/impress.js/issues/111
+		// Dynamically add in the img tag, so that this huge file never downloads for mobile
+		// Explanation of how to put Impress in a container here ...
+		// https://github.com/impress/impress.js/issues/111
 
-	var bigImage = new Image();
-	bigImage.onload = function () {
-		console.log('infographic loaded.');
+		var bigImage = new Image();
+		bigImage.onload = function () {
+			console.log('infographic loaded.');
 
-		// For flash of content on page load
-		bigImageLoaded(this);
+			// For flash of content on page load
+			bigImageLoaded(this);
 
-		var desktopInfographic = new _desktopInfographic2.default();
-	};
-	bigImage.src = infographicAsset;
-	bigImage.alt = "Get Big Things Done Infographic";
-	bigImage.className = 'big-image';
-	bigImageContainer.append(bigImage);
-	// } else {
-	// 	let mobileInfographic = new MobileInfographic();
-	// 	mobileInfographic.init();
-	// }
+			var desktopInfographic = new _desktopInfographic2.default();
+		};
+		bigImage.src = infographicAsset;
+		bigImage.alt = "Get Big Things Done Infographic";
+		bigImage.className = 'big-image';
+		bigImageContainer.append(bigImage);
+	} else {
+		var mobileInfographic = new _mobileInfographic2.default();
+		mobileInfographic.init();
+	}
 });
-},{"./desktop-infographic.js":7,"./infographic.js":8,"./utils.js":12}],11:[function(require,module,exports){
+},{"./desktop-infographic.js":7,"./infographic.js":8,"./mobile-infographic.js":11,"./utils.js":12}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

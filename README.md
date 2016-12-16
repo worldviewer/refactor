@@ -171,3 +171,17 @@ Another thing I'd like to check on today is whether or not impress.js can be run
 
 https://github.com/impress/impress.js/wiki/Mobile-support
 
+Based on the testing, it's become apparent that at least five things must happen in order to have a chance of supporting this code on a mobile device:
+
+(1) The graphic must be far smaller.  It's currently at 21mb, but I've been size-limiting *all* of the graphics in my controversy collection to 10mb -- a slightly more reasonable value.
+
+(2) I would have to ditch Materialize.css because it's not rendering properly on mobile and it's way too monolithic.  This would involve recreating the sideNav, toasts and icon styling -- probably a day's work (?).  If I was to do this, there would be the added benefit of dramatically reducing the complexity of my code and improving my bundling.  Also, I could eliminate my device-detection library, device.js, and probably elminate a number of node packages.
+
+(3) It would make sense to refactor out of jQuery -- something which I'm eager to do regardless and soon.
+
+(4) I may (?) have to rewrite some parts of impress.js in order to get this to work.  It's difficult to know if this can be made to work, since impress.js is by default turned off for iphones, so none of the online demos demo mobile behavior.
+
+(5) I would have to create a new responsive design, and perhaps more directly handle touch interactions.
+
+It probably makes sense to focus for now on desktop support, as I do know for a fact that the card-based approach I was going with for mobile is not a workable solution long-term.
+

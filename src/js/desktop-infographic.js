@@ -57,7 +57,7 @@ export default class DesktopInfographic {
 
 			Materialize.toast('Use < and > keys to navigate', 10000);
 
-			// this.showSideNav();
+			this.showSideNav();
 
 			this.bigImage.show();
 
