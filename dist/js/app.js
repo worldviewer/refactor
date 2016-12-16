@@ -13990,7 +13990,7 @@ var DesktopInfographic = function () {
 
 				Materialize.toast('Use < and > keys to navigate', 10000);
 
-				_this.showSideNav();
+				// this.showSideNav();
 
 				_this.bigImage.show();
 
