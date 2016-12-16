@@ -11,6 +11,7 @@ export default class Keyboard {
 		this.tabKey = 9; // toggle sideNav
 		this.plusKey = 187; // zoom in
 		this.minusKey = 189; // zoom out
+		this.keypressCount = 0; // counts successive + or -
 	}
 
 	init() {
@@ -48,8 +49,6 @@ export default class Keyboard {
 
 	// Calculates new scale based upon previous
 	calculateScale(element, direction, factor) {
-		console.log('element: ' + element);
-		console.log('element.attr(id): ' + element.attr('id'));
 		console.log('factor: ' + factor);
 
 		return direction === 'in' ? 
@@ -66,56 +65,53 @@ export default class Keyboard {
 			')').css('transition-duration', '0.25s').css('transition-delay', '0');
 	}
 
-	// Allows user to zoom in rapidly with consecutive keypresses
-	bigCssZoom(element, direction, keypressCount) {
-		let factor;
-		setTimeout( (currentCount) => {
-			if (currentCount === keypressCount) {
-				factor = this.calculateZoom(currentCount);
-				console.log('factor in bigCssZoom: ' + factor);
-				this.cssZoom(element, direction, factor);
-				keypressCount = 0;
-			}
-		}, 500, keypressCount);		
-	}
-
 	getTimeDiff(currentTime, previousTime) {
 		return parseInt(currentTime) - parseInt(previousTime);
 	}
 
+	// Allows user to zoom in rapidly with consecutive keypresses
+	bigCssZoom(element, direction) {
+		let factor = this.calculateZoom(this.keypressCount);
+
+		setTimeout( (currentCount) => {
+			if (currentCount === this.keypressCount) {
+				console.log('key presses: ' + this.keypressCount);
+				this.cssZoom(element, direction, factor);
+				this.keypressCount = 0;
+			}
+		}, 500, this.keypressCount);
+
+		this.previousTime = this.currentTime;
+	}
+
 	// Evaluates total zoom based upon consecutive zoom keypresses
 	evaluateZoomScale(element, direction) {
-    	let currentTime = Date.now(),
-    		previousTime = currentTime,
-			timeDiff = this.getTimeDiff(currentTime, previousTime),
-			keypressCount = 0;
+    	this.currentTime = Date.now();
+		let timeDiff = this.getTimeDiff(this.currentTime, this.previousTime);
 
 		// First keypress in a series
-		if (keypressCount === 0) {
-			let startTime = currentTime;
-			keypressCount++;
+		if (this.keypressCount === 0) {
+			this.keypressCount++;
 
-			this.bigCssZoom(element, direction, keypressCount);
-
-			previousTime = currentTime;	
+			this.bigCssZoom(element, direction);
 
 		// This keypress occurred within half a second of the last
 		} else {
-			if (this.getTimeDiff(currentTime, previousTime) < 250) {
-				keypressCount++;
+			if (this.getTimeDiff(this.currentTime, this.previousTime) < 250) {
+				this.keypressCount++;
 
 				// Wait half a second and check to see if any more of these same
 				// keypresses have occurred.  If not, then currentCount will equal
 				// the count.  It is only then that we want to calculate and invoke
 				// the zoom function
-				this.bigCssZoom(element, direction, keypressCount);
-			}
-
-			previousTime = currentTime;						
+				this.bigCssZoom(element, direction);
+			}				
 		}
 	}
 
 	setupZoomInKey() {
+		this.previousTime = Date.now();
+
 		$(document).keydown( (e) => {
 			if (e.keyCode === this.plusKey) {
 				this.evaluateZoomScale(this.impressContainer, 'in');
@@ -124,6 +120,8 @@ export default class Keyboard {
 	}
 
 	setupZoomOutKey() {
+		this.previousTime = Date.now();
+
 		$(document).keydown( (e) => {
 			if (e.keyCode === this.minusKey) {
 				this.evaluateZoomScale(this.impressContainer, 'out');
