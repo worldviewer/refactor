@@ -14186,142 +14186,9 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupKeypresses',
 		value: function setupKeypresses() {
-			var _this6 = this;
+			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.hamburgerCollapseIcon, this.hamburgerExpandIcon);
 
-			var keyboard = new _keyboard2.default();
-
-			var count = 0;
-			var current, start, end, previous, diff, factor;
-
-			// Define shortcuts here
-			// REFACTOR THIS
-			$(document).keydown(function (e) {
-				// When plus or minus is hit, count the number of times
-
-				if (e.keyCode === 9 || e.keyCode === 189 || e.keyCode === 187) {
-					e.preventDefault();
-				}
-
-				console.log("key code: " + e.keyCode);
-
-				// Use ENTER key to set the scale for all slides
-				// if (e.keyCode === 13) {
-				// 	factor = $('#impress').attr('data-scale-factor');
-				// 	$('#impress').attr('data-set-scale-factor', factor);
-				// 	console.log('Set scale to active');
-				// }
-
-				// TAB key: Use tab key as a shortcut for toggling the side-nav
-				if (e.keyCode === 9) {
-					if (_this6.sideNav.hasClass('active')) {
-						_this6.hamburgerCollapseIcon.trigger('click');
-					} else {
-						_this6.hamburgerExpandIcon.trigger('click');
-					}
-				} else if (e.keyCode === 189 || e.keyCode === 187) {
-
-					// Subtract key: Use for zooming out
-					if (e.keyCode === 189) {
-						current = Date.now();
-						console.log("current: " + current);
-						console.log("previous: " + previous);
-						diff = parseInt(current) - parseInt(previous);
-						console.log("diff: " + diff);
-
-						// First keypress in a series
-						if (count === 0) {
-							start = current;
-							count++;
-							console.log('count: ' + count);
-
-							setTimeout(function (currentCount) {
-								console.log('count: ' + count + ", currentCount: " + currentCount);
-								if (currentCount === count) {
-									factor = Math.pow(Math.log(count + 2), 3);
-									_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-									// setScaleFactor(-factor);
-									count = 0;
-								}
-							}, 500, count);
-
-							previous = current;
-
-							// This keypress occurred within half a second of the last
-						} else {
-							if (parseInt(current) - parseInt(previous) < 250) {
-								count++;
-								console.log('count: ' + count);
-
-								// Wait half a second and check to see if any more of these same
-								// keypresses have occurred.  If not, then currentCount will equal
-								// the count.  It is only then that we want to calculate and invoke
-								// the zoom function
-								setTimeout(function (currentCount) {
-									console.log('count: ' + count + ", currentCount: " + currentCount);
-									if (currentCount === count) {
-										factor = Math.pow(Math.log(count + 2), 3);
-										_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-										// setScaleFactor(-factor);
-										count = 0;
-									}
-								}, 500, count);
-							}
-
-							previous = current;
-						}
-
-						// Add key: Use for zooming in						
-					} else if (e.keyCode === 187) {
-						current = Date.now();
-						console.log("current: " + current);
-						console.log("previous: " + previous);
-						diff = parseInt(current) - parseInt(previous);
-						console.log("diff: " + diff);
-
-						// First keypress in a series
-						if (count === 0) {
-							start = current;
-							count++;
-							console.log('count: ' + count);
-
-							setTimeout(function (currentCount) {
-								console.log('count: ' + count + ", currentCount: " + currentCount);
-								if (currentCount === count) {
-									factor = Math.pow(Math.log(count + 2), 3);
-									_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-									// setScaleFactor(factor);
-									count = 0;
-								}
-							}, 500, count);
-
-							previous = current;
-
-							// This keypress occurred within half a second of the last
-						} else {
-							if (parseInt(current) - parseInt(previous) < 250) {
-								count++;
-								console.log('count: ' + count);
-
-								// Wait half a second and check to see if any more of these same
-								// keypresses have occurred.  If not, then currentCount will equal
-								// the count.  It is only then that we want to calculate and invoke
-								// the zoom function
-								setTimeout(function (currentCount) {
-									console.log('count: ' + count + ", currentCount: " + currentCount);
-									if (currentCount === count) {
-										factor = Math.pow(Math.log(count + 2), 3);
-										_this6.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * factor + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
-										// setScaleFactor(factor);
-										count = 0;
-									}
-								}, 500, count);
-							}
-
-							previous = current;
-						}
-					}
-				}
-			});
+			keyboard.init();
 		}
 	}]);
 
@@ -14368,6 +14235,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _utils = require('./utils.js');
+
+var _utils2 = _interopRequireDefault(_utils);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 // Note that impress maps both the right/left arrows and page down/up for slide next/previous
@@ -14390,9 +14263,9 @@ var Keyboard = function () {
 		value: function init() {
 			var _this = this;
 
-			setupSideNavToggle();
-			setupZoomOutKey();
-			setupZoomInKey();
+			this.setupSideNavToggle();
+			this.setupZoomOutKey();
+			this.setupZoomInKey();
 
 			$(document).keydown(function (e) {
 				if (e.keyCode === _this.tabKey || e.keyCode === _this.minusKey || e.keyCode === _this.plusKey) {
@@ -14417,127 +14290,109 @@ var Keyboard = function () {
 				}
 			});
 		}
+
+		// This zoom equation was derived through trial and error
+
 	}, {
 		key: 'calculateZoom',
 		value: function calculateZoom(keypressCount) {
 			return Math.pow(Math.log(keypressCount + 2), 3);
 		}
+
+		// Calculates new scale based upon previous
+
 	}, {
 		key: 'calculateScale',
-		value: function calculateScale(element, factor, direction) {
-			return direction === 'in' ? utils.getScale(element.attr('id')) * factor : utils.getScale(element.attr('id')) / factor;
+		value: function calculateScale(element, direction, factor) {
+			return direction === 'in' ? _utils2.default.getScale(element.attr('id')) * factor : _utils2.default.getScale(element.attr('id')) / factor;
 		}
+
+		// Zooms via CSS transform
+
 	}, {
 		key: 'cssZoom',
-		value: function cssZoom(element) {
-			var direction = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'in';
-			var factor = arguments[2];
+		value: function cssZoom(element, direction, factor) {
+			var newScale = this.calculateScale(element, direction, factor);
+			console.log('New scale: ' + newScale);
 
-			element.css('transform', 'scale(' + this.calculateScale() + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+			element.css('transform', 'scale(' + newScale + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+		}
+
+		// Allows user to zoom in rapidly with consecutive keypresses
+
+	}, {
+		key: 'bigCssZoom',
+		value: function bigCssZoom(element, direction, keypressCount) {
+			var _this3 = this;
+
+			var factor = void 0;
+			setTimeout(function (currentCount) {
+				if (currentCount === keypressCount) {
+					factor = _this3.calculateZoom();
+					_this3.cssZoom(element, direction, factor);
+					keypressCount = 0;
+				}
+			}, 500, keypressCount);
+		}
+	}, {
+		key: 'getTimeDiff',
+		value: function getTimeDiff(currentTime, previousTime) {
+			return parseInt(currentTime) - parseInt(previousTime);
+		}
+
+		// Evaluates total zoom based upon consecutive zoom keypresses
+
+	}, {
+		key: 'evaluateZoomScale',
+		value: function evaluateZoomScale(element, direction) {
+			var currentTime = Date.now(),
+			    previousTime = currentTime,
+			    timeDiff = this.getTimeDiff(currentTime, previousTime),
+			    keypressCount = 0;
+
+			// First keypress in a series
+			if (keypressCount === 0) {
+				var startTime = currentTime;
+				keypressCount++;
+
+				this.bigCssZoom(element, 'in', keypressCount);
+
+				previousTime = currentTime;
+
+				// This keypress occurred within half a second of the last
+			} else {
+				if (this.getTimeDiff(currentTime, previousTime) < 250) {
+					keypressCount++;
+
+					// Wait half a second and check to see if any more of these same
+					// keypresses have occurred.  If not, then currentCount will equal
+					// the count.  It is only then that we want to calculate and invoke
+					// the zoom function
+					this.bigCssZoom(element, 'in', keypressCount);
+				}
+
+				previousTime = currentTime;
+			}
 		}
 	}, {
 		key: 'setupZoomInKey',
 		value: function setupZoomInKey() {
-			var _this3 = this;
+			var _this4 = this;
 
 			$(document).keydown(function (e) {
-				if (e.keyCode === _this3.plusKey) {
-					currentTime = Date.now();
-					timeDiff = parseInt(currentTime) - parseInt(previousTime);
-					console.log("time diff: " + timeDiff);
-
-					// First keypress in a series
-					if (keypressCount === 0) {
-						startTime = currentTime;
-						keypressCount++;
-						console.log('keypress count: ' + keypressCount);
-
-						setTimeout(function (currentCount) {
-							console.log('keypress count: ' + keypressCount + ", currentCount: " + currentCount);
-							if (currentCount === keypressCount) {
-								factor = _this3.calculateZoom();
-								_this3.cssZoom(_this3.impressContainer, 'in', factor);
-								keypressCount = 0;
-							}
-						}, 500, keypressCount);
-
-						previousTime = currentTime;
-
-						// This keypress occurred within half a second of the last
-					} else {
-						if (parseInt(currentTime) - parseInt(previousTime) < 250) {
-							keypressCount++;
-							console.log('count: ' + keypressCount);
-
-							// Wait half a second and check to see if any more of these same
-							// keypresses have occurred.  If not, then currentCount will equal
-							// the count.  It is only then that we want to calculate and invoke
-							// the zoom function
-							setTimeout(function (currentCount) {
-								console.log('count: ' + keypressCount + ", currentCount: " + currentCount);
-								if (currentCount === keypressCount) {
-									factor = _this3.calculateZoom();
-									_this3.cssZoom(_this3.impressContainer, 'in', factor);
-									keypressCount = 0;
-								}
-							}, 500, keypressCount);
-						}
-
-						previousTime = currentTime;
-					}
+				if (e.keyCode === _this4.plusKey) {
+					_this4.evaluateZoomScale(_this4.impressContainer, 'in');
 				}
 			});
 		}
 	}, {
 		key: 'setupZoomOutKey',
 		value: function setupZoomOutKey() {
-			var _this4 = this;
+			var _this5 = this;
 
 			$(document).keydown(function (e) {
-				if (e.keyCode === _this4.minusKey) {
-					current = Date.now();
-					diff = parseInt(current) - parseInt(previous);
-					console.log("diff: " + diff);
-
-					// First keypress in a series
-					if (count === 0) {
-						start = current;
-						count++;
-						console.log('count: ' + count);
-
-						setTimeout(function (currentCount) {
-							console.log('count: ' + count + ", currentCount: " + currentCount);
-							if (currentCount === count) {
-								factor = _this4.calculateZoom();
-								_this4.cssZoom(_this4.impressContainer, 'out', factor);
-								count = 0;
-							}
-						}, 500, count);
-
-						previous = current;
-
-						// This keypress occurred within half a second of the last
-					} else {
-						if (parseInt(current) - parseInt(previous) < 250) {
-							count++;
-							console.log('count: ' + count);
-
-							// Wait half a second and check to see if any more of these same
-							// keypresses have occurred.  If not, then currentCount will equal
-							// the count.  It is only then that we want to calculate and invoke
-							// the zoom function
-							setTimeout(function (currentCount) {
-								console.log('count: ' + count + ", currentCount: " + currentCount);
-								if (currentCount === count) {
-									factor = _this4.calculateZoom();
-									_this4.cssZoom(_this4.impressContainer, 'out', factor);
-									count = 0;
-								}
-							}, 500, count);
-						}
-
-						previous = current;
-					}
+				if (e.keyCode === _this5.minusKey) {
+					_this5.evaluateZoomScale(_this5.impressContainer, 'out');
 				}
 			});
 		}
@@ -14547,7 +14402,7 @@ var Keyboard = function () {
 }();
 
 exports.default = Keyboard;
-},{}],10:[function(require,module,exports){
+},{"./utils.js":12}],10:[function(require,module,exports){
 'use strict';
 
 var _infographic = require('./infographic.js');
