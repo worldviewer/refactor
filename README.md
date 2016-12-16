@@ -135,3 +135,7 @@ Split up mobile and desktop into separate files.  Eliminated redundant checks fo
 
 Noticing that some of the mobile functionality has evaporated.  Will get to that soon.
 
+I've broken the desktop version into modules.  The most challenging part is the Keyboard class.  Something is not quite wired up correctly post-refactor, because the zooms are glitchy.  But, the desktop version is now infinitely more readable than it was.
+
+Debugging ...
+

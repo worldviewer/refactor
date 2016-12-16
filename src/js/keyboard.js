@@ -48,6 +48,10 @@ export default class Keyboard {
 
 	// Calculates new scale based upon previous
 	calculateScale(element, direction, factor) {
+		console.log('element: ' + element);
+		console.log('element.attr(id): ' + element.attr('id'));
+		console.log('factor: ' + factor);
+
 		return direction === 'in' ? 
 			utils.getScale(element.attr('id')) * factor :
 			utils.getScale(element.attr('id')) / factor;
@@ -67,7 +71,8 @@ export default class Keyboard {
 		let factor;
 		setTimeout( (currentCount) => {
 			if (currentCount === keypressCount) {
-				factor = this.calculateZoom();
+				factor = this.calculateZoom(currentCount);
+				console.log('factor in bigCssZoom: ' + factor);
 				this.cssZoom(element, direction, factor);
 				keypressCount = 0;
 			}
@@ -90,7 +95,7 @@ export default class Keyboard {
 			let startTime = currentTime;
 			keypressCount++;
 
-			this.bigCssZoom(element, 'in', keypressCount);
+			this.bigCssZoom(element, direction, keypressCount);
 
 			previousTime = currentTime;	
 
@@ -103,7 +108,7 @@ export default class Keyboard {
 				// keypresses have occurred.  If not, then currentCount will equal
 				// the count.  It is only then that we want to calculate and invoke
 				// the zoom function
-				this.bigCssZoom(element, 'in', keypressCount);
+				this.bigCssZoom(element, direction, keypressCount);
 			}
 
 			previousTime = currentTime;						

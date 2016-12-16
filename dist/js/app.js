@@ -14304,6 +14304,10 @@ var Keyboard = function () {
 	}, {
 		key: 'calculateScale',
 		value: function calculateScale(element, direction, factor) {
+			console.log('element: ' + element);
+			console.log('element.attr(id): ' + element.attr('id'));
+			console.log('factor: ' + factor);
+
 			return direction === 'in' ? _utils2.default.getScale(element.attr('id')) * factor : _utils2.default.getScale(element.attr('id')) / factor;
 		}
 
@@ -14328,7 +14332,8 @@ var Keyboard = function () {
 			var factor = void 0;
 			setTimeout(function (currentCount) {
 				if (currentCount === keypressCount) {
-					factor = _this3.calculateZoom();
+					factor = _this3.calculateZoom(currentCount);
+					console.log('factor in bigCssZoom: ' + factor);
 					_this3.cssZoom(element, direction, factor);
 					keypressCount = 0;
 				}
@@ -14355,7 +14360,7 @@ var Keyboard = function () {
 				var startTime = currentTime;
 				keypressCount++;
 
-				this.bigCssZoom(element, 'in', keypressCount);
+				this.bigCssZoom(element, direction, keypressCount);
 
 				previousTime = currentTime;
 
@@ -14368,7 +14373,7 @@ var Keyboard = function () {
 					// keypresses have occurred.  If not, then currentCount will equal
 					// the count.  It is only then that we want to calculate and invoke
 					// the zoom function
-					this.bigCssZoom(element, 'in', keypressCount);
+					this.bigCssZoom(element, direction, keypressCount);
 				}
 
 				previousTime = currentTime;
@@ -15082,25 +15087,19 @@ var utils = function () {
 	}, {
 		key: 'getScale',
 		value: function getScale(elementId) {
-			var el = document.getElementById(elementId);
-			var st = window.getComputedStyle(el, null);
-			var tr = st.getPropertyValue("-webkit-transform") || st.getPropertyValue("-moz-transform") || st.getPropertyValue("-ms-transform") || st.getPropertyValue("-o-transform") || st.getPropertyValue("transform") || "fail...";
-
-			// With rotate(30deg)...
-			// matrix(0.866025, 0.5, -0.5, 0.866025, 0px, 0px)
-			console.log('Matrix: ' + tr);
+			var element = document.getElementById(elementId),
+			    style = window.getComputedStyle(element, null),
+			    transform = style.getPropertyValue("-webkit-transform") || style.getPropertyValue("-moz-transform") || style.getPropertyValue("-ms-transform") || style.getPropertyValue("-o-transform") || style.getPropertyValue("transform") || "fail...";
 
 			// rotation matrix - http://en.wikipedia.org/wiki/Rotation_matrix
 
-			var values = tr.split('(')[1];
+			var values = transform.split('(')[1];
 			values = values.split(')')[0];
 			values = values.split(',');
 			var a = values[0];
 			var b = values[1];
 			var c = values[2];
 			var d = values[3];
-
-			console.log("scale: " + Math.sqrt(a * a + b * b));
 
 			return Math.sqrt(a * a + b * b);
 		}

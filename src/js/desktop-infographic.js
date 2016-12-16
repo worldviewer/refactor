@@ -196,11 +196,13 @@ export default class DesktopInfographic {
 		// jQuery automatically adds in necessary vendor prefixes when using
 		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
 		this.zoomInIcon.on('click', () => {
-			this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")*1.25 + ')');
+			this.impressContainer.css('transform', 
+				'scale(' + utils.getScale("impress")*1.25 + ')');
 		});
 
 		this.zoomOutIcon.on('click', () => {
-			this.impressContainer.css('transform', 'scale(' + utils.getScale("impress")/1.25 + ')');
+			this.impressContainer.css('transform', 
+				'scale(' + utils.getScale("impress")/1.25 + ')');
 		});
 	}
 
@@ -240,7 +242,7 @@ export default class DesktopInfographic {
 			this.hamburgerCollapseIcon,
 			this.hamburgerExpandIcon
 		);
-		
+
 		keyboard.init();
 	}
 }

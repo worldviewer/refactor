@@ -4,8 +4,8 @@
 export default class utils {
 	static loadScript(url, callback) {
 	    // Adding the script tag to the head as suggested before
-	    var head = document.getElementsByTagName('head')[0];
-	    var script = document.createElement('script');
+	    let head = document.getElementsByTagName('head')[0];
+	    let script = document.createElement('script');
 	    script.type = 'text/javascript';
 	    script.src = url;
 
@@ -22,30 +22,24 @@ export default class utils {
 	// the ID passed.  Comes from site here ...
 	// https://css-tricks.com/get-value-of-css-rotation-through-javascript/
 	static getScale(elementId) {
-		var el = document.getElementById(elementId);
-		var st = window.getComputedStyle(el, null);
-		var tr = st.getPropertyValue("-webkit-transform") ||
-		         st.getPropertyValue("-moz-transform") ||
-		         st.getPropertyValue("-ms-transform") ||
-		         st.getPropertyValue("-o-transform") ||
-		         st.getPropertyValue("transform") ||
+		let element = document.getElementById(elementId),
+			style = window.getComputedStyle(element, null),
+			transform = style.getPropertyValue("-webkit-transform") ||
+		         style.getPropertyValue("-moz-transform") ||
+		         style.getPropertyValue("-ms-transform") ||
+		         style.getPropertyValue("-o-transform") ||
+		         style.getPropertyValue("transform") ||
 		         "fail...";
-
-		// With rotate(30deg)...
-		// matrix(0.866025, 0.5, -0.5, 0.866025, 0px, 0px)
-		console.log('Matrix: ' + tr);
 
 		// rotation matrix - http://en.wikipedia.org/wiki/Rotation_matrix
 
-		var values = tr.split('(')[1];
+		let values = transform.split('(')[1];
 		    values = values.split(')')[0];
 		    values = values.split(',');
-		var a = values[0];
-		var b = values[1];
-		var c = values[2];
-		var d = values[3];
-
-		console.log("scale: " + Math.sqrt(a*a + b*b));
+		let a = values[0];
+		let b = values[1];
+		let c = values[2];
+		let d = values[3];
 
 		return(Math.sqrt(a*a + b*b));
 	}
