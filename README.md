@@ -153,10 +153,18 @@ Since January, I have adopted a standard template format for all of my controver
   <img src="https://github.com/worldviewer/refactor/blob/master/top-spot.jpg" />
 </p>
 
-I call this a "controversy card".  The idea with these cards is that I can construct them with HTML and CSS: The title, summary and circular annotation can all be overlayed onto the graphic in order to generate a controversy card.  It's expected that at a later time a graphic designer might have their way with this template.  This permits me to continue to fill out the controversy API content until that time.  At the current moment -- December 16, 2016 -- I have created 170 of these controversy cards.  The hope is to double that over the next year.
+I call this a "controversy card".  The idea with these cards is that I can construct them with HTML and CSS: The title, summary and circular annotation can all be overlayed onto the graphic in order to generate a controversy card.  There is also markdown associated with each of these cards which I generate in parallel with the graphics.  The full collection, as it stands, can be seen here:
 
-The point is that my index.html is very bloated at the moment -- since this is all client-side and there is no server-side templating.  I will be getting to the creation of this controversy API, but something that I can do in the near-term is to use Ajax calls to simulate the modularization of my HTML.  This could dramatically improve the HTML's readability, by separating the page's data from the structure.
+*Controversies of Science*
+https://plus.google.com/collection/Yhn4Y
 
-Another thing I'd like to check on today is whether or not impress.js can be run on mobile devices.  When I looked into this a year ago, the answer appeared to be no.  I want to validate that once again, as I've seen a suggestion that it may be possible here ...
+It's expected that at a later time a graphic designer might have their way with this template.  This permits me to continue to fill out the controversy API content until that time.  At the current moment -- December 16, 2016 -- I have created 170 of these controversy cards.  The hope is to double that over the next year, at which point I will completely switch over to creating the social network.
+
+This approach of refusing to generate the conversation infrastructure until I have in place seed content is to ensure my own future ability to attract talent.  If people arrived and all they saw was this empty shell of a social network, there would be no precedent set for the type of content I expect there.  And the social network would predictably fail to gain adherents.  By seeding the social network with the best collection of scientific controversies and critiques of modern science in the world, I dramatically increase the chances of keeping visitors.
+
+The point about this API is that my index.html is very bloated at the moment since there currently is no AP.  I've yet to figure out my hosting situation, so this is all client-side without any server-side templating.  I will be getting to the creation of this controversy API, but something that I can do in the near-term is to use Ajax calls to simulate the modularization of my HTML.  This could dramatically improve the HTML's readability, by separating the page's data from the structure.
+
+Another thing I'd like to check on today is whether or not impress.js can be run on mobile devices.  When I looked into this a year ago, the answer appeared to be no.  I want to re-evaluate that situation now, as I've seen a suggestion that it may be possible here ...
 
 https://github.com/impress/impress.js/wiki/Mobile-support
+
