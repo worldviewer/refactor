@@ -3,7 +3,7 @@
 To view the current state of the refactor, go <a href="http://worldviewer.github.io/refactor/">here</a>.
 
 <p align="center">
-  <img src="https://github.com/worldviewer/worldviewer.github.io/blob/master/infographic-desktop.jpg" />
+  <img src="https://github.com/worldviewer/refactor/blob/master/infographic-desktop.jpg" />
 </p>
 
 ## Immediate Goals
@@ -146,3 +146,17 @@ Now noticing an issue with interactions with the sideNav list items; doesn't alw
 file:///Volumes/PRODUCTION/Database/code/worldviewer/refactor/index.html#undefined
 
 Looks like I might want to contemplate a more general-purpose solution to these hashes.
+
+Since January, I have adopted a standard template format for all of my controversy graphics, like here on the left:
+
+<p align="center">
+  <img src="https://github.com/worldviewer/refactor/blob/master/top-spot.jpg" />
+</p>
+
+I call this a "controversy card".  The idea with these cards is that I can construct them with HTML and CSS: The title, summary and circular annotation can all be overlayed onto the graphic in order to generate a controversy card.  It's expected that at a later time a graphic designer might have their way with this template.  This permits me to continue to fill out the controversy API content until that time.  At the current moment -- December 16, 2016 -- I have created 170 of these controversy cards.  The hope is to double that over the next year.
+
+The point is that my index.html is very bloated at the moment -- since this is all client-side and there is no server-side templating.  I will be getting to the creation of this controversy API, but something that I can do in the near-term is to use Ajax calls to simulate the modularization of my HTML.  This could dramatically improve the HTML's readability, by separating the page's data from the structure.
+
+Another thing I'd like to check on today is whether or not impress.js can be run on mobile devices.  When I looked into this a year ago, the answer appeared to be no.  I want to validate that once again, as I've seen a suggestion that it may be possible here ...
+
+https://github.com/impress/impress.js/wiki/Mobile-support
