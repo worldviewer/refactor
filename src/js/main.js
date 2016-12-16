@@ -16,7 +16,7 @@ $(document).ready( () => {
 		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
 	}
 
-	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
+	// if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		preloaderWrapper.addClass('active');
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
@@ -36,8 +36,8 @@ $(document).ready( () => {
 		bigImage.alt = "Get Big Things Done Infographic";
 		bigImage.className = 'big-image';
 		bigImageContainer.append(bigImage);
-	} else {
-		let mobileInfographic = new MobileInfographic();
-		mobileInfographic.init();
-	}
+	// } else {
+	// 	let mobileInfographic = new MobileInfographic();
+	// 	mobileInfographic.init();
+	// }
 });
