@@ -1,6 +1,6 @@
 import Infographic from './infographic.js';
 import DesktopInfographic from './desktop-infographic.js';
-import MobileInfographic from './mobile-infographic.js';
+// import MobileInfographic from './mobile-infographic.js';
 import utils from './utils.js';
 
 let infographic = new Infographic();
@@ -12,9 +12,9 @@ $(document).ready( () => {
 	let bigImageContainer = $('#impress > div:first-of-type');
 
 	// Check if user has set a preferred device
-	if (infographic.deviceCookie === 'mobile') {
-		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
-	}
+	// if (infographic.deviceCookie === 'mobile') {
+	// 	html.removeClass('desktop').removeClass('tablet').addClass('mobile');
+	// }
 
 	// if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		preloaderWrapper.addClass('active');
