@@ -7,6 +7,8 @@ let infographic = new Infographic();
 let infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
 $(document).ready( () => {
+	console.log('desktop or tablet document.ready()');
+
 	let html = $('html');
 	let preloaderWrapper = $('.preloader-wrapper');
 	let bigImageContainer = $('#impress > div:first-of-type');

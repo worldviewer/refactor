@@ -196,3 +196,8 @@ The video I'm watching is at ...
 Build APIs in Node.js and Swagger 2.0 with Apigee-127
 https://www.youtube.com/watch?v=Fw43z14Y1Xw
 
+One of my concerns going into a service like apigee has to do with vendor lock-in, and specifically the possibility that the company might go out of business.  And something that helps to ameliorate that concern is the fact that apigee was just purchased by Google quite recently, mentioned here ...
+
+5 Things Developers Should Know About Serverless by Alan Ho, Apigee
+https://www.youtube.com/watch?v=Dh_UXXtSvjQ
+

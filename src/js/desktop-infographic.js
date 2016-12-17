@@ -1,3 +1,5 @@
+
+
 import Infographic from './infographic.js';
 import Keyboard from './keyboard.js';
 import kinetic from '../../node_modules/jquery.kinetic/jquery.kinetic.js';
@@ -37,25 +39,17 @@ export default class DesktopInfographic {
 
 	init() {
 		$(window).on('load', () => {
-			console.log("desktop or tablet document.ready()");
+			console.log("desktop or tablet window.on(load)");
 
-			// Initialize impress.js presentation scale to 1
 			this.impressContainer.attr('data-set-scale-factor', 1);
 
-			// Initialize Materialize tooltip
 			this.materializeToolTips.tooltip({delay: 50});
 
-			// Initialize Materialize sideNav
-			this.hamburgerCollapseIcon.sideNav({
-				menuWidth: 360 // Default is 240
-			});
-
-			this.hamburgerCollapseIcon.sideNav('show');
-			this.sideNav.addClass('active');
+			this.initSidNav();
 
 			this.showControls();
 
-			Materialize.toast('Use < and > keys to navigate', 10000);
+			Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
 
 			this.showSideNav();
 
@@ -84,6 +78,16 @@ export default class DesktopInfographic {
 	showSideNav() {
 		this.sideNav.show();
 		this.sideNav.addClass('animated fadeInLeft').css('visibility', 'visible');
+	}
+
+	initSideNav() {
+		// Expand sideNav
+		this.hamburgerCollapseIcon.sideNav({
+			menuWidth: 360 // Default is 240
+		});
+
+		this.hamburgerCollapseIcon.sideNav('show');
+		this.sideNav.addClass('active');		
 	}
 
 	loadImpress() {
@@ -157,6 +161,7 @@ export default class DesktopInfographic {
 
 		this.sideNavListItems.on('click', () => {
 			console.log('click-induced transition');
+
 			window.location.hash = '#' + $(this).data('slide');
 		});
 
@@ -169,6 +174,7 @@ export default class DesktopInfographic {
 		});
 	}
 
+	// REMOVE
 	setupMobileChange() {
 		// I want to persist this setting between sessions, so I'll use js.cookie.js
 		// Usage information here ...
