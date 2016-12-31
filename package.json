@@ -29,8 +29,10 @@
   "devDependencies": {
     "autoprefixer": "^6.5.4",
     "babel-cli": "^6.18.0",
+    "babel-eslint": "^7.1.1",
     "babel-preset-latest": "^6.16.0",
     "browserify": "^13.1.1",
+    "eslint": "^3.12.2",
     "node-sass": "^4.0.0",
     "postcss-cli": "^2.6.0"
   }

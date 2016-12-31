@@ -1,5 +1,3 @@
-
-
 import Infographic from './infographic.js';
 import Keyboard from './keyboard.js';
 import kinetic from '../../node_modules/jquery.kinetic/jquery.kinetic.js';
