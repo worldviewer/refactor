@@ -1,0 +1,166 @@
+{
+	"@context": "http://schema.org",
+	"@type": "BreadcrumbList",
+	"itemListElement": [{
+		"@type": "ListItem",
+		"position": 1,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor",
+			"name": "Infographic"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#ineluctable",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#risk",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#forgotten",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#specialization",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#internet_era",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#get_big_things_done",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#china",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#get_big_things_done_fail",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#stories_not_told",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#lightning",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#peratt_galaxies",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#halton_arp",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#gerrit_verschuur",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#gerrit_verschuur_cmb",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#earthquake_lights",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#fermi_paradox",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#lightning_to_space",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#gel_cell_theory",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#origin_of_life",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#peratt_petroglyphs",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#petroglyph_plasmas",
+			"name": "Slide"
+		}
+	},{
+		"@type": "ListItem",
+		"position": 2,
+		"item": {
+			"@id": "http://worldviewer.github.io/refactor#cranks",
+			"name": "Slide"
+		}
+	}]
+}
