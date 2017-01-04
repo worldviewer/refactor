@@ -43,7 +43,7 @@ export default class DesktopInfographic {
 
 			this.materializeToolTips.tooltip({delay: 50});
 
-			this.initSidNav();
+			this.initSideNav();
 
 			this.showControls();
 
