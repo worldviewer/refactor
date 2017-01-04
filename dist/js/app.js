@@ -761,7 +761,7 @@ var DesktopInfographic = function () {
 
 				_this.materializeToolTips.tooltip({ delay: 50 });
 
-				_this.initSidNav();
+				_this.initSideNav();
 
 				_this.showControls();
 
