@@ -695,6 +695,48 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var controversyAPI = function () {
+	function controversyAPI() {
+		_classCallCheck(this, controversyAPI);
+
+		this.url = 'http://worldviewer-test.apigee.net/controversies-of-science/v1/';
+		this.cardId = '76b02dc7-d246-11e6-861b-0ad881f403bf'; // Example graphic mock
+	}
+
+	_createClass(controversyAPI, [{
+		key: 'init',
+		value: function init() {
+			var _this = this;
+
+			$.get(this.url + 'cards/' + this.cardId, function (data) {
+				_this.card = data;
+
+				console.log(_this.card);
+			});
+		}
+	}, {
+		key: 'getReferences',
+		value: function getReferences(cardId) {}
+	}, {
+		key: 'getSlides',
+		value: function getSlides(cardId) {}
+	}]);
+
+	return controversyAPI;
+}();
+
+exports.default = controversyAPI;
+},{}],5:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 var _infographic = require('./infographic.js');
 
 var _infographic2 = _interopRequireDefault(_infographic);
@@ -988,7 +1030,7 @@ var DesktopInfographic = function () {
 }();
 
 exports.default = DesktopInfographic;
-},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":5,"./keyboard.js":6,"./utils.js":9}],5:[function(require,module,exports){
+},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":6,"./keyboard.js":7,"./utils.js":10}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1018,7 +1060,7 @@ var Infographic = function Infographic() {
 };
 
 exports.default = Infographic;
-},{"js-cookie":2}],6:[function(require,module,exports){
+},{"js-cookie":2}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1195,7 +1237,7 @@ var Keyboard = function () {
 }();
 
 exports.default = Keyboard;
-},{"./utils.js":9}],7:[function(require,module,exports){
+},{"./utils.js":10}],8:[function(require,module,exports){
 'use strict';
 
 var _infographic = require('./infographic.js');
@@ -1209,6 +1251,10 @@ var _desktopInfographic2 = _interopRequireDefault(_desktopInfographic);
 var _mobileInfographic = require('./mobile-infographic.js');
 
 var _mobileInfographic2 = _interopRequireDefault(_mobileInfographic);
+
+var _controversyApi = require('./controversy-api.js');
+
+var _controversyApi2 = _interopRequireDefault(_controversyApi);
 
 var _utils = require('./utils.js');
 
@@ -1234,6 +1280,9 @@ $(document).ready(function () {
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		preloaderWrapper.addClass('active');
 
+		var api = new _controversyApi2.default();
+		api.init();
+
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
 		// Explanation of how to put Impress in a container here ...
 		// https://github.com/impress/impress.js/issues/111
@@ -1256,7 +1305,7 @@ $(document).ready(function () {
 		mobileInfographic.init();
 	}
 });
-},{"./desktop-infographic.js":4,"./infographic.js":5,"./mobile-infographic.js":8,"./utils.js":9}],8:[function(require,module,exports){
+},{"./controversy-api.js":4,"./desktop-infographic.js":5,"./infographic.js":6,"./mobile-infographic.js":9,"./utils.js":10}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1286,7 +1335,7 @@ var MobileInfographic = function () {
 }();
 
 exports.default = MobileInfographic;
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1357,4 +1406,4 @@ var utils = function () {
 }();
 
 exports.default = utils;
-},{}]},{},[3,4,5,6,7,8,9]);
+},{}]},{},[3,4,5,6,7,8,9,10]);

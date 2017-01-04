@@ -1,6 +1,7 @@
 import Infographic from './infographic.js';
 import DesktopInfographic from './desktop-infographic.js';
 import MobileInfographic from './mobile-infographic.js';
+import controversyAPI from './controversy-api.js';
 import utils from './utils.js';
 
 let infographic = new Infographic();
@@ -20,6 +21,9 @@ $(document).ready( () => {
 
 	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
 		preloaderWrapper.addClass('active');
+
+		let api = new controversyAPI();
+		api.init();
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
 		// Explanation of how to put Impress in a container here ...
