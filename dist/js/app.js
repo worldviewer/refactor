@@ -701,7 +701,7 @@ var controversyAPI = function () {
 	function controversyAPI() {
 		_classCallCheck(this, controversyAPI);
 
-		this.url = 'http://worldviewer-test.apigee.net/controversies-of-science/v1/';
+		this.url = 'https://worldviewer-test.apigee.net/controversies-of-science/v1/';
 		this.cardId = '76b02dc7-d246-11e6-861b-0ad881f403bf'; // Example graphic mock
 	}
 
