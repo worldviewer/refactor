@@ -6,6 +6,7 @@ import utils from './utils.js';
 export default class DesktopInfographic {
 	constructor() {
 		console.log('desktop or tablet window.load()');
+		console.time('with jquery');
 
 		// Presentation
 		this.impressContainer = $('#impress');
@@ -59,6 +60,8 @@ export default class DesktopInfographic {
 
 				this.loadImpress();
 			}, 4000);
+
+			console.timeEnd('with jquery');
 		});
 	}
 
@@ -104,7 +107,6 @@ export default class DesktopInfographic {
 
 		this.setupHamburger();
 		this.setupHashChange();
-		this.setupMobileChange();
 		this.setupZooms();
 		this.setupDiscuss();
 		this.setupNextPrev();
@@ -169,30 +171,6 @@ export default class DesktopInfographic {
 
 		this.endIcon.on('click', () => {
 			window.location.hash = '#futurism';
-		});
-	}
-
-	// REMOVE
-	setupMobileChange() {
-		// I want to persist this setting between sessions, so I'll use js.cookie.js
-		// Usage information here ...
-		// https://github.com/js-cookie/js-cookie
-		//
-		// Cookies.set('name', 'value');
-		//
-		// Valid across entire site ...
-		// Cookies.set('name', 'value', { expires: 7 });
-		// 
-		// Cookies.get('name'); // => 'value'
-		// Cookies.get('nothing'); // => undefined
-
-		this.mobileViewIcon.on('click', () => {
-			Cookies.set('display', 'mobile', {expires: 365});
-
-			console.log("display: " + Cookies.get('display'));
-
-			// Then reload the page ...
-			document.location.reload();
 		});
 	}
 
