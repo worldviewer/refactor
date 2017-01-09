@@ -5,44 +5,41 @@ import utils from './utils.js';
 
 export default class DesktopInfographic {
 	constructor() {
-		console.log('desktop or tablet window.load()');
-		console.time('with jquery');
-
 		// Presentation
-		this.impressContainer = $('#impress');
-		this.bigImage = $('.big-image');
+		this.impressContainer = document.getElementById('impress');
+		this.bigImage = document.querySelector('.big-image');
 
 		// Materialize
-		this.materializeToolTips = $('.tooltipped');
-		this.preloaderWrapper = $('.preloader-wrapper');
+		this.$materializeToolTips = $('.tooltipped');
+		this.preloaderWrapper = document.querySelector('.preloader-wrapper');
 
 		// SideNav
-		this.sideNav = $('#slide-out');
-		this.sideNavListItems = $('.side-nav > li');
+		this.sideNav = document.getElementById('slide-out');
+		this.sideNavListItems = document.querySelectorAll('.side-nav > li');
 
-		this.hamburgerCollapseIcon = $('.button-collapse');
-		this.hamburgerExpandIcon = $('#hamburger');
+		this.$hamburgerCollapseIcon = $('.button-collapse');
+		this.hamburgerExpandIcon = document.getElementById('hamburger');
 
 		// Icons
-		this.startIcon = $('#start');
-		this.endIcon = $('#end');
-		this.mobileViewIcon = $('#mobile-view');
-		this.zoomInIcon = $('#zoom-in');
-		this.zoomOutIcon = $('#zoom-out');
-		this.previousSlideIcon = $('#previous-slide');
-		this.nextSlideIcon = $('#next-slide');
-		this.discussSlideIcon = $('#discuss-slide');
+		this.startIcon = document.getElementById('start');
+		this.endIcon = document.getElementById('end');
+		this.mobileViewIcon = document.getElementById('mobile-view');
+		this.zoomInIcon = document.getElementById('zoom-in');
+		this.zoomOutIcon = document.getElementById('zoom-out');
+		this.previousSlideIcon = document.getElementById('previous-slide');
+		this.nextSlideIcon = document.getElementById('next-slide');
+		this.discussSlideIcon = document.getElementById('discuss-slide');
 
 		this.init();
 	}
 
 	init() {
-		$(window).on('load', () => {
-			console.log("desktop or tablet window.on(load)");
+		window.addEventListener('load', () => {
+			console.log("window.on(load)");
 
-			this.impressContainer.attr('data-set-scale-factor', 1);
+			this.impressContainer.setAttribute('data-set-scale-factor', 1);
 
-			this.materializeToolTips.tooltip({delay: 50});
+			this.$materializeToolTips.tooltip({delay: 50});
 
 			this.initSideNav();
 
@@ -52,43 +49,46 @@ export default class DesktopInfographic {
 
 			this.showSideNav();
 
-			this.bigImage.show();
+			this.bigImage.style.display = 'block';
 
 			setTimeout(() => {
-				this.preloaderWrapper.removeClass('active');
-				this.bigImage.addClass('animated fadeIn').css('visibility', 'visible');
+				this.preloaderWrapper.classList.remove('active');
+				this.showElement(this.bigImage, 'fadeIn');
 
 				this.loadImpress();
 			}, 4000);
-
-			console.timeEnd('with jquery');
 		});
 	}
 
+	showElement(element, fade) {
+		element.classList.add('animated');
+		element.classList.add(fade);
+		element.style.visibility = 'visible';
+	}
+
 	showControls() {
-		this.startIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-		this.endIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-		this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-		this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-		this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-		this.previousSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible')
-		this.nextSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-		this.discussSlideIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+		this.showElement(this.startIcon, 'fadeInUp');
+		this.showElement(this.endIcon, 'fadeInUp');
+		this.showElement(this.zoomInIcon, 'fadeInRight');
+		this.showElement(this.zoomOutIcon, 'fadeInRight');
+		this.showElement(this.previousSlideIcon, 'fadeInUp');
+		this.showElement(this.nextSlideIcon, 'fadeInUp');
+		this.showElement(this.discussSlideIcon, 'fadeInRight');
 	}
 
 	showSideNav() {
-		this.sideNav.show();
-		this.sideNav.addClass('animated fadeInLeft').css('visibility', 'visible');
+		this.sideNav.style.display = 'block';
+		this.showElement(this.sideNav, 'fadeInLeft');
 	}
 
 	initSideNav() {
 		// Expand sideNav
-		this.hamburgerCollapseIcon.sideNav({
+		this.$hamburgerCollapseIcon.sideNav({
 			menuWidth: 360 // Default is 240
 		});
 
-		this.hamburgerCollapseIcon.sideNav('show');
-		this.sideNav.addClass('active');		
+		this.$hamburgerCollapseIcon.sideNav('show');
+		this.sideNav.classList.add('active');		
 	}
 
 	loadImpress() {
@@ -115,21 +115,21 @@ export default class DesktopInfographic {
 
 	setupHamburger() {
 		// Allow side-nav collapse by pressing the hamburger icon
-		this.hamburgerCollapseIcon.on('click', () => {
+		this.$hamburgerCollapseIcon.on('click', () => {
 			// $("#slide").animate({width:'toggle'},350);
 			// $('.button-collapse').sideNav('hide');
-			this.sideNav.removeClass('active');
+			this.sideNav.classList.remove('active');
 
-			this.hamburgerExpandIcon.css('visibility', 'visible');
+			this.hamburgerExpandIcon.style.visibility = 'visible';
 
 			console.log("collapse side-nav");
 		});
 
 		// Show side-nav bar when corner hamburger is clicked
-		this.hamburgerExpandIcon.on('click', () => {
-			this.hamburgerCollapseIcon.sideNav('show');
-			this.sideNav.addClass('active');
-			this.hamburgerExpandIcon.css('visibility', 'hidden');
+		this.hamburgerExpandIcon.addEventListener('click', () => {
+			this.$hamburgerCollapseIcon.sideNav('show');
+			this.sideNav.classList.add('active');
+			this.hamburgerExpandIcon.style.visibility = 'hidden';
 		});
 	}
 
@@ -140,18 +140,24 @@ export default class DesktopInfographic {
 		// activated by impress.js, and with that, we can can apply border styling to
 		// the right border of $('.side-nav > li[id="id"');
 
-		$(window).on('hashchange', (e) => {
+		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
 
 			// grab active impress.js slide ID
-			var currentSlideHash = $('#impress .active').attr('id');
+			let currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 			// Reality-check to console
 			console.log("current slide hash: " + currentSlideHash);
 
 			// toggle the active-slide class for the list item with that ID
-			this.sideNavListItems.removeClass('active-slide');
-			$('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
+			this.sideNavListItems.forEach((element) => 
+				element.classList.remove('active-slide'));
+
+			let activeSlide = document.querySelector('.side-nav li[data-slide=\"' + currentSlideHash + '\"]');
+
+			if (activeSlide) {
+				activeSlide.classList.toggle('active-slide');
+			}
 		});
 
 		// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
@@ -159,17 +165,19 @@ export default class DesktopInfographic {
 		// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
 		// '#your-page-element';
 
-		this.sideNavListItems.on('click', () => {
-			console.log('click-induced transition');
+		this.sideNavListItems.forEach((element) => 
+			element.addEventListener('click', () => {
+				console.log('click-induced transition');
 
-			window.location.hash = '#' + $(this).data('slide');
-		});
+				window.location.hash = '#' + element.getAttribute('data-slide');
+			})
+		);
 
-		this.startIcon.on('click', () => {
+		this.startIcon.addEventListener('click', () => {
 			window.location.hash = '#intro';
 		});
 
-		this.endIcon.on('click', () => {
+		this.endIcon.addEventListener('click', () => {
 			window.location.hash = '#futurism';
 		});
 	}
@@ -177,25 +185,25 @@ export default class DesktopInfographic {
 	setupZooms() {
 		// jQuery automatically adds in necessary vendor prefixes when using
 		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
-		this.zoomInIcon.on('click', () => {
-			this.impressContainer.css('transform', 
+		this.zoomInIcon.addEventListener('click', () => {
+			this.impressContainer.setAttribute('transform', 
 				'scale(' + utils.getScale("impress")*1.25 + ')');
 		});
 
-		this.zoomOutIcon.on('click', () => {
-			this.impressContainer.css('transform', 
+		this.zoomOutIcon.addEventListener('click', () => {
+			this.impressContainer.setAttribute('transform', 
 				'scale(' + utils.getScale("impress")/1.25 + ')');
 		});
 	}
 
 	setupDiscuss() {
-		this.discussSlideIcon.on('click', () => {
+		this.discussSlideIcon.addEventListener('click', () => {
 
 		});
 	}
 
 	setupNextPrev() {
-		this.previousSlideIcon.on('click', () => {
+		this.previousSlideIcon.addEventListener('click', () => {
 			// This approach does not work because it does not preventDefault(),
 			// and the key is already being captured by impress.js, which causes
 			// a conflict ...
@@ -212,7 +220,7 @@ export default class DesktopInfographic {
 			// cases ...
 		});
 
-		this.nextSlideIcon.on('click', () => {
+		this.nextSlideIcon.addEventListener('click', () => {
 			impress().next();
 		});
 	}
@@ -221,7 +229,7 @@ export default class DesktopInfographic {
 		let keyboard = new Keyboard(
 			this.impressContainer,
 			this.sideNav,
-			this.hamburgerCollapseIcon,
+			this.$hamburgerCollapseIcon,
 			this.hamburgerExpandIcon
 		);
 

@@ -1,5 +1,3 @@
-import Cookies from 'js-cookie';
-
 export default class Infographic {
 	constructor() {
 		// Materialize.css does not currently work well with iPad touches, so for now,
@@ -9,7 +7,6 @@ export default class Infographic {
 		// http://www.danwellman.co.uk/fixing-jquery-click-events-for-the-ipad/
 		// https://github.com/Dogfalo/materialize/issues/2319
 		
-		this.deviceCookie = Cookies.get('display');
 		this.isDesktop = !device.mobile() && !device.tablet();
 	}
 }

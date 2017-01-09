@@ -8,19 +8,14 @@ let infographic = new Infographic();
 let infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
 $(document).ready( () => {
-	console.log('desktop or tablet document.ready()');
+	console.log('document.ready()');
 
-	let html = $('html');
-	let preloaderWrapper = $('.preloader-wrapper');
-	let bigImageContainer = $('#impress > div:first-of-type');
+	let html = document.getElementsByTagName('html');
+	let preloaderWrapper = document.querySelector('.preloader-wrapper');
+	let bigImageContainer = document.querySelector('#impress > div:first-of-type');
 
-	// Check if user has set a preferred device
-	if (infographic.deviceCookie === 'mobile') {
-		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
-	}
-
-	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
-		preloaderWrapper.addClass('active');
+	if (infographic.isDesktop) {
+		preloaderWrapper.classList.add('active');
 
 		let api = new controversyAPI();
 		api.init();

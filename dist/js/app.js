@@ -526,167 +526,9 @@
 
 
 },{}],2:[function(require,module,exports){
-/*!
- * JavaScript Cookie v2.1.3
- * https://github.com/js-cookie/js-cookie
- *
- * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
- * Released under the MIT license
- */
-;(function (factory) {
-	var registeredInModuleLoader = false;
-	if (typeof define === 'function' && define.amd) {
-		define(factory);
-		registeredInModuleLoader = true;
-	}
-	if (typeof exports === 'object') {
-		module.exports = factory();
-		registeredInModuleLoader = true;
-	}
-	if (!registeredInModuleLoader) {
-		var OldCookies = window.Cookies;
-		var api = window.Cookies = factory();
-		api.noConflict = function () {
-			window.Cookies = OldCookies;
-			return api;
-		};
-	}
-}(function () {
-	function extend () {
-		var i = 0;
-		var result = {};
-		for (; i < arguments.length; i++) {
-			var attributes = arguments[ i ];
-			for (var key in attributes) {
-				result[key] = attributes[key];
-			}
-		}
-		return result;
-	}
-
-	function init (converter) {
-		function api (key, value, attributes) {
-			var result;
-			if (typeof document === 'undefined') {
-				return;
-			}
-
-			// Write
-
-			if (arguments.length > 1) {
-				attributes = extend({
-					path: '/'
-				}, api.defaults, attributes);
-
-				if (typeof attributes.expires === 'number') {
-					var expires = new Date();
-					expires.setMilliseconds(expires.getMilliseconds() + attributes.expires * 864e+5);
-					attributes.expires = expires;
-				}
-
-				try {
-					result = JSON.stringify(value);
-					if (/^[\{\[]/.test(result)) {
-						value = result;
-					}
-				} catch (e) {}
-
-				if (!converter.write) {
-					value = encodeURIComponent(String(value))
-						.replace(/%(23|24|26|2B|3A|3C|3E|3D|2F|3F|40|5B|5D|5E|60|7B|7D|7C)/g, decodeURIComponent);
-				} else {
-					value = converter.write(value, key);
-				}
-
-				key = encodeURIComponent(String(key));
-				key = key.replace(/%(23|24|26|2B|5E|60|7C)/g, decodeURIComponent);
-				key = key.replace(/[\(\)]/g, escape);
-
-				return (document.cookie = [
-					key, '=', value,
-					attributes.expires ? '; expires=' + attributes.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-					attributes.path ? '; path=' + attributes.path : '',
-					attributes.domain ? '; domain=' + attributes.domain : '',
-					attributes.secure ? '; secure' : ''
-				].join(''));
-			}
-
-			// Read
-
-			if (!key) {
-				result = {};
-			}
-
-			// To prevent the for loop in the first place assign an empty array
-			// in case there are no cookies at all. Also prevents odd result when
-			// calling "get()"
-			var cookies = document.cookie ? document.cookie.split('; ') : [];
-			var rdecode = /(%[0-9A-Z]{2})+/g;
-			var i = 0;
-
-			for (; i < cookies.length; i++) {
-				var parts = cookies[i].split('=');
-				var cookie = parts.slice(1).join('=');
-
-				if (cookie.charAt(0) === '"') {
-					cookie = cookie.slice(1, -1);
-				}
-
-				try {
-					var name = parts[0].replace(rdecode, decodeURIComponent);
-					cookie = converter.read ?
-						converter.read(cookie, name) : converter(cookie, name) ||
-						cookie.replace(rdecode, decodeURIComponent);
-
-					if (this.json) {
-						try {
-							cookie = JSON.parse(cookie);
-						} catch (e) {}
-					}
-
-					if (key === name) {
-						result = cookie;
-						break;
-					}
-
-					if (!key) {
-						result[name] = cookie;
-					}
-				} catch (e) {}
-			}
-
-			return result;
-		}
-
-		api.set = api;
-		api.get = function (key) {
-			return api.call(api, key);
-		};
-		api.getJSON = function () {
-			return api.apply({
-				json: true
-			}, [].slice.call(arguments));
-		};
-		api.defaults = {};
-
-		api.remove = function (key, attributes) {
-			api(key, '', extend(attributes, {
-				expires: -1
-			}));
-		};
-
-		api.withConverter = init;
-
-		return api;
-	}
-
-	return init(function () {});
-}));
-
-},{}],3:[function(require,module,exports){
 /*! device.js 0.2.7 */
 (function(){var a,b,c,d,e,f,g,h,i,j;b=window.device,a={},window.device=a,d=window.document.documentElement,j=window.navigator.userAgent.toLowerCase(),a.ios=function(){return a.iphone()||a.ipod()||a.ipad()},a.iphone=function(){return!a.windows()&&e("iphone")},a.ipod=function(){return e("ipod")},a.ipad=function(){return e("ipad")},a.android=function(){return!a.windows()&&e("android")},a.androidPhone=function(){return a.android()&&e("mobile")},a.androidTablet=function(){return a.android()&&!e("mobile")},a.blackberry=function(){return e("blackberry")||e("bb10")||e("rim")},a.blackberryPhone=function(){return a.blackberry()&&!e("tablet")},a.blackberryTablet=function(){return a.blackberry()&&e("tablet")},a.windows=function(){return e("windows")},a.windowsPhone=function(){return a.windows()&&e("phone")},a.windowsTablet=function(){return a.windows()&&e("touch")&&!a.windowsPhone()},a.fxos=function(){return(e("(mobile;")||e("(tablet;"))&&e("; rv:")},a.fxosPhone=function(){return a.fxos()&&e("mobile")},a.fxosTablet=function(){return a.fxos()&&e("tablet")},a.meego=function(){return e("meego")},a.cordova=function(){return window.cordova&&"file:"===location.protocol},a.nodeWebkit=function(){return"object"==typeof window.process},a.mobile=function(){return a.androidPhone()||a.iphone()||a.ipod()||a.windowsPhone()||a.blackberryPhone()||a.fxosPhone()||a.meego()},a.tablet=function(){return a.ipad()||a.androidTablet()||a.blackberryTablet()||a.windowsTablet()||a.fxosTablet()},a.desktop=function(){return!a.tablet()&&!a.mobile()},a.television=function(){var a;for(television=["googletv","viera","smarttv","internet.tv","netcast","nettv","appletv","boxee","kylo","roku","dlnadoc","roku","pov_tv","hbbtv","ce-html"],a=0;a<television.length;){if(e(television[a]))return!0;a++}return!1},a.portrait=function(){return window.innerHeight/window.innerWidth>1},a.landscape=function(){return window.innerHeight/window.innerWidth<1},a.noConflict=function(){return window.device=b,this},e=function(a){return-1!==j.indexOf(a)},g=function(a){var b;return b=new RegExp(a,"i"),d.className.match(b)},c=function(a){var b=null;g(a)||(b=d.className.replace(/^\s+|\s+$/g,""),d.className=b+" "+a)},i=function(a){g(a)&&(d.className=d.className.replace(" "+a,""))},a.ios()?a.ipad()?c("ios ipad tablet"):a.iphone()?c("ios iphone mobile"):a.ipod()&&c("ios ipod mobile"):a.android()?c(a.androidTablet()?"android tablet":"android mobile"):a.blackberry()?c(a.blackberryTablet()?"blackberry tablet":"blackberry mobile"):a.windows()?c(a.windowsTablet()?"windows tablet":a.windowsPhone()?"windows mobile":"desktop"):a.fxos()?c(a.fxosTablet()?"fxos tablet":"fxos mobile"):a.meego()?c("meego mobile"):a.nodeWebkit()?c("node-webkit"):a.television()?c("television"):a.desktop()&&c("desktop"),a.cordova()&&c("cordova"),f=function(){a.landscape()?(i("portrait"),c("landscape")):(i("landscape"),c("portrait"))},h=Object.prototype.hasOwnProperty.call(window,"onorientationchange")?"orientationchange":"resize",window.addEventListener?window.addEventListener(h,f,!1):window.attachEvent?window.attachEvent(h,f):window[h]=f,f(),"function"==typeof define&&"object"==typeof define.amd&&define.amd?define(function(){return a}):"undefined"!=typeof module&&module.exports?module.exports=a:window.device=a}).call(this);
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -728,7 +570,7 @@ var controversyAPI = function () {
 }();
 
 exports.default = controversyAPI;
-},{}],5:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -761,32 +603,30 @@ var DesktopInfographic = function () {
 	function DesktopInfographic() {
 		_classCallCheck(this, DesktopInfographic);
 
-		console.log('desktop or tablet window.load()');
-
 		// Presentation
-		this.impressContainer = $('#impress');
-		this.bigImage = $('.big-image');
+		this.impressContainer = document.getElementById('impress');
+		this.bigImage = document.querySelector('.big-image');
 
 		// Materialize
-		this.materializeToolTips = $('.tooltipped');
-		this.preloaderWrapper = $('.preloader-wrapper');
+		this.$materializeToolTips = $('.tooltipped');
+		this.preloaderWrapper = document.querySelector('.preloader-wrapper');
 
 		// SideNav
-		this.sideNav = $('#slide-out');
-		this.sideNavListItems = $('.side-nav > li');
+		this.sideNav = document.getElementById('slide-out');
+		this.sideNavListItems = document.querySelectorAll('.side-nav > li');
 
-		this.hamburgerCollapseIcon = $('.button-collapse');
-		this.hamburgerExpandIcon = $('#hamburger');
+		this.$hamburgerCollapseIcon = $('.button-collapse');
+		this.hamburgerExpandIcon = document.getElementById('hamburger');
 
 		// Icons
-		this.startIcon = $('#start');
-		this.endIcon = $('#end');
-		this.mobileViewIcon = $('#mobile-view');
-		this.zoomInIcon = $('#zoom-in');
-		this.zoomOutIcon = $('#zoom-out');
-		this.previousSlideIcon = $('#previous-slide');
-		this.nextSlideIcon = $('#next-slide');
-		this.discussSlideIcon = $('#discuss-slide');
+		this.startIcon = document.getElementById('start');
+		this.endIcon = document.getElementById('end');
+		this.mobileViewIcon = document.getElementById('mobile-view');
+		this.zoomInIcon = document.getElementById('zoom-in');
+		this.zoomOutIcon = document.getElementById('zoom-out');
+		this.previousSlideIcon = document.getElementById('previous-slide');
+		this.nextSlideIcon = document.getElementById('next-slide');
+		this.discussSlideIcon = document.getElementById('discuss-slide');
 
 		this.init();
 	}
@@ -796,12 +636,12 @@ var DesktopInfographic = function () {
 		value: function init() {
 			var _this = this;
 
-			$(window).on('load', function () {
-				console.log("desktop or tablet window.on(load)");
+			window.addEventListener('load', function () {
+				console.log("window.on(load)");
 
-				_this.impressContainer.attr('data-set-scale-factor', 1);
+				_this.impressContainer.setAttribute('data-set-scale-factor', 1);
 
-				_this.materializeToolTips.tooltip({ delay: 50 });
+				_this.$materializeToolTips.tooltip({ delay: 50 });
 
 				_this.initSideNav();
 
@@ -811,44 +651,50 @@ var DesktopInfographic = function () {
 
 				_this.showSideNav();
 
-				_this.bigImage.show();
+				_this.bigImage.style.display = 'block';
 
 				setTimeout(function () {
-					_this.preloaderWrapper.removeClass('active');
-					_this.bigImage.addClass('animated fadeIn').css('visibility', 'visible');
+					_this.preloaderWrapper.classList.remove('active');
+					_this.showElement(_this.bigImage, 'fadeIn');
 
 					_this.loadImpress();
 				}, 4000);
 			});
 		}
 	}, {
+		key: 'showElement',
+		value: function showElement(element, fade) {
+			element.classList.add('animated');
+			element.classList.add(fade);
+			element.style.visibility = 'visible';
+		}
+	}, {
 		key: 'showControls',
 		value: function showControls() {
-			this.startIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-			this.endIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-			this.mobileViewIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-			this.zoomInIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-			this.zoomOutIcon.addClass('animated fadeInRight').css('visibility', 'visible');
-			this.previousSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-			this.nextSlideIcon.addClass('animated fadeInUp').css('visibility', 'visible');
-			this.discussSlideIcon.addClass('animated fadeInRight').css('visibility', 'visible');
+			this.showElement(this.startIcon, 'fadeInUp');
+			this.showElement(this.endIcon, 'fadeInUp');
+			this.showElement(this.zoomInIcon, 'fadeInRight');
+			this.showElement(this.zoomOutIcon, 'fadeInRight');
+			this.showElement(this.previousSlideIcon, 'fadeInUp');
+			this.showElement(this.nextSlideIcon, 'fadeInUp');
+			this.showElement(this.discussSlideIcon, 'fadeInRight');
 		}
 	}, {
 		key: 'showSideNav',
 		value: function showSideNav() {
-			this.sideNav.show();
-			this.sideNav.addClass('animated fadeInLeft').css('visibility', 'visible');
+			this.sideNav.style.display = 'block';
+			this.showElement(this.sideNav, 'fadeInLeft');
 		}
 	}, {
 		key: 'initSideNav',
 		value: function initSideNav() {
 			// Expand sideNav
-			this.hamburgerCollapseIcon.sideNav({
+			this.$hamburgerCollapseIcon.sideNav({
 				menuWidth: 360 // Default is 240
 			});
 
-			this.hamburgerCollapseIcon.sideNav('show');
-			this.sideNav.addClass('active');
+			this.$hamburgerCollapseIcon.sideNav('show');
+			this.sideNav.classList.add('active');
 		}
 	}, {
 		key: 'loadImpress',
@@ -873,7 +719,6 @@ var DesktopInfographic = function () {
 
 			this.setupHamburger();
 			this.setupHashChange();
-			this.setupMobileChange();
 			this.setupZooms();
 			this.setupDiscuss();
 			this.setupNextPrev();
@@ -885,21 +730,21 @@ var DesktopInfographic = function () {
 			var _this3 = this;
 
 			// Allow side-nav collapse by pressing the hamburger icon
-			this.hamburgerCollapseIcon.on('click', function () {
+			this.$hamburgerCollapseIcon.on('click', function () {
 				// $("#slide").animate({width:'toggle'},350);
 				// $('.button-collapse').sideNav('hide');
-				_this3.sideNav.removeClass('active');
+				_this3.sideNav.classList.remove('active');
 
-				_this3.hamburgerExpandIcon.css('visibility', 'visible');
+				_this3.hamburgerExpandIcon.style.visibility = 'visible';
 
 				console.log("collapse side-nav");
 			});
 
 			// Show side-nav bar when corner hamburger is clicked
-			this.hamburgerExpandIcon.on('click', function () {
-				_this3.hamburgerCollapseIcon.sideNav('show');
-				_this3.sideNav.addClass('active');
-				_this3.hamburgerExpandIcon.css('visibility', 'hidden');
+			this.hamburgerExpandIcon.addEventListener('click', function () {
+				_this3.$hamburgerCollapseIcon.sideNav('show');
+				_this3.sideNav.classList.add('active');
+				_this3.hamburgerExpandIcon.style.visibility = 'hidden';
 			});
 		}
 	}, {
@@ -913,18 +758,25 @@ var DesktopInfographic = function () {
 			// activated by impress.js, and with that, we can can apply border styling to
 			// the right border of $('.side-nav > li[id="id"');
 
-			$(window).on('hashchange', function (e) {
+			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
 
 				// grab active impress.js slide ID
-				var currentSlideHash = $('#impress .active').attr('id');
+				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 				// Reality-check to console
 				console.log("current slide hash: " + currentSlideHash);
 
 				// toggle the active-slide class for the list item with that ID
-				_this4.sideNavListItems.removeClass('active-slide');
-				$('.side-nav li[data-slide=\"' + currentSlideHash + '\"]').toggleClass('active-slide');
+				_this4.sideNavListItems.forEach(function (element) {
+					return element.classList.remove('active-slide');
+				});
+
+				var activeSlide = document.querySelector('.side-nav li[data-slide=\"' + currentSlideHash + '\"]');
+
+				if (activeSlide) {
+					activeSlide.classList.toggle('active-slide');
+				}
 			});
 
 			// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
@@ -932,45 +784,20 @@ var DesktopInfographic = function () {
 			// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
 			// '#your-page-element';
 
-			this.sideNavListItems.on('click', function () {
-				console.log('click-induced transition');
+			this.sideNavListItems.forEach(function (element) {
+				return element.addEventListener('click', function () {
+					console.log('click-induced transition');
 
-				window.location.hash = '#' + $(_this4).data('slide');
+					window.location.hash = '#' + element.getAttribute('data-slide');
+				});
 			});
 
-			this.startIcon.on('click', function () {
+			this.startIcon.addEventListener('click', function () {
 				window.location.hash = '#intro';
 			});
 
-			this.endIcon.on('click', function () {
+			this.endIcon.addEventListener('click', function () {
 				window.location.hash = '#futurism';
-			});
-		}
-
-		// REMOVE
-
-	}, {
-		key: 'setupMobileChange',
-		value: function setupMobileChange() {
-			// I want to persist this setting between sessions, so I'll use js.cookie.js
-			// Usage information here ...
-			// https://github.com/js-cookie/js-cookie
-			//
-			// Cookies.set('name', 'value');
-			//
-			// Valid across entire site ...
-			// Cookies.set('name', 'value', { expires: 7 });
-			// 
-			// Cookies.get('name'); // => 'value'
-			// Cookies.get('nothing'); // => undefined
-
-			this.mobileViewIcon.on('click', function () {
-				Cookies.set('display', 'mobile', { expires: 365 });
-
-				console.log("display: " + Cookies.get('display'));
-
-				// Then reload the page ...
-				document.location.reload();
 			});
 		}
 	}, {
@@ -980,23 +807,23 @@ var DesktopInfographic = function () {
 
 			// jQuery automatically adds in necessary vendor prefixes when using
 			// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
-			this.zoomInIcon.on('click', function () {
-				_this5.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") * 1.25 + ')');
+			this.zoomInIcon.addEventListener('click', function () {
+				_this5.impressContainer.setAttribute('transform', 'scale(' + _utils2.default.getScale("impress") * 1.25 + ')');
 			});
 
-			this.zoomOutIcon.on('click', function () {
-				_this5.impressContainer.css('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
+			this.zoomOutIcon.addEventListener('click', function () {
+				_this5.impressContainer.setAttribute('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
 			});
 		}
 	}, {
 		key: 'setupDiscuss',
 		value: function setupDiscuss() {
-			this.discussSlideIcon.on('click', function () {});
+			this.discussSlideIcon.addEventListener('click', function () {});
 		}
 	}, {
 		key: 'setupNextPrev',
 		value: function setupNextPrev() {
-			this.previousSlideIcon.on('click', function () {
+			this.previousSlideIcon.addEventListener('click', function () {
 				// This approach does not work because it does not preventDefault(),
 				// and the key is already being captured by impress.js, which causes
 				// a conflict ...
@@ -1013,14 +840,14 @@ var DesktopInfographic = function () {
 				// cases ...
 			});
 
-			this.nextSlideIcon.on('click', function () {
+			this.nextSlideIcon.addEventListener('click', function () {
 				impress().next();
 			});
 		}
 	}, {
 		key: 'setupKeypresses',
 		value: function setupKeypresses() {
-			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.hamburgerCollapseIcon, this.hamburgerExpandIcon);
+			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.$hamburgerCollapseIcon, this.hamburgerExpandIcon);
 
 			keyboard.init();
 		}
@@ -1030,18 +857,12 @@ var DesktopInfographic = function () {
 }();
 
 exports.default = DesktopInfographic;
-},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":6,"./keyboard.js":7,"./utils.js":10}],6:[function(require,module,exports){
-'use strict';
+},{"../../node_modules/jquery.kinetic/jquery.kinetic.js":1,"./infographic.js":5,"./keyboard.js":6,"./utils.js":9}],5:[function(require,module,exports){
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-
-var _jsCookie = require('js-cookie');
-
-var _jsCookie2 = _interopRequireDefault(_jsCookie);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1055,12 +876,11 @@ var Infographic = function Infographic() {
 	// http://www.danwellman.co.uk/fixing-jquery-click-events-for-the-ipad/
 	// https://github.com/Dogfalo/materialize/issues/2319
 
-	this.deviceCookie = _jsCookie2.default.get('display');
 	this.isDesktop = !device.mobile() && !device.tablet();
 };
 
 exports.default = Infographic;
-},{"js-cookie":2}],7:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1237,7 +1057,7 @@ var Keyboard = function () {
 }();
 
 exports.default = Keyboard;
-},{"./utils.js":10}],8:[function(require,module,exports){
+},{"./utils.js":9}],7:[function(require,module,exports){
 'use strict';
 
 var _infographic = require('./infographic.js');
@@ -1266,19 +1086,14 @@ var infographic = new _infographic2.default();
 var infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
 $(document).ready(function () {
-	console.log('desktop or tablet document.ready()');
+	console.log('document.ready()');
 
-	var html = $('html');
-	var preloaderWrapper = $('.preloader-wrapper');
-	var bigImageContainer = $('#impress > div:first-of-type');
+	var html = document.getElementsByTagName('html');
+	var preloaderWrapper = document.querySelector('.preloader-wrapper');
+	var bigImageContainer = document.querySelector('#impress > div:first-of-type');
 
-	// Check if user has set a preferred device
-	if (infographic.deviceCookie === 'mobile') {
-		html.removeClass('desktop').removeClass('tablet').addClass('mobile');
-	}
-
-	if (infographic.isDesktop && infographic.deviceCookie !== 'mobile') {
-		preloaderWrapper.addClass('active');
+	if (infographic.isDesktop) {
+		preloaderWrapper.classList.add('active');
 
 		var api = new _controversyApi2.default();
 		api.init();
@@ -1305,7 +1120,7 @@ $(document).ready(function () {
 		mobileInfographic.init();
 	}
 });
-},{"./controversy-api.js":4,"./desktop-infographic.js":5,"./infographic.js":6,"./mobile-infographic.js":9,"./utils.js":10}],9:[function(require,module,exports){
+},{"./controversy-api.js":3,"./desktop-infographic.js":4,"./infographic.js":5,"./mobile-infographic.js":8,"./utils.js":9}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1335,7 +1150,7 @@ var MobileInfographic = function () {
 }();
 
 exports.default = MobileInfographic;
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1406,4 +1221,4 @@ var utils = function () {
 }();
 
 exports.default = utils;
-},{}]},{},[3,4,5,6,7,8,9,10]);
+},{}]},{},[2,3,4,5,6,7,8,9]);
