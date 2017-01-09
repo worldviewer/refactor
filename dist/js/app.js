@@ -719,7 +719,6 @@ var DesktopInfographic = function () {
 
 			this.setupHamburger();
 			this.setupHashChange();
-			this.setupZooms();
 			this.setupDiscuss();
 			this.setupNextPrev();
 			this.setupKeypresses();
@@ -731,8 +730,6 @@ var DesktopInfographic = function () {
 
 			// Allow side-nav collapse by pressing the hamburger icon
 			this.$hamburgerCollapseIcon.on('click', function () {
-				// $("#slide").animate({width:'toggle'},350);
-				// $('.button-collapse').sideNav('hide');
 				_this3.sideNav.classList.remove('active');
 
 				_this3.hamburgerExpandIcon.style.visibility = 'visible';
@@ -747,16 +744,13 @@ var DesktopInfographic = function () {
 				_this3.hamburgerExpandIcon.style.visibility = 'hidden';
 			});
 		}
+
+		// When the URL hash changes, color any related footnote in side nav
+
 	}, {
 		key: 'setupHashChange',
 		value: function setupHashChange() {
 			var _this4 = this;
-
-			// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
-			// (URL CHANGE --> LI CHANGE)
-			// $('#impress > .present').attr('id') can be used to grab the id that is currently
-			// activated by impress.js, and with that, we can can apply border styling to
-			// the right border of $('.side-nav > li[id="id"');
 
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
@@ -764,7 +758,6 @@ var DesktopInfographic = function () {
 				// grab active impress.js slide ID
 				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
-				// Reality-check to console
 				console.log("current slide hash: " + currentSlideHash);
 
 				// toggle the active-slide class for the list item with that ID
@@ -779,11 +772,7 @@ var DesktopInfographic = function () {
 				}
 			});
 
-			// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
-			// (LI CLICK --> URL CHANGE)
-			// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
-			// '#your-page-element';
-
+			// Clicking a footnote should jump to the related slide
 			this.sideNavListItems.forEach(function (element) {
 				return element.addEventListener('click', function () {
 					console.log('click-induced transition');
@@ -802,17 +791,15 @@ var DesktopInfographic = function () {
 		}
 	}, {
 		key: 'setupZooms',
-		value: function setupZooms() {
+		value: function setupZooms(keyboard) {
 			var _this5 = this;
 
-			// jQuery automatically adds in necessary vendor prefixes when using
-			// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
 			this.zoomInIcon.addEventListener('click', function () {
-				_this5.impressContainer.setAttribute('transform', 'scale(' + _utils2.default.getScale("impress") * 1.25 + ')');
+				keyboard.cssZoom(_this5.impressContainer, 'in', 1.25);
 			});
 
 			this.zoomOutIcon.addEventListener('click', function () {
-				_this5.impressContainer.setAttribute('transform', 'scale(' + _utils2.default.getScale("impress") / 1.25 + ')');
+				keyboard.cssZoom(_this5.impressContainer, 'out', 1.25);
 			});
 		}
 	}, {
@@ -824,20 +811,7 @@ var DesktopInfographic = function () {
 		key: 'setupNextPrev',
 		value: function setupNextPrev() {
 			this.previousSlideIcon.addEventListener('click', function () {
-				// This approach does not work because it does not preventDefault(),
-				// and the key is already being captured by impress.js, which causes
-				// a conflict ...
-
-				// var e = jQuery.Event("keydown");
-				// e.which = 37;
-				// e.keyCode = 37;
-				// $(document).trigger(e);
-
-				// Instead, we can in this case just use impress ...
 				impress().prev();
-
-				// And see below for an example of how to capture keypresses in other
-				// cases ...
 			});
 
 			this.nextSlideIcon.addEventListener('click', function () {
@@ -850,6 +824,8 @@ var DesktopInfographic = function () {
 			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.$hamburgerCollapseIcon, this.hamburgerExpandIcon);
 
 			keyboard.init();
+
+			this.setupZooms(keyboard);
 		}
 	}]);
 
@@ -899,12 +875,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 // Note that impress maps both the right/left arrows and page down/up for slide next/previous
 var Keyboard = function () {
-	function Keyboard(impressContainer, sideNav, hamburgerCollapseIcon, hamburgerExpandIcon) {
+	function Keyboard(impressContainer, sideNav, $hamburgerCollapseIcon, hamburgerExpandIcon) {
 		_classCallCheck(this, Keyboard);
 
 		this.impressContainer = impressContainer;
 		this.sideNav = sideNav;
-		this.hamburgerCollapseIcon = hamburgerCollapseIcon;
+		this.$hamburgerCollapseIcon = $hamburgerCollapseIcon;
 		this.hamburgerExpandIcon = hamburgerExpandIcon;
 
 		this.tabKey = 9; // toggle sideNav
@@ -922,7 +898,7 @@ var Keyboard = function () {
 			this.setupZoomOutKey();
 			this.setupZoomInKey();
 
-			$(document).keydown(function (e) {
+			document.addEventListener('keydown', function (e) {
 				if (e.keyCode === _this.tabKey || e.keyCode === _this.minusKey || e.keyCode === _this.plusKey) {
 
 					console.log("key code: " + e.keyCode);
@@ -935,12 +911,12 @@ var Keyboard = function () {
 		value: function setupSideNavToggle() {
 			var _this2 = this;
 
-			$(document).keydown(function (e) {
+			document.addEventListener('keydown', function (e) {
 				if (e.keyCode === _this2.tabKey) {
-					if (_this2.sideNav.hasClass('active')) {
-						_this2.hamburgerCollapseIcon.trigger('click');
+					if (_this2.sideNav.classList.contains('active')) {
+						_this2.$hamburgerCollapseIcon.trigger('click');
 					} else {
-						_this2.hamburgerExpandIcon.trigger('click');
+						_this2.hamburgerExpandIcon.click();
 					}
 				}
 			});
@@ -961,7 +937,7 @@ var Keyboard = function () {
 		value: function calculateScale(element, direction, factor) {
 			console.log('factor: ' + factor);
 
-			return direction === 'in' ? _utils2.default.getScale(element.attr('id')) * factor : _utils2.default.getScale(element.attr('id')) / factor;
+			return direction === 'in' ? _utils2.default.getScale(element.getAttribute('id')) * factor : _utils2.default.getScale(element.getAttribute('id')) / factor;
 		}
 
 		// Zooms via CSS transform
@@ -972,7 +948,9 @@ var Keyboard = function () {
 			var newScale = this.calculateScale(element, direction, factor);
 			console.log('New scale: ' + newScale);
 
-			element.css('transform', 'scale(' + newScale + ')').css('transition-duration', '0.25s').css('transition-delay', '0');
+			element.style.transform = 'scale(' + newScale + ')';
+			element.style.transitionDuration = '0.25s';
+			element.style.transitionDelay = '0s';
 		}
 	}, {
 		key: 'getTimeDiff',
@@ -1032,7 +1010,7 @@ var Keyboard = function () {
 
 			this.previousTime = Date.now();
 
-			$(document).keydown(function (e) {
+			document.addEventListener('keydown', function (e) {
 				if (e.keyCode === _this4.plusKey) {
 					_this4.evaluateZoomScale(_this4.impressContainer, 'in');
 				}
@@ -1045,7 +1023,7 @@ var Keyboard = function () {
 
 			this.previousTime = Date.now();
 
-			$(document).keydown(function (e) {
+			document.addEventListener('keydown', function (e) {
 				if (e.keyCode === _this5.minusKey) {
 					_this5.evaluateZoomScale(_this5.impressContainer, 'out');
 				}
@@ -1085,7 +1063,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var infographic = new _infographic2.default();
 var infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
 	console.log('document.ready()');
 
 	var html = document.getElementsByTagName('html');

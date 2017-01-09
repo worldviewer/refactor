@@ -107,7 +107,6 @@ export default class DesktopInfographic {
 
 		this.setupHamburger();
 		this.setupHashChange();
-		this.setupZooms();
 		this.setupDiscuss();
 		this.setupNextPrev();
 		this.setupKeypresses();
@@ -116,8 +115,6 @@ export default class DesktopInfographic {
 	setupHamburger() {
 		// Allow side-nav collapse by pressing the hamburger icon
 		this.$hamburgerCollapseIcon.on('click', () => {
-			// $("#slide").animate({width:'toggle'},350);
-			// $('.button-collapse').sideNav('hide');
 			this.sideNav.classList.remove('active');
 
 			this.hamburgerExpandIcon.style.visibility = 'visible';
@@ -133,20 +130,14 @@ export default class DesktopInfographic {
 		});
 	}
 
+	// When the URL hash changes, color any related footnote in side nav
 	setupHashChange() {
-		// DECORATING LIST ITEM BORDER FOR CONTENT SLIDES
-		// (URL CHANGE --> LI CHANGE)
-		// $('#impress > .present').attr('id') can be used to grab the id that is currently
-		// activated by impress.js, and with that, we can can apply border styling to
-		// the right border of $('.side-nav > li[id="id"');
-
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
 
 			// grab active impress.js slide ID
 			let currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
-			// Reality-check to console
 			console.log("current slide hash: " + currentSlideHash);
 
 			// toggle the active-slide class for the list item with that ID
@@ -160,11 +151,7 @@ export default class DesktopInfographic {
 			}
 		});
 
-		// MOVING INFOGRAPHIC FOCUS BASED UPON CLICKS TO SIDE-NAV
-		// (LI CLICK --> URL CHANGE)
-		// clicks on $('.side-nav > li') should grab data('slide'), and window.location.hash = 
-		// '#your-page-element';
-
+		// Clicking a footnote should jump to the related slide
 		this.sideNavListItems.forEach((element) => 
 			element.addEventListener('click', () => {
 				console.log('click-induced transition');
@@ -182,17 +169,13 @@ export default class DesktopInfographic {
 		});
 	}
 
-	setupZooms() {
-		// jQuery automatically adds in necessary vendor prefixes when using
-		// .css().  See https://css-tricks.com/how-to-deal-with-vendor-prefixes/.
+	setupZooms(keyboard) {
 		this.zoomInIcon.addEventListener('click', () => {
-			this.impressContainer.setAttribute('transform', 
-				'scale(' + utils.getScale("impress")*1.25 + ')');
+			keyboard.cssZoom(this.impressContainer, 'in', 1.25);
 		});
 
 		this.zoomOutIcon.addEventListener('click', () => {
-			this.impressContainer.setAttribute('transform', 
-				'scale(' + utils.getScale("impress")/1.25 + ')');
+			keyboard.cssZoom(this.impressContainer, 'out', 1.25);
 		});
 	}
 
@@ -204,20 +187,7 @@ export default class DesktopInfographic {
 
 	setupNextPrev() {
 		this.previousSlideIcon.addEventListener('click', () => {
-			// This approach does not work because it does not preventDefault(),
-			// and the key is already being captured by impress.js, which causes
-			// a conflict ...
-
-			// var e = jQuery.Event("keydown");
-			// e.which = 37;
-			// e.keyCode = 37;
-			// $(document).trigger(e);
-
-			// Instead, we can in this case just use impress ...
 			impress().prev();
-
-			// And see below for an example of how to capture keypresses in other
-			// cases ...
 		});
 
 		this.nextSlideIcon.addEventListener('click', () => {
@@ -234,5 +204,7 @@ export default class DesktopInfographic {
 		);
 
 		keyboard.init();
+
+		this.setupZooms(keyboard);
 	}
 }

@@ -2,10 +2,10 @@ import utils from './utils.js';
 
 // Note that impress maps both the right/left arrows and page down/up for slide next/previous
 export default class Keyboard {
-	constructor(impressContainer, sideNav, hamburgerCollapseIcon, hamburgerExpandIcon) {
+	constructor(impressContainer, sideNav, $hamburgerCollapseIcon, hamburgerExpandIcon) {
 		this.impressContainer = impressContainer;
 		this.sideNav = sideNav;
-		this.hamburgerCollapseIcon = hamburgerCollapseIcon;
+		this.$hamburgerCollapseIcon = $hamburgerCollapseIcon;
 		this.hamburgerExpandIcon = hamburgerExpandIcon;
 
 		this.tabKey = 9; // toggle sideNav
@@ -19,7 +19,7 @@ export default class Keyboard {
 		this.setupZoomOutKey();
 		this.setupZoomInKey();
 
-		$(document).keydown( (e) => {
+		document.addEventListener('keydown', (e) => {
 			if ((e.keyCode === this.tabKey) || 
 				(e.keyCode === this.minusKey) || 
 				(e.keyCode === this.plusKey)) {
@@ -31,12 +31,12 @@ export default class Keyboard {
 	}
 
 	setupSideNavToggle() {
-		$(document).keydown( (e) => {
+		document.addEventListener('keydown', (e) => {
 			if (e.keyCode === this.tabKey) {
-		    	if (this.sideNav.hasClass('active')) {
-					this.hamburgerCollapseIcon.trigger('click');
+		    	if (this.sideNav.classList.contains('active')) {
+					this.$hamburgerCollapseIcon.trigger('click');
 				} else {
-					this.hamburgerExpandIcon.trigger('click');
+					this.hamburgerExpandIcon.click();
 				}
 			}
 		});
@@ -52,8 +52,8 @@ export default class Keyboard {
 		console.log('factor: ' + factor);
 
 		return direction === 'in' ? 
-			utils.getScale(element.attr('id')) * factor :
-			utils.getScale(element.attr('id')) / factor;
+			utils.getScale(element.getAttribute('id')) * factor :
+			utils.getScale(element.getAttribute('id')) / factor;
 	}
 
 	// Zooms via CSS transform
@@ -61,8 +61,9 @@ export default class Keyboard {
 		let newScale = this.calculateScale(element, direction, factor);
 		console.log('New scale: ' + newScale);
 
-		element.css('transform', 'scale(' + newScale +
-			')').css('transition-duration', '0.25s').css('transition-delay', '0');
+		element.style.transform = `scale(${newScale})`;
+		element.style.transitionDuration = '0.25s';
+		element.style.transitionDelay = '0s';
 	}
 
 	getTimeDiff(currentTime, previousTime) {
@@ -110,7 +111,7 @@ export default class Keyboard {
 	setupZoomInKey() {
 		this.previousTime = Date.now();
 
-		$(document).keydown( (e) => {
+		document.addEventListener('keydown', (e) => {
 			if (e.keyCode === this.plusKey) {
 				this.evaluateZoomScale(this.impressContainer, 'in');
 			}
@@ -120,7 +121,7 @@ export default class Keyboard {
 	setupZoomOutKey() {
 		this.previousTime = Date.now();
 
-		$(document).keydown( (e) => {
+		document.addEventListener('keydown', (e) => {
 			if (e.keyCode === this.minusKey) {
 				this.evaluateZoomScale(this.impressContainer, 'out');
 			}

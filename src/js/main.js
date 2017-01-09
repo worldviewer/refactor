@@ -7,7 +7,7 @@ import utils from './utils.js';
 let infographic = new Infographic();
 let infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
-$(document).ready( () => {
+document.addEventListener('DOMContentLoaded', () => {
 	console.log('document.ready()');
 
 	let html = document.getElementsByTagName('html');
