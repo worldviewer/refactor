@@ -1114,9 +1114,14 @@ document.addEventListener('DOMContentLoaded', function () {
 				});
 
 				markupPromise.then(function () {
-					desktopInfographic.setupHashChange();
-					desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li');
-					desktopInfographic.showSideNav();
+					var sideNavPromise = new Promise(function (resolve, reject) {
+						resolve(desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li'));
+					});
+
+					sideNavPromise.then(function () {
+						desktopInfographic.setupHashChange();
+						desktopInfographic.showSideNav();
+					});
 				});
 			});
 

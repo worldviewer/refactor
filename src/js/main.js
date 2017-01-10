@@ -35,10 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			markupPromise.then(
 				() => {
-					desktopInfographic.setupHashChange();
-					desktopInfographic.sideNavListItems = 
-						document.querySelectorAll('.side-nav > li');
-					desktopInfographic.showSideNav();
+					var sideNavPromise = new Promise(
+						(resolve, reject) => {
+							resolve(desktopInfographic.sideNavListItems = 
+								document.querySelectorAll('.side-nav > li'));
+						}
+					);
+
+					sideNavPromise.then(
+						() => {
+							desktopInfographic.setupHashChange();
+							desktopInfographic.showSideNav();
+						}
+					)
 				}
 			);
 		});
