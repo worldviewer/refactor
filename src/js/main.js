@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			setTimeout(() => {
 				desktopInfographic.preloaderWrapper.classList.remove('active');
-				desktopInfographic.showElement(this.bigImage, 'fadeIn');
+				desktopInfographic.showElement(this, 'fadeIn');
 
 				desktopInfographic.loadImpress();
 			}, 4000);			
