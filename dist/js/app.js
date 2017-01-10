@@ -669,7 +669,6 @@ var DesktopInfographic = function () {
 
 		// Presentation
 		this.impressContainer = document.getElementById('impress');
-		this.bigImage = document.querySelector('.big-image');
 
 		// Materialize
 		this.$materializeToolTips = $('.tooltipped');
@@ -713,6 +712,7 @@ var DesktopInfographic = function () {
 
 				_this.showSideNav();
 
+				_this.bigImage = document.querySelector('.big-image');
 				_this.bigImage.style.display = 'block';
 
 				setTimeout(function () {

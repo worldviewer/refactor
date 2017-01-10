@@ -7,7 +7,6 @@ export default class DesktopInfographic {
 	constructor() {
 		// Presentation
 		this.impressContainer = document.getElementById('impress');
-		this.bigImage = document.querySelector('.big-image');
 
 		// Materialize
 		this.$materializeToolTips = $('.tooltipped');
@@ -47,6 +46,7 @@ export default class DesktopInfographic {
 
 			this.showSideNav();
 
+			this.bigImage = document.querySelector('.big-image');
 			this.bigImage.style.display = 'block';
 
 			setTimeout(() => {
