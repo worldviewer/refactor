@@ -111,11 +111,11 @@ export default class DesktopInfographic {
 
 	// When the URL hash changes, color any related footnote in side nav
 	setupHashChange() {
+		console.log('#impress:');
+		console.log(document.querySelector('#impress'));
+
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
-
-			console.log('#impress:');
-			console.log(document.querySelector('#impress'));
 
 			// grab active impress.js slide ID
 			let currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
@@ -126,7 +126,8 @@ export default class DesktopInfographic {
 			this.sideNavListItems.forEach((element) => 
 				element.classList.remove('active-slide'));
 
-			let activeSlide = document.querySelector('.side-nav li[data-slide=\"' + currentSlideHash + '\"]');
+			let activeSlide = document.querySelector('.side-nav li[data-slide=\"' +
+				currentSlideHash + '\"]');
 
 			if (activeSlide) {
 				activeSlide.classList.toggle('active-slide');

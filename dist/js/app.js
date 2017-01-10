@@ -777,11 +777,11 @@ var DesktopInfographic = function () {
 		value: function setupHashChange() {
 			var _this3 = this;
 
+			console.log('#impress:');
+			console.log(document.querySelector('#impress'));
+
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
-
-				console.log('#impress:');
-				console.log(document.querySelector('#impress'));
 
 				// grab active impress.js slide ID
 				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
