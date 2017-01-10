@@ -678,7 +678,7 @@ var DesktopInfographic = function () {
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
 
-		// this.impressContainer.setAttribute('data-set-scale-factor', 1);
+		this.impressContainer.setAttribute('data-set-scale-factor', 1);
 		this.$materializeToolTips.tooltip({ delay: 50 });
 	}
 
