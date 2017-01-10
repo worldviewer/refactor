@@ -554,16 +554,67 @@ var controversyAPI = function () {
 
 			$.get(this.url + 'cards/' + this.cardId, function (data) {
 				_this.card = data;
+				_this.footnotes = data.footnotes;
+				_this.slides = data.slides;
+
+				_this.impressContainer = document.getElementById('impress');
+				_this.sideNav = document.getElementById('slide-out');
+
+				_this.cardSummary = document.querySelector('.title-box .info-left');
+				_this.cardAuthor = document.querySelector('.title-box .card-author');
+				_this.cardTitle = document.querySelector('.title-box .card-title');
+				_this.authorAvatar = document.querySelector('.title-box img');
 
 				console.log(_this.card);
+
+				_this.addMetadataMarkup();
+				_this.addFootnotesMarkup();
+				_this.addSlidesMarkup();
 			});
 		}
 	}, {
-		key: 'getReferences',
-		value: function getReferences(cardId) {}
+		key: 'generateFootnote',
+		value: function generateFootnote(selector, markup) {
+			var li = document.createElement('li');
+			li.innerHTML = markup;
+			li.setAttribute('data-slide', selector);
+			return li;
+		}
 	}, {
-		key: 'getSlides',
-		value: function getSlides(cardId) {}
+		key: 'generateSlide',
+		value: function generateSlide(selector, x, y, scale) {
+			var div = document.createElement('div');
+			div.setAttribute('data-x', x);
+			div.setAttribute('data-y', y);
+			div.setAttribute('id', selector);
+			return div;
+		}
+	}, {
+		key: 'addMetadataMarkup',
+		value: function addMetadataMarkup() {
+			this.cardTitle.innerHTML = this.card.metacard.name;
+			this.cardSummary.innerHTML = this.card.metacard.summary;
+			this.cardAuthor.innerHTML = this.card.metacard.author.username;
+			this.authorAvatar.src = this.card.metacard.author.avatar;
+		}
+	}, {
+		key: 'addFootnotesMarkup',
+		value: function addFootnotesMarkup() {
+			var _this2 = this;
+
+			this.footnotes.forEach(function (footnote) {
+				_this2.sideNav.appendChild(_this2.generateFootnote(footnote['selector'], footnote['markup']));
+			});
+		}
+	}, {
+		key: 'addSlidesMarkup',
+		value: function addSlidesMarkup() {
+			var _this3 = this;
+
+			this.slides.forEach(function (slide) {
+				_this3.impressContainer.appendChild(_this3.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
+			});
+		}
 	}]);
 
 	return controversyAPI;
