@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		let desktopInfographic = new DesktopInfographic();
 		let api = new controversyAPI();
 
-		$.get(this.url + 'cards/' + this.cardId, (data) => {
+		$.get(api.url + 'cards/' + api.cardId, (data) => {
 			api.init(data);
 
 			console.log(api.card);

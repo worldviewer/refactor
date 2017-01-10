@@ -1102,7 +1102,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			var desktopInfographic = new _desktopInfographic2.default();
 			var api = new _controversyApi2.default();
 
-			$.get(undefined.url + 'cards/' + undefined.cardId, function (data) {
+			$.get(api.url + 'cards/' + api.cardId, function (data) {
 				api.init(data);
 
 				console.log(api.card);
