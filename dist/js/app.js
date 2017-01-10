@@ -587,7 +587,7 @@ var controversyAPI = function () {
 			var authorAvatar = document.createElement('img');
 			authorAvatar.classList.add('author-avatar');
 			authorAvatar.src = this.card.metacard.author.avatar;
-			this.cardSummary.appendChild(authorAvatar);
+			this.cardSummary.insertBefore(authorAvatar, this.cardSummary.firstChild);
 		}
 	}, {
 		key: 'addMetadataMarkup',
