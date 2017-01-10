@@ -19,7 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
 		let desktopInfographic = new DesktopInfographic();
 		let api = new controversyAPI();
-		api.init(desktopInfographic);
+
+		$.get(this.url + 'cards/' + this.cardId, (data) => {
+			api.init(data);
+
+			console.log(api.card);
+
+			var markupPromise = new Promise(
+				(resolve, reject) => {
+					api.addMetadataMarkup(resolve, reject);
+					api.addFootnotesMarkup(resolve, reject);
+					api.addSlidesMarkup(resolve, reject);
+				}
+			);
+
+			markupPromise.then(
+				() => {
+					desktopInfographic.setupHashChange();
+					desktopInfographic.sideNavListItems = 
+						document.querySelectorAll('.side-nav > li');
+					desktopInfographic.showSideNav();
+				}
+			);
+		});
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
 		// Explanation of how to put Impress in a container here ...
@@ -32,7 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			// For flash of content on page load
 			bigImageLoaded(this);
 
-			desktopInfographic.init();
+			desktopInfographic.initSideNav();
+
+			desktopInfographic.showControls();
+
+			Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
+
+			this.bigImage = document.querySelector('.big-image');
+			this.bigImage.style.display = 'block';
+
+			setTimeout(() => {
+				this.preloaderWrapper.classList.remove('active');
+				this.showElement(this.bigImage, 'fadeIn');
+
+				desktopInfographic.loadImpress();
+			}, 4000);			
 		}
 		bigImage.src = infographicAsset;
 		bigImage.alt = "Get Big Things Done Infographic";

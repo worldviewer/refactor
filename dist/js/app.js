@@ -549,34 +549,18 @@ var controversyAPI = function () {
 
 	_createClass(controversyAPI, [{
 		key: 'init',
-		value: function init(infographic) {
-			var _this = this;
+		value: function init(data) {
+			this.card = data;
+			this.footnotes = data.footnotes;
+			this.slides = data.slides;
 
-			$.get(this.url + 'cards/' + this.cardId, function (data) {
-				_this.card = data;
-				_this.footnotes = data.footnotes;
-				_this.slides = data.slides;
+			this.impressContainer = document.getElementById('impress');
+			this.sideNav = document.getElementById('slide-out');
 
-				_this.impressContainer = document.getElementById('impress');
-				_this.sideNav = document.getElementById('slide-out');
-
-				_this.cardSummary = document.querySelector('.title-box .card-summary');
-				_this.cardAuthor = document.querySelector('.title-box .card-author');
-				_this.cardTitle = document.querySelector('.title-box .card-title');
-				_this.authorAvatar = document.querySelector('.title-box img');
-
-				console.log(_this.card);
-
-				var markupPromise = new Promise(function (resolve, reject) {
-					_this.addMetadataMarkup(resolve, reject);
-					_this.addFootnotesMarkup(resolve, reject);
-					_this.addSlidesMarkup(resolve, reject);
-				});
-
-				markupPromise.then(function () {
-					infographic.setupHashChange();
-				});
-			});
+			this.cardSummary = document.querySelector('.title-box .card-summary');
+			this.cardAuthor = document.querySelector('.title-box .card-author');
+			this.cardTitle = document.querySelector('.title-box .card-title');
+			this.authorAvatar = document.querySelector('.title-box img');
 		}
 	}, {
 		key: 'generateFootnote',
@@ -609,10 +593,10 @@ var controversyAPI = function () {
 	}, {
 		key: 'addFootnotesMarkup',
 		value: function addFootnotesMarkup(resolve, reject) {
-			var _this2 = this;
+			var _this = this;
 
 			this.footnotes.forEach(function (footnote) {
-				_this2.sideNav.appendChild(_this2.generateFootnote(footnote['selector'], footnote['markup']));
+				_this.sideNav.appendChild(_this.generateFootnote(footnote['selector'], footnote['markup']));
 			});
 
 			resolve();
@@ -620,10 +604,10 @@ var controversyAPI = function () {
 	}, {
 		key: 'addSlidesMarkup',
 		value: function addSlidesMarkup(resolve, reject) {
-			var _this3 = this;
+			var _this2 = this;
 
 			this.slides.forEach(function (slide) {
-				_this3.impressContainer.appendChild(_this3.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
+				_this2.impressContainer.appendChild(_this2.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
 			});
 
 			resolve();
@@ -689,38 +673,16 @@ var DesktopInfographic = function () {
 		this.previousSlideIcon = document.getElementById('previous-slide');
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
+
+		this.impressContainer.setAttribute('data-set-scale-factor', 1);
+		this.$materializeToolTips.tooltip({ delay: 50 });
 	}
 
 	_createClass(DesktopInfographic, [{
 		key: 'init',
 		value: function init() {
-			var _this = this;
-
 			window.addEventListener('load', function () {
 				console.log("window.on(load)");
-
-				_this.impressContainer.setAttribute('data-set-scale-factor', 1);
-
-				_this.$materializeToolTips.tooltip({ delay: 50 });
-
-				_this.initSideNav();
-
-				_this.showControls();
-
-				Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
-
-				_this.showSideNav();
-
-				_this.sideNavListItems = document.querySelectorAll('.side-nav > li');
-				_this.bigImage = document.querySelector('.big-image');
-				_this.bigImage.style.display = 'block';
-
-				setTimeout(function () {
-					_this.preloaderWrapper.classList.remove('active');
-					_this.showElement(_this.bigImage, 'fadeIn');
-
-					_this.loadImpress();
-				}, 4000);
 			});
 		}
 	}, {
@@ -761,10 +723,10 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'loadImpress',
 		value: function loadImpress() {
-			var _this2 = this;
+			var _this = this;
 
 			var setup = function setup() {
-				return _this2.setupHandlers();
+				return _this.setupHandlers();
 			};
 
 			// Add in drag scroll once all animations have completed.  For some reason,
@@ -787,22 +749,22 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupHamburger',
 		value: function setupHamburger() {
-			var _this3 = this;
+			var _this2 = this;
 
 			// Allow side-nav collapse by pressing the hamburger icon
 			this.$hamburgerCollapseIcon.on('click', function () {
-				_this3.sideNav.classList.remove('active');
+				_this2.sideNav.classList.remove('active');
 
-				_this3.hamburgerExpandIcon.style.visibility = 'visible';
+				_this2.hamburgerExpandIcon.style.visibility = 'visible';
 
 				console.log("collapse side-nav");
 			});
 
 			// Show side-nav bar when corner hamburger is clicked
 			this.hamburgerExpandIcon.addEventListener('click', function () {
-				_this3.$hamburgerCollapseIcon.sideNav('show');
-				_this3.sideNav.classList.add('active');
-				_this3.hamburgerExpandIcon.style.visibility = 'hidden';
+				_this2.$hamburgerCollapseIcon.sideNav('show');
+				_this2.sideNav.classList.add('active');
+				_this2.hamburgerExpandIcon.style.visibility = 'hidden';
 			});
 		}
 
@@ -811,7 +773,7 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupHashChange',
 		value: function setupHashChange() {
-			var _this4 = this;
+			var _this3 = this;
 
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
@@ -824,7 +786,7 @@ var DesktopInfographic = function () {
 				console.log("current slide hash: " + currentSlideHash);
 
 				// toggle the active-slide class for the list item with that ID
-				_this4.sideNavListItems.forEach(function (element) {
+				_this3.sideNavListItems.forEach(function (element) {
 					return element.classList.remove('active-slide');
 				});
 
@@ -855,14 +817,14 @@ var DesktopInfographic = function () {
 	}, {
 		key: 'setupZooms',
 		value: function setupZooms(keyboard) {
-			var _this5 = this;
+			var _this4 = this;
 
 			this.zoomInIcon.addEventListener('click', function () {
-				keyboard.cssZoom(_this5.impressContainer, 'in', 1.25);
+				keyboard.cssZoom(_this4.impressContainer, 'in', 1.25);
 			});
 
 			this.zoomOutIcon.addEventListener('click', function () {
-				keyboard.cssZoom(_this5.impressContainer, 'out', 1.25);
+				keyboard.cssZoom(_this4.impressContainer, 'out', 1.25);
 			});
 		}
 	}, {
@@ -1139,7 +1101,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			var desktopInfographic = new _desktopInfographic2.default();
 			var api = new _controversyApi2.default();
-			api.init(desktopInfographic);
+
+			$.get(undefined.url + 'cards/' + undefined.cardId, function (data) {
+				api.init(data);
+
+				console.log(api.card);
+
+				var markupPromise = new Promise(function (resolve, reject) {
+					api.addMetadataMarkup(resolve, reject);
+					api.addFootnotesMarkup(resolve, reject);
+					api.addSlidesMarkup(resolve, reject);
+				});
+
+				markupPromise.then(function () {
+					desktopInfographic.setupHashChange();
+					desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li');
+					desktopInfographic.showSideNav();
+				});
+			});
 
 			// Dynamically add in the img tag, so that this huge file never downloads for mobile
 			// Explanation of how to put Impress in a container here ...
@@ -1147,12 +1126,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			var bigImage = new Image();
 			bigImage.onload = function () {
+				var _this = this;
+
 				console.log('infographic loaded.');
 
 				// For flash of content on page load
 				bigImageLoaded(this);
 
-				desktopInfographic.init();
+				desktopInfographic.initSideNav();
+
+				desktopInfographic.showControls();
+
+				Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
+
+				this.bigImage = document.querySelector('.big-image');
+				this.bigImage.style.display = 'block';
+
+				setTimeout(function () {
+					_this.preloaderWrapper.classList.remove('active');
+					_this.showElement(_this.bigImage, 'fadeIn');
+
+					desktopInfographic.loadImpress();
+				}, 4000);
 			};
 			bigImage.src = infographicAsset;
 			bigImage.alt = "Get Big Things Done Infographic";

@@ -27,34 +27,14 @@ export default class DesktopInfographic {
 		this.previousSlideIcon = document.getElementById('previous-slide');
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
+
+		this.impressContainer.setAttribute('data-set-scale-factor', 1);
+		this.$materializeToolTips.tooltip({delay: 50});
 	}
 
 	init() {
 		window.addEventListener('load', () => {
 			console.log("window.on(load)");
-
-			this.impressContainer.setAttribute('data-set-scale-factor', 1);
-
-			this.$materializeToolTips.tooltip({delay: 50});
-
-			this.initSideNav();
-
-			this.showControls();
-
-			Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
-
-			this.showSideNav();
-
-			this.sideNavListItems = document.querySelectorAll('.side-nav > li');
-			this.bigImage = document.querySelector('.big-image');
-			this.bigImage.style.display = 'block';
-
-			setTimeout(() => {
-				this.preloaderWrapper.classList.remove('active');
-				this.showElement(this.bigImage, 'fadeIn');
-
-				this.loadImpress();
-			}, 4000);
 		});
 	}
 

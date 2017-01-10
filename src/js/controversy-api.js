@@ -4,36 +4,18 @@ export default class controversyAPI {
 		this.cardId = '76b02dc7-d246-11e6-861b-0ad881f403bf'; // Example graphic mock
 	}
 
-	init(infographic) {
-		$.get(this.url + 'cards/' + this.cardId, (data) => {
-			this.card = data;
-			this.footnotes = data.footnotes;
-			this.slides = data.slides;
+	init(data) {
+		this.card = data;
+		this.footnotes = data.footnotes;
+		this.slides = data.slides;
 
-			this.impressContainer = document.getElementById('impress');
-			this.sideNav = document.getElementById('slide-out');
+		this.impressContainer = document.getElementById('impress');
+		this.sideNav = document.getElementById('slide-out');
 
-			this.cardSummary = document.querySelector('.title-box .card-summary');
-			this.cardAuthor = document.querySelector('.title-box .card-author');
-			this.cardTitle = document.querySelector('.title-box .card-title');
-			this.authorAvatar = document.querySelector('.title-box img');
-
-			console.log(this.card);
-
-			var markupPromise = new Promise(
-				(resolve, reject) => {
-					this.addMetadataMarkup(resolve, reject);
-					this.addFootnotesMarkup(resolve, reject);
-					this.addSlidesMarkup(resolve, reject);
-				}
-			);
-
-			markupPromise.then(
-				() => {
-					infographic.setupHashChange();
-				}
-			)
-		});
+		this.cardSummary = document.querySelector('.title-box .card-summary');
+		this.cardAuthor = document.querySelector('.title-box .card-author');
+		this.cardTitle = document.querySelector('.title-box .card-title');
+		this.authorAvatar = document.querySelector('.title-box img');
 	}
 
 	generateFootnote(selector, markup) {
