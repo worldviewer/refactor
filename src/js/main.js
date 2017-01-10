@@ -69,12 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
 
-			this.bigImage = document.querySelector('.big-image');
-			this.bigImage.style.display = 'block';
+			desktopInfographic.bigImage = document.querySelector('.big-image');
+			desktopInfographic.bigImage.style.display = 'block';
 
 			setTimeout(() => {
-				this.preloaderWrapper.classList.remove('active');
-				this.showElement(this.bigImage, 'fadeIn');
+				desktopInfographic.preloaderWrapper.classList.remove('active');
+				desktopInfographic.showElement(this.bigImage, 'fadeIn');
 
 				desktopInfographic.loadImpress();
 			}, 4000);			
