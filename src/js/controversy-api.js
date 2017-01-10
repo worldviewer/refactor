@@ -20,10 +20,19 @@ export default class controversyAPI {
 
 			console.log(this.card);
 
-			this.addMetadataMarkup();
-			this.addFootnotesMarkup();
-			this.addSlidesMarkup();
-			infographic.setupHashChange();
+			var markupPromise = new Promise(
+				(resolve, reject) => {
+					this.addMetadataMarkup(resolve, reject);
+					this.addFootnotesMarkup(resolve, reject);
+					this.addSlidesMarkup(resolve, reject);
+				}
+			);
+
+			markupPromise.then(
+				() => {
+					infographic.setupHashChange();
+				}
+			)
 		});
 	}
 
@@ -48,9 +57,11 @@ export default class controversyAPI {
 		this.cardSummary.innerHTML = this.card.metacard.summary;
 		this.cardAuthor.innerHTML = this.card.metacard.author.username;
 		this.authorAvatar.src = this.card.metacard.author.avatar;
+
+		resolve();
 	}
 
-	addFootnotesMarkup() {
+	addFootnotesMarkup(resolve, reject) {
 		this.footnotes.forEach((footnote) => {
 			this.sideNav.appendChild(
 				this.generateFootnote(
@@ -59,9 +70,11 @@ export default class controversyAPI {
 				)
 			);
 		});
+
+		resolve();
 	}
 
-	addSlidesMarkup() {
+	addSlidesMarkup(resolve, reject) {
 		this.slides.forEach((slide) => {
 			this.impressContainer.appendChild(
 				this.generateSlide(
@@ -72,5 +85,7 @@ export default class controversyAPI {
 				)
 			)
 		});
+
+		resolve();
 	}
 }

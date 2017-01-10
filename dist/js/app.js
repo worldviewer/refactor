@@ -567,10 +567,15 @@ var controversyAPI = function () {
 
 				console.log(_this.card);
 
-				_this.addMetadataMarkup();
-				_this.addFootnotesMarkup();
-				_this.addSlidesMarkup();
-				infographic.setupHashChange();
+				var markupPromise = new Promise(function (resolve, reject) {
+					_this.addMetadataMarkup(resolve, reject);
+					_this.addFootnotesMarkup(resolve, reject);
+					_this.addSlidesMarkup(resolve, reject);
+				});
+
+				markupPromise.then(function () {
+					infographic.setupHashChange();
+				});
 			});
 		}
 	}, {
@@ -598,24 +603,30 @@ var controversyAPI = function () {
 			this.cardSummary.innerHTML = this.card.metacard.summary;
 			this.cardAuthor.innerHTML = this.card.metacard.author.username;
 			this.authorAvatar.src = this.card.metacard.author.avatar;
+
+			resolve();
 		}
 	}, {
 		key: 'addFootnotesMarkup',
-		value: function addFootnotesMarkup() {
+		value: function addFootnotesMarkup(resolve, reject) {
 			var _this2 = this;
 
 			this.footnotes.forEach(function (footnote) {
 				_this2.sideNav.appendChild(_this2.generateFootnote(footnote['selector'], footnote['markup']));
 			});
+
+			resolve();
 		}
 	}, {
 		key: 'addSlidesMarkup',
-		value: function addSlidesMarkup() {
+		value: function addSlidesMarkup(resolve, reject) {
 			var _this3 = this;
 
 			this.slides.forEach(function (slide) {
 				_this3.impressContainer.appendChild(_this3.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
 			});
+
+			resolve();
 		}
 	}]);
 
