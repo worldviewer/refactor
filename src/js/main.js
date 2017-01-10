@@ -47,6 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				values => {
 					var pSideNav1 = new Promise(
 						(resolve, reject) => {
+							console.log('pSideNav1');
 							resolve(desktopInfographic.sideNavListItems = 
 								document.querySelectorAll('.side-nav > li'));
 						}
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 					Promise.all([pSideNav1, pSideNav2]).then(
 						values => {
+							console.log('final Promise.all()');
 							desktopInfographic.setupHashChange();
 							desktopInfographic.showSideNav();
 						}

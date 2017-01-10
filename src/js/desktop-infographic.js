@@ -68,6 +68,7 @@ export default class DesktopInfographic {
 		this.$hamburgerCollapseIcon.sideNav('show');
 		this.sideNav.classList.add('active');
 
+		console.log('pSideNav2');
 		resolve();
 	}
 
@@ -112,7 +113,7 @@ export default class DesktopInfographic {
 	// When the URL hash changes, color any related footnote in side nav
 	setupHashChange() {
 		console.log('#impress:');
-		console.log(document.querySelector('#impress'));
+		console.log(document.querySelector('.side-nav'));
 
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');

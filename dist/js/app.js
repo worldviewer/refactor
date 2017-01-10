@@ -588,6 +588,7 @@ var controversyAPI = function () {
 			this.cardAuthor.innerHTML = this.card.metacard.author.username;
 			this.authorAvatar.src = this.card.metacard.author.avatar;
 
+			console.log('pMarkup1');
 			resolve();
 		}
 	}, {
@@ -599,6 +600,7 @@ var controversyAPI = function () {
 				_this.sideNav.appendChild(_this.generateFootnote(footnote['selector'], footnote['markup']));
 			});
 
+			console.log('pMarkup2');
 			resolve();
 		}
 	}, {
@@ -610,6 +612,7 @@ var controversyAPI = function () {
 				_this2.impressContainer.appendChild(_this2.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
 			});
 
+			console.log('pMarkup3');
 			resolve();
 		}
 	}]);
@@ -720,6 +723,7 @@ var DesktopInfographic = function () {
 			this.$hamburgerCollapseIcon.sideNav('show');
 			this.sideNav.classList.add('active');
 
+			console.log('pSideNav2');
 			resolve();
 		}
 	}, {
@@ -778,7 +782,7 @@ var DesktopInfographic = function () {
 			var _this3 = this;
 
 			console.log('#impress:');
-			console.log(document.querySelector('#impress'));
+			console.log(document.querySelector('.side-nav'));
 
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
@@ -1124,6 +1128,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(function (values) {
 					var pSideNav1 = new Promise(function (resolve, reject) {
+						console.log('pSideNav1');
 						resolve(desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li'));
 					});
 
@@ -1132,6 +1137,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					});
 
 					Promise.all([pSideNav1, pSideNav2]).then(function (values) {
+						console.log('final Promise.all()');
 						desktopInfographic.setupHashChange();
 						desktopInfographic.showSideNav();
 					});

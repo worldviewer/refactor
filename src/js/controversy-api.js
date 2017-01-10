@@ -40,6 +40,7 @@ export default class controversyAPI {
 		this.cardAuthor.innerHTML = this.card.metacard.author.username;
 		this.authorAvatar.src = this.card.metacard.author.avatar;
 
+		console.log('pMarkup1');
 		resolve();
 	}
 
@@ -53,6 +54,7 @@ export default class controversyAPI {
 			);
 		});
 
+		console.log('pMarkup2');
 		resolve();
 	}
 
@@ -68,6 +70,7 @@ export default class controversyAPI {
 			)
 		});
 
+		console.log('pMarkup3');
 		resolve();
 	}
 }
