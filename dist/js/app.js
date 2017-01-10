@@ -587,6 +587,7 @@ var controversyAPI = function () {
 			div.setAttribute('data-x', x);
 			div.setAttribute('data-y', y);
 			div.setAttribute('id', selector);
+			div.setAttribute('scale', scale);
 			return div;
 		}
 	}, {
