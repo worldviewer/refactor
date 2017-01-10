@@ -14,7 +14,6 @@ export default class DesktopInfographic {
 
 		// SideNav
 		this.sideNav = document.getElementById('slide-out');
-		this.sideNavListItems = document.querySelectorAll('.side-nav > li');
 
 		this.$hamburgerCollapseIcon = $('.button-collapse');
 		this.hamburgerExpandIcon = document.getElementById('hamburger');
@@ -34,11 +33,11 @@ export default class DesktopInfographic {
 		window.addEventListener('load', () => {
 			console.log("window.on(load)");
 
+			this.sideNavListItems = document.querySelectorAll('.side-nav > li');
+
 			this.impressContainer.setAttribute('data-set-scale-factor', 1);
 
 			this.$materializeToolTips.tooltip({delay: 50});
-
-			this.initSideNav();
 
 			this.showControls();
 
@@ -53,6 +52,7 @@ export default class DesktopInfographic {
 				this.preloaderWrapper.classList.remove('active');
 				this.showElement(this.bigImage, 'fadeIn');
 
+				this.initSideNav();
 				this.loadImpress();
 			}, 4000);
 		});
