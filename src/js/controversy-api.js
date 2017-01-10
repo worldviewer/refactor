@@ -13,7 +13,7 @@ export default class controversyAPI {
 			this.impressContainer = document.getElementById('impress');
 			this.sideNav = document.getElementById('slide-out');
 
-			this.cardSummary = document.querySelector('.title-box .info-left');
+			this.cardSummary = document.querySelector('.title-box .card-summary');
 			this.cardAuthor = document.querySelector('.title-box .card-author');
 			this.cardTitle = document.querySelector('.title-box .card-title');
 			this.authorAvatar = document.querySelector('.title-box img');

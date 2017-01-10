@@ -560,7 +560,7 @@ var controversyAPI = function () {
 				_this.impressContainer = document.getElementById('impress');
 				_this.sideNav = document.getElementById('slide-out');
 
-				_this.cardSummary = document.querySelector('.title-box .info-left');
+				_this.cardSummary = document.querySelector('.title-box .card-summary');
 				_this.cardAuthor = document.querySelector('.title-box .card-author');
 				_this.cardTitle = document.querySelector('.title-box .card-title');
 				_this.authorAvatar = document.querySelector('.title-box img');
