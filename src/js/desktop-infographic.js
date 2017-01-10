@@ -54,9 +54,11 @@ export default class DesktopInfographic {
 		this.showElement(this.discussSlideIcon, 'fadeInRight');
 	}
 
-	showSideNav() {
+	showSideNav(resolve, reject) {
 		this.sideNav.style.display = 'block';
 		this.showElement(this.sideNav, 'fadeInLeft');
+
+		resolve();
 	}
 
 	initSideNav(resolve, reject) {
@@ -68,11 +70,11 @@ export default class DesktopInfographic {
 		this.$hamburgerCollapseIcon.sideNav('show');
 		this.sideNav.classList.add('active');
 
-		console.log('pSideNav2');
+		console.log('pSideNav3');
 		resolve();
 	}
 
-	loadImpress() {
+	loadImpress(resolve, reject) {
 		let setup = () => this.setupHandlers();
 
 		// Add in drag scroll once all animations have completed.  For some reason,
@@ -80,7 +82,8 @@ export default class DesktopInfographic {
 		// the slowdown value in the original code ...
 		$(window).kinetic();
 
-		utils.loadScript("dist/js/impress.js", setup);
+		console.log('pImpress');
+		resolve(utils.loadScript("dist/js/impress.js", setup));
 	}
 
 	setupHandlers() {
@@ -96,7 +99,6 @@ export default class DesktopInfographic {
 		// Allow side-nav collapse by pressing the hamburger icon
 		this.$hamburgerCollapseIcon.on('click', () => {
 			this.sideNav.classList.remove('active');
-
 			this.hamburgerExpandIcon.style.visibility = 'visible';
 
 			console.log("collapse side-nav");
@@ -118,14 +120,15 @@ export default class DesktopInfographic {
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
 
-			// grab active impress.js slide ID
+			// grab active impress.js slide ID, active class is applied by impress.js
 			let currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 			console.log("current slide hash: " + currentSlideHash);
 
 			// toggle the active-slide class for the list item with that ID
-			this.sideNavListItems.forEach((element) => 
-				element.classList.remove('active-slide'));
+			this.sideNavListItems.forEach((element) => {
+				element.classList.remove('active-slide')
+			});
 
 			let activeSlide = document.querySelector('.side-nav li[data-slide=\"' +
 				currentSlideHash + '\"]');
@@ -138,9 +141,10 @@ export default class DesktopInfographic {
 		// Clicking a footnote should jump to the related slide
 		this.sideNavListItems.forEach((element) => 
 			element.addEventListener('click', () => {
-				console.log('click-induced transition');
+				console.log('click-induced transition:');
+				console.log(element);
 
-				window.location.hash = '#' + element.getAttribute('data-slide');
+				window.location.hash = '#' + this.getAttribute('data-slide');
 			})
 		);
 

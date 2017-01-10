@@ -10,9 +10,11 @@
 	<!-- Must significantly precede body to prevent the flash of large image which occurs when image is cached, and therefore loads before document.ready fires -->
 
 	<script>
-		function bigImageLoaded(img) {
+		function bigImageLoaded(img, resolve, reject) {
 			var imgWrapper = img.parentNode;
 			imgWrapper.className += imgWrapper.className ? ' loaded' : 'loaded';
+
+			resolve();
 		}
 	</script>
 

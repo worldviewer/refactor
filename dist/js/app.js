@@ -708,9 +708,11 @@ var DesktopInfographic = function () {
 		}
 	}, {
 		key: 'showSideNav',
-		value: function showSideNav() {
+		value: function showSideNav(resolve, reject) {
 			this.sideNav.style.display = 'block';
 			this.showElement(this.sideNav, 'fadeInLeft');
+
+			resolve();
 		}
 	}, {
 		key: 'initSideNav',
@@ -723,12 +725,12 @@ var DesktopInfographic = function () {
 			this.$hamburgerCollapseIcon.sideNav('show');
 			this.sideNav.classList.add('active');
 
-			console.log('pSideNav2');
+			console.log('pSideNav3');
 			resolve();
 		}
 	}, {
 		key: 'loadImpress',
-		value: function loadImpress() {
+		value: function loadImpress(resolve, reject) {
 			var _this = this;
 
 			var setup = function setup() {
@@ -740,7 +742,8 @@ var DesktopInfographic = function () {
 			// the slowdown value in the original code ...
 			$(window).kinetic();
 
-			_utils2.default.loadScript("dist/js/impress.js", setup);
+			console.log('pImpress');
+			resolve(_utils2.default.loadScript("dist/js/impress.js", setup));
 		}
 	}, {
 		key: 'setupHandlers',
@@ -760,7 +763,6 @@ var DesktopInfographic = function () {
 			// Allow side-nav collapse by pressing the hamburger icon
 			this.$hamburgerCollapseIcon.on('click', function () {
 				_this2.sideNav.classList.remove('active');
-
 				_this2.hamburgerExpandIcon.style.visibility = 'visible';
 
 				console.log("collapse side-nav");
@@ -787,14 +789,14 @@ var DesktopInfographic = function () {
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
 
-				// grab active impress.js slide ID
+				// grab active impress.js slide ID, active class is applied by impress.js
 				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 				console.log("current slide hash: " + currentSlideHash);
 
 				// toggle the active-slide class for the list item with that ID
 				_this3.sideNavListItems.forEach(function (element) {
-					return element.classList.remove('active-slide');
+					element.classList.remove('active-slide');
 				});
 
 				var activeSlide = document.querySelector('.side-nav li[data-slide=\"' + currentSlideHash + '\"]');
@@ -807,9 +809,10 @@ var DesktopInfographic = function () {
 			// Clicking a footnote should jump to the related slide
 			this.sideNavListItems.forEach(function (element) {
 				return element.addEventListener('click', function () {
-					console.log('click-induced transition');
+					console.log('click-induced transition:');
+					console.log(element);
 
-					window.location.hash = '#' + element.getAttribute('data-slide');
+					window.location.hash = '#' + _this3.getAttribute('data-slide');
 				});
 			});
 
@@ -1095,6 +1098,15 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var infographic = new _infographic2.default();
 var infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
+var pMarkup1 = void 0,
+    pMarkup2 = void 0,
+    pMarkup3 = void 0,
+    pSideNav1 = void 0,
+    pSideNav2 = void 0,
+    pSideNav3 = void 0,
+    pImpress = void 0,
+    pImage = void 0;
+
 document.addEventListener('DOMContentLoaded', function () {
 	console.log('document.ready()');
 
@@ -1114,32 +1126,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				console.log(api.card);
 
-				var pMarkup1 = new Promise(function (resolve, reject) {
+				pMarkup1 = new Promise(function (resolve, reject) {
 					api.addMetadataMarkup(resolve, reject);
 				});
 
-				var pMarkup2 = new Promise(function (resolve, reject) {
+				pMarkup2 = new Promise(function (resolve, reject) {
 					api.addFootnotesMarkup(resolve, reject);
 				});
 
-				var pMarkup3 = new Promise(function (resolve, reject) {
+				pMarkup3 = new Promise(function (resolve, reject) {
 					api.addSlidesMarkup(resolve, reject);
 				});
 
+				// Once slides and footnotes are received from API ...
 				Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(function (values) {
-					var pSideNav1 = new Promise(function (resolve, reject) {
+					pSideNav1 = new Promise(function (resolve, reject) {
 						console.log('pSideNav1');
 						resolve(desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li'));
 					});
 
-					var pSideNav2 = new Promise(function (resolve, reject) {
+					pSideNav2 = new Promise(function (resolve, reject) {
 						desktopInfographic.initSideNav(resolve, reject);
 					});
 
+					// Show SideNav once it's constructed
 					Promise.all([pSideNav1, pSideNav2]).then(function (values) {
-						console.log('final Promise.all()');
-						desktopInfographic.setupHashChange();
-						desktopInfographic.showSideNav();
+						pSideNav3 = new Promise(function (resolve, reject) {
+							desktopInfographic.showSideNav(resolve, reject);
+						});
 					});
 				});
 			});
@@ -1155,21 +1169,31 @@ document.addEventListener('DOMContentLoaded', function () {
 				console.log('infographic loaded.');
 
 				// For flash of content on page load
-				bigImageLoaded(this);
+				pImage = new Promise(function (resolve, reject) {
+					bigImageLoaded(_this, resolve, reject);
+				});
 
-				desktopInfographic.showControls();
+				pImage.then(function () {
+					Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
 
-				Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
-
-				desktopInfographic.bigImage = document.querySelector('.big-image');
-				desktopInfographic.bigImage.style.display = 'block';
-
-				setTimeout(function () {
+					desktopInfographic.showControls();
+					desktopInfographic.bigImage = document.querySelector('.big-image');
+					desktopInfographic.bigImage.style.display = 'block';
 					desktopInfographic.preloaderWrapper.classList.remove('active');
 					desktopInfographic.showElement(_this, 'fadeIn');
 
-					desktopInfographic.loadImpress();
-				}, 4000);
+					pImpress = new Promise(function (resolve, reject) {
+						desktopInfographic.loadImpress(resolve, reject);
+					});
+
+					// Wait to setup the hash change event handler until Impress and large image are loaded
+					Promise.all([pImpress, pSideNav3]).then(function (values) {
+						console.log('this must happen last');
+						desktopInfographic.setupHashChange();
+					});
+				});
+
+				setTimeout(function () {}, 4000);
 			};
 			bigImage.src = infographicAsset;
 			bigImage.alt = "Get Big Things Done Infographic";

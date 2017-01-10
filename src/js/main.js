@@ -7,6 +7,10 @@ import utils from './utils.js';
 let infographic = new Infographic();
 let infographicAsset = "dist/assets/img-desktop/get-big-things-done-1.1.jpg";
 
+let pMarkup1, pMarkup2, pMarkup3,
+	pSideNav1, pSideNav2, pSideNav3,
+	pImpress, pImage;
+
 document.addEventListener('DOMContentLoaded', () => {
 	console.log('document.ready()');
 
@@ -25,27 +29,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			console.log(api.card);
 
-			var pMarkup1 = new Promise(
+			pMarkup1 = new Promise(
 				(resolve, reject) => {
 					api.addMetadataMarkup(resolve, reject);
 				}
 			);
 
-			var pMarkup2 = new Promise(
+			pMarkup2 = new Promise(
 				(resolve, reject) => {
 					api.addFootnotesMarkup(resolve, reject);
 				}
 			);
 
-			var pMarkup3 = new Promise(
+			pMarkup3 = new Promise(
 				(resolve, reject) => {
 					api.addSlidesMarkup(resolve, reject);
 				}
 			);
 
+			// Once slides and footnotes are received from API ...
 			Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(
 				values => {
-					var pSideNav1 = new Promise(
+					pSideNav1 = new Promise(
 						(resolve, reject) => {
 							console.log('pSideNav1');
 							resolve(desktopInfographic.sideNavListItems = 
@@ -53,17 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
 						}
 					);
 
-					var pSideNav2 = new Promise(
+					pSideNav2 = new Promise(
 						(resolve, reject) => {
 							desktopInfographic.initSideNav(resolve, reject);
 						}
 					);
 
+					// Show SideNav once it's constructed
 					Promise.all([pSideNav1, pSideNav2]).then(
 						values => {
-							console.log('final Promise.all()');
-							desktopInfographic.setupHashChange();
-							desktopInfographic.showSideNav();
+							pSideNav3 = new Promise(
+								(resolve, reject) => {
+									desktopInfographic.showSideNav(resolve, reject);
+								}
+							)
 						}
 					)
 				}
@@ -79,20 +87,39 @@ document.addEventListener('DOMContentLoaded', () => {
 			console.log('infographic loaded.');
 
 			// For flash of content on page load
-			bigImageLoaded(this);
+			pImage = new Promise(
+				(resolve, reject) => {
+					bigImageLoaded(this, resolve, reject);
+				}
+			);
 
-			desktopInfographic.showControls();
+			pImage.then(
+				() => {
+					Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
 
-			Materialize.toast('Use < / > keys to navigate, + / - to zoom', 10000);
+					desktopInfographic.showControls();
+					desktopInfographic.bigImage = document.querySelector('.big-image');
+					desktopInfographic.bigImage.style.display = 'block';
+					desktopInfographic.preloaderWrapper.classList.remove('active');
+					desktopInfographic.showElement(this, 'fadeIn');
 
-			desktopInfographic.bigImage = document.querySelector('.big-image');
-			desktopInfographic.bigImage.style.display = 'block';
+					pImpress = new Promise(
+						(resolve, reject) => {
+							desktopInfographic.loadImpress(resolve, reject);
+						}
+					);
+
+					// Wait to setup the hash change event handler until Impress and large image are loaded
+					Promise.all([pImpress, pSideNav3]).then(
+						values => {
+							console.log('this must happen last')
+							desktopInfographic.setupHashChange();
+						}
+					);
+				}
+			)
 
 			setTimeout(() => {
-				desktopInfographic.preloaderWrapper.classList.remove('active');
-				desktopInfographic.showElement(this, 'fadeIn');
-
-				desktopInfographic.loadImpress();
 			}, 4000);			
 		}
 		bigImage.src = infographicAsset;
