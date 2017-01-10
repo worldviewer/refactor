@@ -711,7 +711,7 @@ var DesktopInfographic = function () {
 		}
 	}, {
 		key: 'initSideNav',
-		value: function initSideNav() {
+		value: function initSideNav(resolve, reject) {
 			// Expand sideNav
 			this.$hamburgerCollapseIcon.sideNav({
 				menuWidth: 360 // Default is 240
@@ -719,6 +719,8 @@ var DesktopInfographic = function () {
 
 			this.$hamburgerCollapseIcon.sideNav('show');
 			this.sideNav.classList.add('active');
+
+			resolve();
 		}
 	}, {
 		key: 'loadImpress',
@@ -1107,21 +1109,29 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				console.log(api.card);
 
-				var markupPromise = new Promise(function (resolve, reject) {
+				var pMarkup1 = new Promise(function (resolve, reject) {
 					api.addMetadataMarkup(resolve, reject);
+				});
+
+				var pMarkup2 = new Promise(function (resolve, reject) {
 					api.addFootnotesMarkup(resolve, reject);
+				});
+
+				var pMarkup3 = new Promise(function (resolve, reject) {
 					api.addSlidesMarkup(resolve, reject);
 				});
 
-				markupPromise.then(function () {
-					var sideNavPromise = new Promise(function (resolve, reject) {
+				Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(function (values) {
+					var pSideNav1 = new Promise(function (resolve, reject) {
 						resolve(desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li'));
 					});
 
-					sideNavPromise.then(function () {
-						desktopInfographic.setupHashChange();
-						desktopInfographic.showSideNav();
+					var pSideNav2 = new Promise(function (resolve, reject) {
+						desktopInfographic.initSideNav(resolve, reject);
 					});
+				}).all([pSideNav1, pSideNav2]).then(function (values) {
+					desktopInfographic.setupHashChange();
+					desktopInfographic.showSideNav();
 				});
 			});
 
@@ -1137,8 +1147,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 				// For flash of content on page load
 				bigImageLoaded(this);
-
-				desktopInfographic.initSideNav();
 
 				desktopInfographic.showControls();
 

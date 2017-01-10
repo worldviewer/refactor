@@ -59,14 +59,16 @@ export default class DesktopInfographic {
 		this.showElement(this.sideNav, 'fadeInLeft');
 	}
 
-	initSideNav() {
+	initSideNav(resolve, reject) {
 		// Expand sideNav
 		this.$hamburgerCollapseIcon.sideNav({
 			menuWidth: 360 // Default is 240
 		});
 
 		this.$hamburgerCollapseIcon.sideNav('show');
-		this.sideNav.classList.add('active');		
+		this.sideNav.classList.add('active');
+
+		resolve();
 	}
 
 	loadImpress() {

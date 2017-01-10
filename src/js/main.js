@@ -25,31 +25,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			console.log(api.card);
 
-			var markupPromise = new Promise(
+			var pMarkup1 = new Promise(
 				(resolve, reject) => {
 					api.addMetadataMarkup(resolve, reject);
+				}
+			);
+
+			var pMarkup2 = new Promise(
+				(resolve, reject) => {
 					api.addFootnotesMarkup(resolve, reject);
+				}
+			);
+
+			var pMarkup3 = new Promise(
+				(resolve, reject) => {
 					api.addSlidesMarkup(resolve, reject);
 				}
 			);
 
-			markupPromise.then(
-				() => {
-					var sideNavPromise = new Promise(
+			Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(
+				values => {
+					var pSideNav1 = new Promise(
 						(resolve, reject) => {
 							resolve(desktopInfographic.sideNavListItems = 
 								document.querySelectorAll('.side-nav > li'));
 						}
 					);
 
-					sideNavPromise.then(
-						() => {
-							desktopInfographic.setupHashChange();
-							desktopInfographic.showSideNav();
+					var pSideNav2 = new Promise(
+						(resolve, reject) => {
+							desktopInfographic.initSideNav(resolve, reject);
 						}
-					)
+					);
 				}
-			);
+			).all([pSideNav1, pSideNav2]).then(
+				values => {
+					desktopInfographic.setupHashChange();
+					desktopInfographic.showSideNav();
+				}
+			)
 		});
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
@@ -62,8 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			// For flash of content on page load
 			bigImageLoaded(this);
-
-			desktopInfographic.initSideNav();
 
 			desktopInfographic.showControls();
 
