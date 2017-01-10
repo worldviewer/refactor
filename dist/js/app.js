@@ -574,10 +574,11 @@ var controversyAPI = function () {
 		key: 'generateSlide',
 		value: function generateSlide(selector, x, y, scale) {
 			var div = document.createElement('div');
+			div.setAttribute('id', selector);
 			div.setAttribute('data-x', x);
 			div.setAttribute('data-y', y);
-			div.setAttribute('id', selector);
 			div.setAttribute('scale', scale);
+			div.classList.add('step');
 			return div;
 		}
 	}, {
@@ -783,7 +784,7 @@ var DesktopInfographic = function () {
 		value: function setupHashChange() {
 			var _this3 = this;
 
-			console.log('#impress:');
+			console.log('.side-nav:');
 			console.log(document.querySelector('.side-nav'));
 
 			window.addEventListener('hashchange', function (e) {

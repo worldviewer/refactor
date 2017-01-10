@@ -114,7 +114,7 @@ export default class DesktopInfographic {
 
 	// When the URL hash changes, color any related footnote in side nav
 	setupHashChange() {
-		console.log('#impress:');
+		console.log('.side-nav:');
 		console.log(document.querySelector('.side-nav'));
 
 		window.addEventListener('hashchange', (e) => {

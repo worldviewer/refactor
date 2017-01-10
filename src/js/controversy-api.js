@@ -27,10 +27,11 @@ export default class controversyAPI {
 
 	generateSlide(selector, x, y, scale) {
 		let div = document.createElement('div');
+		div.setAttribute('id', selector);
 		div.setAttribute('data-x', x);
 		div.setAttribute('data-y', y);
-		div.setAttribute('id', selector);
 		div.setAttribute('scale', scale);
+		div.classList.add('step');
 		return div;
 	}
 
