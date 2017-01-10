@@ -75,7 +75,7 @@ export default class DesktopInfographic {
 	}
 
 	loadImpress(resolve, reject) {
-		let setup = () => this.setupHandlers();
+		let setup = () => this.setupHandlers(resolve, reject);
 
 		// Add in drag scroll once all animations have completed.  For some reason,
 		// I'm not able to get the deceleration to work for this, even when I modify
@@ -83,16 +83,16 @@ export default class DesktopInfographic {
 		$(window).kinetic();
 
 		console.log('pImpress');
-		resolve(utils.loadScript("dist/js/impress.js", setup));
+		utils.loadScript("dist/js/impress.js", setup);
 	}
 
-	setupHandlers() {
+	setupHandlers(resolve, reject) {
 		impress().init();
 
 		this.setupHamburger();
 		this.setupDiscuss();
 		this.setupNextPrev();
-		this.setupKeypresses();
+		this.setupKeypresses(resolve, reject);
 	}
 
 	setupHamburger() {
@@ -183,7 +183,7 @@ export default class DesktopInfographic {
 		});
 	}
 
-	setupKeypresses() {
+	setupKeypresses(resolve, reject) {
 		let keyboard = new Keyboard(
 			this.impressContainer,
 			this.sideNav,
@@ -194,5 +194,7 @@ export default class DesktopInfographic {
 		keyboard.init();
 
 		this.setupZooms(keyboard);
+
+		resolve();
 	}
 }

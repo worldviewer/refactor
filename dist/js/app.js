@@ -734,7 +734,7 @@ var DesktopInfographic = function () {
 			var _this = this;
 
 			var setup = function setup() {
-				return _this.setupHandlers();
+				return _this.setupHandlers(resolve, reject);
 			};
 
 			// Add in drag scroll once all animations have completed.  For some reason,
@@ -743,17 +743,17 @@ var DesktopInfographic = function () {
 			$(window).kinetic();
 
 			console.log('pImpress');
-			resolve(_utils2.default.loadScript("dist/js/impress.js", setup));
+			_utils2.default.loadScript("dist/js/impress.js", setup);
 		}
 	}, {
 		key: 'setupHandlers',
-		value: function setupHandlers() {
+		value: function setupHandlers(resolve, reject) {
 			impress().init();
 
 			this.setupHamburger();
 			this.setupDiscuss();
 			this.setupNextPrev();
-			this.setupKeypresses();
+			this.setupKeypresses(resolve, reject);
 		}
 	}, {
 		key: 'setupHamburger',
@@ -855,12 +855,14 @@ var DesktopInfographic = function () {
 		}
 	}, {
 		key: 'setupKeypresses',
-		value: function setupKeypresses() {
+		value: function setupKeypresses(resolve, reject) {
 			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.$hamburgerCollapseIcon, this.hamburgerExpandIcon);
 
 			keyboard.init();
 
 			this.setupZooms(keyboard);
+
+			resolve();
 		}
 	}]);
 
