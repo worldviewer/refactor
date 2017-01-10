@@ -598,7 +598,7 @@ var controversyAPI = function () {
 		}
 	}, {
 		key: 'addMetadataMarkup',
-		value: function addMetadataMarkup() {
+		value: function addMetadataMarkup(resolve, reject) {
 			this.cardTitle.innerHTML = this.card.metacard.name;
 			this.cardSummary.innerHTML = this.card.metacard.summary;
 			this.cardAuthor.innerHTML = this.card.metacard.author.username;
