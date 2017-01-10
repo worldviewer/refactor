@@ -812,7 +812,7 @@ var DesktopInfographic = function () {
 					console.log('click-induced transition:');
 					console.log(element);
 
-					window.location.hash = '#' + _this3.getAttribute('data-slide');
+					window.location.hash = '#' + element.getAttribute('data-slide');
 				});
 			});
 

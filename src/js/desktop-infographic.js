@@ -144,7 +144,7 @@ export default class DesktopInfographic {
 				console.log('click-induced transition:');
 				console.log(element);
 
-				window.location.hash = '#' + this.getAttribute('data-slide');
+				window.location.hash = '#' + element.getAttribute('data-slide');
 			})
 		);
 
