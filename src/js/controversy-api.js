@@ -1,3 +1,4 @@
+// Currently using Google+ to serve assets, todo: switch to Usergrid
 export default class controversyAPI {
 	constructor() {
 		this.url = 'https://worldviewer-test.apigee.net/controversies-of-science/v1/';
@@ -15,7 +16,6 @@ export default class controversyAPI {
 		this.cardSummary = document.querySelector('.title-box .card-summary');
 		this.cardAuthor = document.querySelector('.title-box .card-author');
 		this.cardTitle = document.querySelector('.title-box .card-title');
-		this.authorAvatar = document.querySelector('.title-box img');
 	}
 
 	generateFootnote(selector, markup) {
@@ -35,11 +35,19 @@ export default class controversyAPI {
 		return div;
 	}
 
+	createAvatar() {
+		let authorAvatar = document.createElement('img');
+		authorAvatar.classList.add('author-avatar');
+		authorAvatar.src = this.card.metacard.author.avatar;
+		this.cardSummary.appendChild(authorAvatar);
+	}
+
 	addMetadataMarkup(resolve, reject) {
 		this.cardTitle.innerHTML = this.card.metacard.name;
 		this.cardSummary.innerHTML = this.card.metacard.summary;
 		this.cardAuthor.innerHTML = this.card.metacard.author.username;
-		this.authorAvatar.src = this.card.metacard.author.avatar;
+
+		this.createAvatar();
 
 		resolve();
 	}

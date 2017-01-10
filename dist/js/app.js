@@ -539,6 +539,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+// Currently using Google+ to serve assets, todo: switch to Usergrid
 var controversyAPI = function () {
 	function controversyAPI() {
 		_classCallCheck(this, controversyAPI);
@@ -560,7 +561,6 @@ var controversyAPI = function () {
 			this.cardSummary = document.querySelector('.title-box .card-summary');
 			this.cardAuthor = document.querySelector('.title-box .card-author');
 			this.cardTitle = document.querySelector('.title-box .card-title');
-			this.authorAvatar = document.querySelector('.title-box img');
 		}
 	}, {
 		key: 'generateFootnote',
@@ -582,12 +582,21 @@ var controversyAPI = function () {
 			return div;
 		}
 	}, {
+		key: 'createAvatar',
+		value: function createAvatar() {
+			var authorAvatar = document.createElement('img');
+			authorAvatar.classList.add('author-avatar');
+			authorAvatar.src = this.card.metacard.author.avatar;
+			this.cardSummary.appendChild(authorAvatar);
+		}
+	}, {
 		key: 'addMetadataMarkup',
 		value: function addMetadataMarkup(resolve, reject) {
 			this.cardTitle.innerHTML = this.card.metacard.name;
 			this.cardSummary.innerHTML = this.card.metacard.summary;
 			this.cardAuthor.innerHTML = this.card.metacard.author.username;
-			this.authorAvatar.src = this.card.metacard.author.avatar;
+
+			this.createAvatar();
 
 			resolve();
 		}
