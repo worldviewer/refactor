@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		$.get(api.url + 'cards/' + api.cardId, (data) => {
 			api.init(data);
 
+			console.log('API response:')
 			console.log(api.card);
 
 			pMarkup1 = new Promise(
@@ -47,12 +48,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				}
 			);
 
-			// Once slides and footnotes are received from API ...
+			// Once metadata, slides and footnotes are all received from API ...
 			Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(
 				values => {
 					pSideNav1 = new Promise(
 						(resolve, reject) => {
-							console.log('pSideNav1');
 							resolve(desktopInfographic.sideNavListItems = 
 								document.querySelectorAll('.side-nav > li'));
 						}
@@ -73,7 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
 								}
 							)
 						}
+					).catch(
+						reason => {
+							console.log('Problem initializing side nav');
+							console.log(reason);
+						}
 					)
+				}
+			).catch(
+				reason => {
+					console.log('Problem loading controversy card data ...')
+					console.log(reason);
 				}
 			)
 		});
@@ -112,15 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
 					// Wait to setup the hash change event handler until Impress and large image are loaded
 					Promise.all([pImpress, pSideNav3]).then(
 						values => {
-							console.log('this must happen last')
 							desktopInfographic.setupHashChange();
 						}
-					);
+					).catch(
+						reason => {
+							console.log('Problem loading either impress.js or image ...')
+							console.log(reason);
+						}
+					)
 				}
-			)
-
-			setTimeout(() => {
-			}, 4000);			
+			)			
 		}
 		bigImage.src = infographicAsset;
 		bigImage.alt = "Get Big Things Done Infographic";

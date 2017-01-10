@@ -28,14 +28,7 @@ export default class DesktopInfographic {
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
 
-		this.impressContainer.setAttribute('data-set-scale-factor', 1);
 		this.$materializeToolTips.tooltip({delay: 50});
-	}
-
-	init() {
-		window.addEventListener('load', () => {
-			console.log("window.on(load)");
-		});
 	}
 
 	showElement(element, fade) {
@@ -70,7 +63,6 @@ export default class DesktopInfographic {
 		this.$hamburgerCollapseIcon.sideNav('show');
 		this.sideNav.classList.add('active');
 
-		console.log('pSideNav3');
 		resolve();
 	}
 
@@ -82,7 +74,6 @@ export default class DesktopInfographic {
 		// the slowdown value in the original code ...
 		$(window).kinetic();
 
-		console.log('pImpress');
 		utils.loadScript("dist/js/impress.js", setup);
 	}
 
@@ -114,9 +105,6 @@ export default class DesktopInfographic {
 
 	// When the URL hash changes, color any related footnote in side nav
 	setupHashChange() {
-		console.log('.side-nav:');
-		console.log(document.querySelector('.side-nav'));
-
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
 
@@ -192,7 +180,6 @@ export default class DesktopInfographic {
 		);
 
 		keyboard.init();
-
 		this.setupZooms(keyboard);
 
 		resolve();

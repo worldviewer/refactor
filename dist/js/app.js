@@ -589,7 +589,6 @@ var controversyAPI = function () {
 			this.cardAuthor.innerHTML = this.card.metacard.author.username;
 			this.authorAvatar.src = this.card.metacard.author.avatar;
 
-			console.log('pMarkup1');
 			resolve();
 		}
 	}, {
@@ -601,7 +600,6 @@ var controversyAPI = function () {
 				_this.sideNav.appendChild(_this.generateFootnote(footnote['selector'], footnote['markup']));
 			});
 
-			console.log('pMarkup2');
 			resolve();
 		}
 	}, {
@@ -613,7 +611,6 @@ var controversyAPI = function () {
 				_this2.impressContainer.appendChild(_this2.generateSlide(slide['selector'], slide['x'], slide['y'], slide['scale']));
 			});
 
-			console.log('pMarkup3');
 			resolve();
 		}
 	}]);
@@ -678,18 +675,10 @@ var DesktopInfographic = function () {
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
 
-		this.impressContainer.setAttribute('data-set-scale-factor', 1);
 		this.$materializeToolTips.tooltip({ delay: 50 });
 	}
 
 	_createClass(DesktopInfographic, [{
-		key: 'init',
-		value: function init() {
-			window.addEventListener('load', function () {
-				console.log("window.on(load)");
-			});
-		}
-	}, {
 		key: 'showElement',
 		value: function showElement(element, fade) {
 			element.classList.add('animated');
@@ -726,7 +715,6 @@ var DesktopInfographic = function () {
 			this.$hamburgerCollapseIcon.sideNav('show');
 			this.sideNav.classList.add('active');
 
-			console.log('pSideNav3');
 			resolve();
 		}
 	}, {
@@ -743,7 +731,6 @@ var DesktopInfographic = function () {
 			// the slowdown value in the original code ...
 			$(window).kinetic();
 
-			console.log('pImpress');
 			_utils2.default.loadScript("dist/js/impress.js", setup);
 		}
 	}, {
@@ -783,9 +770,6 @@ var DesktopInfographic = function () {
 		key: 'setupHashChange',
 		value: function setupHashChange() {
 			var _this3 = this;
-
-			console.log('.side-nav:');
-			console.log(document.querySelector('.side-nav'));
 
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
@@ -860,7 +844,6 @@ var DesktopInfographic = function () {
 			var keyboard = new _keyboard2.default(this.impressContainer, this.sideNav, this.$hamburgerCollapseIcon, this.hamburgerExpandIcon);
 
 			keyboard.init();
-
 			this.setupZooms(keyboard);
 
 			resolve();
@@ -1127,6 +1110,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			$.get(api.url + 'cards/' + api.cardId, function (data) {
 				api.init(data);
 
+				console.log('API response:');
 				console.log(api.card);
 
 				pMarkup1 = new Promise(function (resolve, reject) {
@@ -1141,10 +1125,9 @@ document.addEventListener('DOMContentLoaded', function () {
 					api.addSlidesMarkup(resolve, reject);
 				});
 
-				// Once slides and footnotes are received from API ...
+				// Once metadata, slides and footnotes are all received from API ...
 				Promise.all([pMarkup1, pMarkup2, pMarkup3]).then(function (values) {
 					pSideNav1 = new Promise(function (resolve, reject) {
-						console.log('pSideNav1');
 						resolve(desktopInfographic.sideNavListItems = document.querySelectorAll('.side-nav > li'));
 					});
 
@@ -1157,7 +1140,13 @@ document.addEventListener('DOMContentLoaded', function () {
 						pSideNav3 = new Promise(function (resolve, reject) {
 							desktopInfographic.showSideNav(resolve, reject);
 						});
+					}).catch(function (reason) {
+						console.log('Problem initializing side nav');
+						console.log(reason);
 					});
+				}).catch(function (reason) {
+					console.log('Problem loading controversy card data ...');
+					console.log(reason);
 				});
 			});
 
@@ -1191,12 +1180,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 					// Wait to setup the hash change event handler until Impress and large image are loaded
 					Promise.all([pImpress, pSideNav3]).then(function (values) {
-						console.log('this must happen last');
 						desktopInfographic.setupHashChange();
+					}).catch(function (reason) {
+						console.log('Problem loading either impress.js or image ...');
+						console.log(reason);
 					});
 				});
-
-				setTimeout(function () {}, 4000);
 			};
 			bigImage.src = infographicAsset;
 			bigImage.alt = "Get Big Things Done Infographic";
