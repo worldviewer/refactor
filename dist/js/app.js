@@ -808,7 +808,9 @@ var DesktopInfographic = function () {
 				console.log('slide transition');
 
 				// grab active impress.js slide ID
-				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
+				var currentSlide = document.querySelector('#impress .active') || document.querySelector('#impress #intro');
+
+				var currentSlideHash = currentSlide.getAttribute('id');
 
 				console.log("current slide hash: " + currentSlideHash);
 
