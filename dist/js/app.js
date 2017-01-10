@@ -780,10 +780,11 @@ var DesktopInfographic = function () {
 			window.addEventListener('hashchange', function (e) {
 				console.log('slide transition');
 
-				// grab active impress.js slide ID
-				var currentSlide = document.querySelector('#impress .active') || document.querySelector('#impress #intro');
+				console.log('#impress:');
+				console.log(document.querySelector('#impress'));
 
-				var currentSlideHash = currentSlide.getAttribute('id');
+				// grab active impress.js slide ID
+				var currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 				console.log("current slide hash: " + currentSlideHash);
 

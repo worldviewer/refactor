@@ -114,11 +114,11 @@ export default class DesktopInfographic {
 		window.addEventListener('hashchange', (e) => {
 			console.log('slide transition');
 
-			// grab active impress.js slide ID
-			let currentSlide = document.querySelector('#impress .active') ||
-				document.querySelector('#impress #intro');
+			console.log('#impress:');
+			console.log(document.querySelector('#impress'));
 
-			let currentSlideHash = currentSlide.getAttribute('id');
+			// grab active impress.js slide ID
+			let currentSlideHash = document.querySelector('#impress .active').getAttribute('id');
 
 			console.log("current slide hash: " + currentSlideHash);
 
