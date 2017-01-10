@@ -699,11 +699,11 @@ var DesktopInfographic = function () {
 			window.addEventListener('load', function () {
 				console.log("window.on(load)");
 
-				_this.sideNavListItems = document.querySelectorAll('.side-nav > li');
-
 				_this.impressContainer.setAttribute('data-set-scale-factor', 1);
 
 				_this.$materializeToolTips.tooltip({ delay: 50 });
+
+				_this.initSideNav();
 
 				_this.showControls();
 
@@ -711,6 +711,7 @@ var DesktopInfographic = function () {
 
 				_this.showSideNav();
 
+				_this.sideNavListItems = document.querySelectorAll('.side-nav > li');
 				_this.bigImage = document.querySelector('.big-image');
 				_this.bigImage.style.display = 'block';
 
@@ -718,7 +719,6 @@ var DesktopInfographic = function () {
 					_this.preloaderWrapper.classList.remove('active');
 					_this.showElement(_this.bigImage, 'fadeIn');
 
-					_this.initSideNav();
 					_this.loadImpress();
 				}, 4000);
 			});

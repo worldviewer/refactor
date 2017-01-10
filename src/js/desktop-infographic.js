@@ -33,11 +33,11 @@ export default class DesktopInfographic {
 		window.addEventListener('load', () => {
 			console.log("window.on(load)");
 
-			this.sideNavListItems = document.querySelectorAll('.side-nav > li');
-
 			this.impressContainer.setAttribute('data-set-scale-factor', 1);
 
 			this.$materializeToolTips.tooltip({delay: 50});
+
+			this.initSideNav();
 
 			this.showControls();
 
@@ -45,6 +45,7 @@ export default class DesktopInfographic {
 
 			this.showSideNav();
 
+			this.sideNavListItems = document.querySelectorAll('.side-nav > li');
 			this.bigImage = document.querySelector('.big-image');
 			this.bigImage.style.display = 'block';
 
@@ -52,7 +53,6 @@ export default class DesktopInfographic {
 				this.preloaderWrapper.classList.remove('active');
 				this.showElement(this.bigImage, 'fadeIn');
 
-				this.initSideNav();
 				this.loadImpress();
 			}, 4000);
 		});
