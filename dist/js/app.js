@@ -1129,9 +1129,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					var pSideNav2 = new Promise(function (resolve, reject) {
 						desktopInfographic.initSideNav(resolve, reject);
 					});
-				}).all([pSideNav1, pSideNav2]).then(function (values) {
-					desktopInfographic.setupHashChange();
-					desktopInfographic.showSideNav();
+
+					Promise.all([pSideNav1, pSideNav2]).then(function (values) {
+						desktopInfographic.setupHashChange();
+						desktopInfographic.showSideNav();
+					});
 				});
 			});
 

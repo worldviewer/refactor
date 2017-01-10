@@ -57,11 +57,13 @@ document.addEventListener('DOMContentLoaded', () => {
 							desktopInfographic.initSideNav(resolve, reject);
 						}
 					);
-				}
-			).all([pSideNav1, pSideNav2]).then(
-				values => {
-					desktopInfographic.setupHashChange();
-					desktopInfographic.showSideNav();
+
+					Promise.all([pSideNav1, pSideNav2]).then(
+						values => {
+							desktopInfographic.setupHashChange();
+							desktopInfographic.showSideNav();
+						}
+					)
 				}
 			)
 		});
