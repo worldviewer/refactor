@@ -549,7 +549,7 @@ var controversyAPI = function () {
 
 	_createClass(controversyAPI, [{
 		key: 'init',
-		value: function init() {
+		value: function init(infographic) {
 			var _this = this;
 
 			$.get(this.url + 'cards/' + this.cardId, function (data) {
@@ -570,6 +570,7 @@ var controversyAPI = function () {
 				_this.addMetadataMarkup();
 				_this.addFootnotesMarkup();
 				_this.addSlidesMarkup();
+				infographic.setupHashChange();
 			});
 		}
 	}, {
@@ -679,8 +680,6 @@ var DesktopInfographic = function () {
 		this.previousSlideIcon = document.getElementById('previous-slide');
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
-
-		this.init();
 	}
 
 	_createClass(DesktopInfographic, [{
@@ -770,7 +769,6 @@ var DesktopInfographic = function () {
 			impress().init();
 
 			this.setupHamburger();
-			this.setupHashChange();
 			this.setupDiscuss();
 			this.setupNextPrev();
 			this.setupKeypresses();
@@ -1125,28 +1123,31 @@ document.addEventListener('DOMContentLoaded', function () {
 	var bigImageContainer = document.querySelector('#impress > div:first-of-type');
 
 	if (infographic.isDesktop) {
-		preloaderWrapper.classList.add('active');
-
-		var api = new _controversyApi2.default();
-		api.init();
-
-		// Dynamically add in the img tag, so that this huge file never downloads for mobile
-		// Explanation of how to put Impress in a container here ...
-		// https://github.com/impress/impress.js/issues/111
-
-		var bigImage = new Image();
-		bigImage.onload = function () {
-			console.log('infographic loaded.');
-
-			// For flash of content on page load
-			bigImageLoaded(this);
+		(function () {
+			preloaderWrapper.classList.add('active');
 
 			var desktopInfographic = new _desktopInfographic2.default();
-		};
-		bigImage.src = infographicAsset;
-		bigImage.alt = "Get Big Things Done Infographic";
-		bigImage.className = 'big-image';
-		bigImageContainer.append(bigImage);
+			var api = new _controversyApi2.default();
+			api.init(desktopInfographic);
+
+			// Dynamically add in the img tag, so that this huge file never downloads for mobile
+			// Explanation of how to put Impress in a container here ...
+			// https://github.com/impress/impress.js/issues/111
+
+			var bigImage = new Image();
+			bigImage.onload = function () {
+				console.log('infographic loaded.');
+
+				// For flash of content on page load
+				bigImageLoaded(this);
+
+				desktopInfographic.init();
+			};
+			bigImage.src = infographicAsset;
+			bigImage.alt = "Get Big Things Done Infographic";
+			bigImage.className = 'big-image';
+			bigImageContainer.append(bigImage);
+		})();
 	} else {
 		var mobileInfographic = new _mobileInfographic2.default();
 		mobileInfographic.init();

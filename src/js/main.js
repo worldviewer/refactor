@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (infographic.isDesktop) {
 		preloaderWrapper.classList.add('active');
 
+		let desktopInfographic = new DesktopInfographic();
 		let api = new controversyAPI();
-		api.init();
+		api.init(desktopInfographic);
 
 		// Dynamically add in the img tag, so that this huge file never downloads for mobile
 		// Explanation of how to put Impress in a container here ...
@@ -31,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			// For flash of content on page load
 			bigImageLoaded(this);
 
-			let desktopInfographic = new DesktopInfographic();
+			desktopInfographic.init();
 		}
 		bigImage.src = infographicAsset;
 		bigImage.alt = "Get Big Things Done Infographic";

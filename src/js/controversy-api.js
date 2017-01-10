@@ -4,7 +4,7 @@ export default class controversyAPI {
 		this.cardId = '76b02dc7-d246-11e6-861b-0ad881f403bf'; // Example graphic mock
 	}
 
-	init() {
+	init(infographic) {
 		$.get(this.url + 'cards/' + this.cardId, (data) => {
 			this.card = data;
 			this.footnotes = data.footnotes;
@@ -23,6 +23,7 @@ export default class controversyAPI {
 			this.addMetadataMarkup();
 			this.addFootnotesMarkup();
 			this.addSlidesMarkup();
+			infographic.setupHashChange();
 		});
 	}
 

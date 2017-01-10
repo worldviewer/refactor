@@ -29,8 +29,6 @@ export default class DesktopInfographic {
 		this.previousSlideIcon = document.getElementById('previous-slide');
 		this.nextSlideIcon = document.getElementById('next-slide');
 		this.discussSlideIcon = document.getElementById('discuss-slide');
-
-		this.init();
 	}
 
 	init() {
@@ -106,7 +104,6 @@ export default class DesktopInfographic {
 		impress().init();
 
 		this.setupHamburger();
-		this.setupHashChange();
 		this.setupDiscuss();
 		this.setupNextPrev();
 		this.setupKeypresses();
