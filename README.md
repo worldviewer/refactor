@@ -1,5 +1,11 @@
 # Refactor of the Original Worldviewer Infographic Viewer
 
+A slide-based prototype for viewing large infographics which receives data from an Apigee API and bases on impress.js
+
+Note: I won't be generating any more refactors of this, because I'm switching to a GIS-based solution.
+
+## worldviewer.github.io/refactor
+
 To view the current state of the refactor, go <a href="http://worldviewer.github.io/refactor/">here</a>.
 
 <p align="center">
