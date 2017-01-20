@@ -74,7 +74,7 @@ export default class DesktopInfographic {
 		// the slowdown value in the original code ...
 		$(window).kinetic();
 
-		utils.loadScript("dist/js/impress.js", setup);
+		utils.loadScript("dist/js/impress.min.js", setup);
 	}
 
 	setupHandlers(resolve, reject) {
